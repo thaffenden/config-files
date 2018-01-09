@@ -1,11 +1,20 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/tristanhaffenden/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="avit"
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="tristan"
+
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,14 +58,15 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python)
-
-# User configuration
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
+plugins=(
+  git
+  python
+)
 
 source $ZSH/oh-my-zsh.sh
+
+# User configuration
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -72,7 +82,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -84,41 +94,38 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-function line() {
-	sed "$1!d" $2
-}
-
-function gfpr() {
-	git fetch upstream refs/pull-requests/$1/from:$2
-	git checkout $2
-}
-
-function dex() {
-	deactivate
-	echo 'Deactivated virtual environment'
-	exit
-}
-
+# shell
 function tarthis () {
-	tar -czf $1.tar.gz $1/
+    tar -czf $1.tar.gz $1/
 }
+alias la='ls -la'
 
-function filter-log() {
-	grep $1 $2 > filtered_$2
+# python
+function dex() {
+    deactivate
+    echo 'Deactivated virtual environment'
+    exit
 }
+alias pl='pip list --format columns'
+alias sba='source bin/activate'
 
-function fps() {
-	ffmpeg -i $1 2>&1 | sed -n "s/.*, \(.*\) fp.*/\1/p" 
-
+# git
+function gfpr() {
+    git fetch upstream refs/pull-requests/$1/from:$2
+    git checkout $2
 }
+alias gs='git status'
+alias gd='git diff'
+alias gpum='git pull upstream master'
+alias gpom='git push origin master'
 
 
-alias gpum="git pull upstream master"
-alias gpom="git push origin master"
-alias gs="git status"
-alias pl="pip list --format columns"
-alias sba="source bin/activate"
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-export PATH="/usr/local/opt/node@6/bin:$PATH"
+# OS specific settings
+case `uname` in
+    Darwin)
+    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+    export PATH="/usr/local/opt/node@6/bin:$PATH"
+esac
+

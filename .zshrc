@@ -95,37 +95,67 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 
 # shell
-function tarthis () {
+alias la='ls -la'
+function tarthis() {
     tar -czf $1.tar.gz $1/
 }
-alias la='ls -la'
+function toggle-display() {
+    current_display=$(xrandr --listmonitors)
+
+    DP_ACTIVE=false
+    HDMI_ACTIVE=false
+
+    if [[ $current_display =~ "DP-2" ]]; then
+        DP_ACTIVE=true
+    fi
+    if [[ $current_display =~ "HDMI-0" ]]; then
+        HDMI_ACTIVE=true
+    fi
+
+    if [[ $DP_ACTIVE == true && $HDMI_ACTIVE == true ]]; then
+        echo "Both monitors active, switching to just display port"
+        enable_monitor="DP-2"
+        disable_monitor="HDMI-0"
+    elif [[ $DP_ACTIVE == true && $HDMI_ACTIVE == false ]]; then
+        echo "Switching to just HDMI output"
+        enable_monitor="HDMI-0"
+        disable_monitor="DP-2"
+    elif [[ $DP_ACTIVE == false && $HDMI_ACTIVE == true ]]; then
+        echo "Switching to just Display Port output"
+        enable_monitor="DP-2"
+        disable_monitor="HDMI-0"
+    fi
+
+    xrandr --output $enable_monitor --auto
+    xrandr --output $disable_monitor --off
+}
 
 # python
+alias pl='pip list --format columns'
+alias sba='source bin/activate'
 function dex() {
     deactivate
     echo 'Deactivated virtual environment'
     exit
 }
-alias pl='pip list --format columns'
-alias sba='source bin/activate'
 
 # git
-function gfpr() {
-    git fetch upstream refs/pull-requests/$1/from:$2
-    git checkout $2
-}
 alias gs='git status'
 alias gd='git diff'
 alias gpum='git pull upstream master'
 alias gpom='git push origin master'
-
+function gfpr() {
+    git fetch upstream refs/pull-requests/$1/from:$2
+    git checkout $2
+}
 
 # OS specific settings
 case `uname` in
     Darwin)
-    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-    export NVM_DIR=~/.nvm
-    source $(brew --prefix nvm)/nvm.sh
-    export PATH="/usr/local/opt/node@6/bin:$PATH"
+        export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+        export NVM_DIR=~/.nvm
+        source $(brew --prefix nvm)/nvm.sh
+        export PATH="/usr/local/opt/node@6/bin:$PATH"
+        ;;
 esac
 

@@ -14,8 +14,17 @@ ln -s full/path/to/this/repo/.zshrc ~/.zshrc
 ```
 
 
-## Enabling keyboard backlight
-Because the keyboard backlight is turned off by default, as script has to be added to `~/.config/autostart/.desktop` to enable it.
+## Install script
+Confiures a few different things on fresh installs.
 
-Run the `install.sh` script to set the correct path for `kb_backlight.sh` script in the `.desktop` file and create a symlink from the git repo to `~/.config/autostart/.desktop` so any changes made in the git repository will be automatically enabled.
+### Enabling keyboard backlight
+Because the keyboard backlight is turned off by default, a script has to be added to `~/.config/autostart/.desktop` to enable it.
+
+The `install.sh` script sets the correct path for `kb_backlight.sh` script in the `.desktop` file and creates a symlink from the git repo to `~/.config/autostart/.desktop` so any changes made in the git repository will be automatically enabled.
+
+
+### Configuring default monitor settings
+Used to ensure that the monitor settings at boot are what you configure them to be by default.
+This is to avoid an issue where my second monitor which is usually off was showing the login screen.
+Monitor prerfances should be configured before this is run, so they are correct when the file is copied.
 

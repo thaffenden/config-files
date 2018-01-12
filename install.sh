@@ -16,7 +16,13 @@ function turn_on_kb_backlight() {
     echo 'Keyboard backlight turned on'
 }
 
+function copy_monitor_config_file() {
+    cp $HOME/.config/monitors.xml /var/liv/gdm/.config/monitors.xml
+}
+
+
 set_backlight_file_path_in_desktop_file
 enable_kb_backlight_at_start_up
 turn_on_kb_backlight
+copy_monitor_config_file
 

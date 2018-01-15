@@ -129,6 +129,12 @@ function toggle-display() {
     xrandr --output $enable_monitor --auto
     xrandr --output $disable_monitor --off
 }
+function winboot() {
+    WINDOWS_TITLE=`grep -i 'windows' /boot/grub/grub.cfg|cut -d"'" -f2`
+    echo 'Booting directly into windows'
+    sudo grub-reboot "$WINDOWS_TITLE"
+    sudo reboot
+}
 
 # python
 alias pl='pip list --format columns'

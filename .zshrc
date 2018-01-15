@@ -135,6 +135,10 @@ function winboot() {
     sudo grub-reboot "$WINDOWS_TITLE"
     sudo reboot
 }
+function mine() {
+    . $PWD/public_key
+    $HOME/eth/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $PUBLIC_KEY
+}
 
 # python
 alias pl='pip list --format columns'

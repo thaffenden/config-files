@@ -16,6 +16,8 @@ function configure_helptags() {
     vim -u NONE -c "helptags $1" -c q
 }
 
+install_pathogen
+
 install_plugin 'https://github.com/tpope/vim-fugitive.git'
 configure_helptags 'vim-fugitive/doc'
 
@@ -24,4 +26,6 @@ configure_helptags 'nerdtree/doc'
 
 install_plugin 'https://github.com/Xuyuanp/nerdtree-git-plugin.git'
 install_plugin 'https://github.com/ryanoasis/vim-devicons'
+install_plugin 'https://github.com/itchyny/lightline.vim'
+install_plugin 'https://github.com/jdkanani/vim-material-theme'
 

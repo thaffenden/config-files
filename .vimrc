@@ -2,14 +2,16 @@
 execute pathogen#infect()
 call pathogen#helptags()
 
+set termguicolors
 set shiftwidth=4
 set number
 set tabstop=4
 set expandtab
 set autoindent
 
-syntax on
-
+syntax enable
+set background=dark
+colorscheme material-theme
 
 " lightline (bottom bar) config
 set laststatus=2

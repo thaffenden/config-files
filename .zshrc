@@ -141,6 +141,12 @@ function mine() {
     . $DIR/public_key
     $HOME/eth/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $PUBLIC_KEY
 }
+function auto() {
+    cd $HOME/git/auto-remote
+    source bin/activate
+    python auto_remote.py send --message=$1
+    deactivate
+}
 
 # python
 alias pl='pip list --format columns'

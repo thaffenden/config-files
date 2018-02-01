@@ -97,6 +97,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # shell
 alias la='ls -la'
+alias suroot='sudo -E -s'
 function tarthis() {
     tar -czf $1.tar.gz $1/
 }

@@ -61,6 +61,7 @@ HIST_STAMPS="dd.mm.yyyy"
 plugins=(
   git
   python
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh

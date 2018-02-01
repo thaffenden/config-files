@@ -142,10 +142,12 @@ function mine() {
     $HOME/eth/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $PUBLIC_KEY
 }
 function auto() {
+    current_dir="$PWD"
     cd $HOME/git/auto-remote
     source bin/activate
     python auto_remote.py send --message=$1
     deactivate
+    cd $current_dir
 }
 
 # python

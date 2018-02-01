@@ -176,6 +176,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gpum='git pull upstream master'
 alias gpom='git push origin master'
+alias gtc='git commit -m "temp"'
 function gfpr() {
     git fetch upstream refs/pull-requests/$1/from:$2
     git checkout $2

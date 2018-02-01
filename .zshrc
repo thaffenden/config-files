@@ -143,10 +143,22 @@ function mine() {
 }
 function auto() {
     current_dir="$PWD"
+    if [[ -n $VIRTUAL_ENV ]]; then
+        current_env="$VIRTUAL_ENV"
+        deactivate
+    else
+        current_env=""
+    fi
+
     cd $HOME/git/auto-remote
     source bin/activate
     python auto_remote.py send --message=$1
     deactivate
+
+    if [[ -n $current_env ]]; then
+        cd $current_env
+        source bin/activate
+    fi
     cd $current_dir
 }
 

@@ -42,7 +42,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 
 set encoding=utf-8
-set guifont=Space\ Mono\ Nerd\ Font\ Complete\ Mono\ 12
+set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
 
 function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''

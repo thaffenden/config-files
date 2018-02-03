@@ -63,6 +63,10 @@ plugins=(
   git
   python
   zsh-syntax-highlighting
+  pip
+  httpie
+  docker
+  web-search
 )
 
 source $ZSH/oh-my-zsh.sh

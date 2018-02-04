@@ -188,6 +188,10 @@ function gfpr() {
     git fetch upstream refs/pull-requests/$1/from:$2
     git checkout $2
 }
+function grl() {
+    sha=$(command git rev-parse HEAD^1)
+    git reset $sha
+}
 
 # OS specific settings
 case `uname` in

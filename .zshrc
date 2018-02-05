@@ -67,6 +67,8 @@ plugins=(
   httpie
   docker
   web-search
+  jira
+  k
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -102,6 +104,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # shell
 alias la='ls -la'
+alias ka='k -ah'
 alias suroot='sudo -E -s'
 function tarthis() {
     tar -czf $1.tar.gz $1/

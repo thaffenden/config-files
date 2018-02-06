@@ -8,6 +8,7 @@ set number
 set tabstop=4
 set expandtab
 set autoindent
+set backspace=indent,eol,start
 
 syntax enable
 set background=dark

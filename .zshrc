@@ -101,98 +101,10 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-# shell
-alias la='ls -la'
-alias ka='k -ah'
-alias suroot='sudo -E -s'
-function tarthis() {
-    tar -czf $1.tar.gz $1/
-}
-function toggle-display() {
-    current_display=$(xrandr --listmonitors)
-
-    DP_ACTIVE=false
-    HDMI_ACTIVE=false
-
-    if [[ $current_display =~ "DP-2" ]]; then
-        DP_ACTIVE=true
-    fi
-    if [[ $current_display =~ "HDMI-0" ]]; then
-        HDMI_ACTIVE=true
-    fi
-
-    if [[ $DP_ACTIVE == true && $HDMI_ACTIVE == true ]]; then
-        echo "Both monitors active, switching to just display port"
-        enable_monitor="DP-2"
-        disable_monitor="HDMI-0"
-    elif [[ $DP_ACTIVE == true && $HDMI_ACTIVE == false ]]; then
-        echo "Switching to just HDMI output"
-        enable_monitor="HDMI-0"
-        disable_monitor="DP-2"
-    elif [[ $DP_ACTIVE == false && $HDMI_ACTIVE == true ]]; then
-        echo "Switching to just Display Port output"
-        enable_monitor="DP-2"
-        disable_monitor="HDMI-0"
-    fi
-
-    xrandr --output $enable_monitor --auto
-    xrandr --output $disable_monitor --off
-}
-function winboot() {
-    WINDOWS_TITLE=`grep -i 'windows' /boot/grub/grub.cfg|cut -d"'" -f2`
-    echo 'Booting directly into windows'
-    sudo grub-reboot "$WINDOWS_TITLE"
-    sudo reboot
-}
-function mine() {
-    cd $HOME
-    DIR="$(dirname "$(readlink -f .zshrc)")"
-    . $DIR/public_key
-    $HOME/eth/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $PUBLIC_KEY
-}
-function auto() {
-    current_dir="$PWD"
-    if [[ -n $VIRTUAL_ENV ]]; then
-        current_env="$VIRTUAL_ENV"
-        deactivate
-    else
-        current_env=""
-    fi
-
-    cd $HOME/git/auto-remote
-    source bin/activate
-    python auto_remote.py send --message=$1
-    deactivate
-
-    if [[ -n $current_env ]]; then
-        cd $current_env
-        source bin/activate
-    fi
-    cd $current_dir
-}
-
-# python
-alias pl='pip list --format columns'
-alias sba='source bin/activate'
-function dex() {
-    deactivate
-    echo 'Deactivated virtual environment'
-    exit
-}
-
-# git
-alias gs='git status'
-alias gd='git diff'
-alias gpum='git pull upstream master'
-alias gpom='git push origin master'
-alias gtc='git commit -m "temp"'
-function gfpr() {
-    git fetch upstream refs/pull-requests/$1/from:$2
-    git checkout $2
-}
-function grl() {
-    sha=$(command git rev-parse HEAD^1)
-    git reset $sha
-}
+if [[ `uname` == 'Darwin' ]]; then
+    git_dir="$(dirname "$(greadlink -f .zshrc)")"
+else
+    git_dir="$(dirname "$(readlink -f .zshrc)")"
+fi
+source $git_dir/.aliases
 

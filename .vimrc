@@ -9,6 +9,7 @@ set tabstop=4
 set expandtab
 set autoindent
 set backspace=indent,eol,start
+set linebreak
 
 syntax enable
 set background=dark
@@ -40,7 +41,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " toggle it with ctrl + n
 map <C-n> :NERDTreeToggle<CR>
-
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 set encoding=utf-8
 set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14

@@ -10,6 +10,7 @@ set expandtab
 set autoindent
 set backspace=indent,eol,start
 set linebreak
+set noexpandtab
 
 syntax enable
 set background=dark

@@ -42,6 +42,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " toggle it with ctrl + n
 map <C-n> :NERDTreeToggle<CR>
+map <C-m> :NERDTree<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 

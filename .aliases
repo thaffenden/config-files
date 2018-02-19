@@ -93,7 +93,7 @@ function grl() {
 }
 
 # docker
-alias dp='docker ps -a --format="table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}"'
+alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 
 if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases

@@ -97,4 +97,5 @@ if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases
 fi
 
-
+# docker
+alias dp='docker ps -a --format="table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}"'

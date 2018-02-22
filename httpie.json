@@ -6,8 +6,8 @@
     },
     "default_options": [
 		"--pretty=all",
+		"--print=hb",
 		"--style=monokai", 
-		"--body", 
 		"--session=default"
 		]
 }

@@ -94,6 +94,10 @@ function grl() {
 
 # docker
 alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
+function dsrm() {
+	docker stop $1
+	docker rm $1
+}
 
 if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases

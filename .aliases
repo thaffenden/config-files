@@ -103,3 +103,11 @@ if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases
 fi
 
+# has to be done after local aliases set so it can use $NOTES_DIR value set in local aliases file
+function notes(){
+	original_dir=$PWD
+	cd $NOTES_DIR
+	vim
+	cd $original_dir
+}
+

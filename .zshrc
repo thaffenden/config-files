@@ -105,6 +105,9 @@ if [[ `uname` == 'Darwin' ]]; then
     git_dir="$(dirname "$(greadlink -f .zshrc)")"
 else
     git_dir="$(dirname "$(readlink -f .zshrc)")"
+    PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 fi
 source $git_dir/.aliases
 

@@ -98,6 +98,8 @@ function dsrm() {
 	docker stop $1
 	docker rm $1
 }
+alias drmi='docker rmi'
+alias dim='docker images'
 
 if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases

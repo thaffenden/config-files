@@ -2,6 +2,10 @@
 alias la='ls -la'
 alias ka='k -ah'
 alias suroot='sudo -E -s'
+function mkcd() {
+    mkdir $1
+	cd $1
+}
 function tarthis() {
     tar -czf $1.tar.gz $1/
 }

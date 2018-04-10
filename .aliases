@@ -2,6 +2,7 @@
 alias la='ls -la'
 alias ka='k -ah'
 alias suroot='sudo -E -s'
+alias devicons='cat $HOME/.local/share/fonts/i_dev.sh'
 function mkcd() {
     mkdir $1
 	cd $1

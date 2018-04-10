@@ -102,9 +102,9 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 if [[ `uname` == 'Darwin' ]]; then
-    git_dir="$(dirname "$(greadlink -f .zshrc)")"
+    git_dir="$(dirname "$(greadlink -f ~/.zshrc)")"
 else
-    git_dir="$(dirname "$(readlink -f .zshrc)")"
+    git_dir="$(dirname "$(readlink -f ~/.zshrc)")"
     PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
     export MANPATH="$(brew --prefix)/share/man:$MANPATH"
     export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"

@@ -68,7 +68,6 @@ plugins=(
   docker
   web-search
   jira
-  k
 )
 
 source $ZSH/oh-my-zsh.sh

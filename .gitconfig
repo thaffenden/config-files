@@ -1,0 +1,16 @@
+[user]
+    name = Tristan Haffenden
+    username = thaffenden
+    email = tristanehaffenden@gmail.com
+
+[core]
+    editor = vim
+
+[color]
+    ui = true
+
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+

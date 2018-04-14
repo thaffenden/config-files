@@ -99,12 +99,13 @@ function grl() {
 
 # docker
 alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
+alias dim='docker images'
+alias drmi='docker rmi'
+alias dc='docker-compose'
 function dsrm() {
 	docker stop $1
 	docker rm $1
 }
-alias drmi='docker rmi'
-alias dim='docker images'
 
 if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases

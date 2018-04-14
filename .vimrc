@@ -17,7 +17,9 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'itchyny/lightline.vim'
-
+Plugin 'w0rp/ale'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -66,6 +68,7 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-m> :NERDTree<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let NERDTreeShowHidden = 1
 
 set encoding=utf-8
 set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
@@ -77,4 +80,9 @@ endfunction
 function! MyFileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
+
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
 

@@ -20,6 +20,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'w0rp/ale'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ekalinin/Dockerfile.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

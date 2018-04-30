@@ -39,6 +39,7 @@ set noexpandtab
 syntax enable
 set background=dark
 colorscheme material-theme
+set t_Co=256
 
 " lightline (bottom bar) config
 set laststatus=2

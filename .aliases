@@ -72,6 +72,9 @@ function auto() {
     fi
     cd $current_dir
 }
+functon delete-except() {
+	find . -type f -not -name $1 -print0 | xargs -0 -- rm
+}
 
 # tmux
 alias tnew='tmux new -s '

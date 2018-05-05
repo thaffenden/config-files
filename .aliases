@@ -80,6 +80,7 @@ functon delete-except() {
 alias tnew='tmux new -s '
 alias tmat='tmux a -t '
 alias tkill='tmux kill-session -t '
+alias tmls='tmux ls'
 
 # python
 alias pl='pip list --format columns'

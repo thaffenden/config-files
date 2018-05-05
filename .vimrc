@@ -10,18 +10,29 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'Valloric/YouCompleteMe'
+" Utilities
 Plugin 'jdkanani/vim-material-theme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'itchyny/lightline.vim'
-Plugin 'w0rp/ale'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ctrlpvim/ctrlp.vim'
+
+" General code
+
+" Language Specific
+" Docker
 Plugin 'ekalinin/Dockerfile.vim'
+
+" Typescript
 Plugin 'leafgarland/typescript-vim'
+
+" Python
+
+
+" Go
 
 call vundle#end()            " required
 filetype plugin indent on    " required

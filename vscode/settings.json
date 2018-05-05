@@ -1,0 +1,28 @@
+{
+    // general editor config
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 14,
+    "editor.fontFamily": "SauceCodePro Nerd Font",
+    "editor.fontLigatures": true,
+
+    // theme
+    "material-icon-theme.activeIconPack": "angular",
+    "workbench.colorTheme": "Material Theme",
+    "workbench.iconTheme": "eq-material-theme-icons",
+    
+    // terminal
+    "terminal.external.osxExec": "iterm.app",
+    "terminal.integrated.fontFamily": "SauceCodePro Nerd Font",
+    "terminal.integrated.fontSize": 14,
+    
+    // explorer
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    
+    // languages
+    //python
+    "python.autoComplete.addBrackets": true,
+    
+    // javascript
+    "eslint.packageManager": "yarn",
+}

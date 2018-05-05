@@ -19,6 +19,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'itchyny/lightline.vim'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Townk/vim-autoclose'
 
 " General code
 
@@ -53,7 +54,7 @@ set background=dark
 colorscheme material-theme
 set t_Co=256
 
-" lightline (bottom bar) config
+" ********** LIGHTLINE CONFIG **********
 set laststatus=2
 set noshowmode
 
@@ -70,7 +71,16 @@ let g:lightline = {
       \ },
       \ }
 
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
 
+function! MyFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+
+" ********** NERDTREE CONFIG **********
 " enable NERDTree at start
 autocmd vimenter * NERDTree
 
@@ -87,16 +97,11 @@ let NERDTreeShowHidden = 1
 set encoding=utf-8
 set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
 
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
 " after a re-source, fix syntax matching issues (concealing brackets):
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
+
+" ********** NERDTREE DEV ICONS CONFIG **********
+" Limit file icons to only these to stop lag.
 

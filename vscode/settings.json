@@ -4,12 +4,19 @@
     "editor.fontSize": 14,
     "editor.fontFamily": "SauceCodePro Nerd Font",
     "editor.fontLigatures": true,
+    "explorer.decorations.badges": false,
 
     // theme
     "material-icon-theme.activeIconPack": "angular",
+    "material-icon-theme.hidesExplorerArrows": true,
     "workbench.colorTheme": "Material Theme",
     "workbench.iconTheme": "material-icon-theme",
-    
+    "workbench.colorCustomizations": {
+        "gitDecoration.modifiedResourceForeground": "#FFEE58",
+        "gitDecoration.deletedResourceForeground": "#FF5722",
+        "gitDecoration.untrackedResourceForeground": "#4CAF50",
+    },
+
     // terminal
     "terminal.external.osxExec": "iterm.app",
     "terminal.integrated.fontFamily": "SauceCodePro Nerd Font",
@@ -21,11 +28,13 @@
     
      // gitlens
     "gitlens.advanced.messages": {
+        "suppressLineUncommittedWarning": true,
         "suppressShowKeyBindingsNotice": true
     },
     "gitlens.currentLine.enabled": false,
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.codeLens.authors.enabled": false,
+    "gitlens.gitExplorer.files.layout": "auto",
 
     // TODO highlight
     "todohighlight.exclude": [
@@ -77,6 +86,5 @@
     
     // javascript
     "eslint.packageManager": "yarn",
-    "gitlens.gitExplorer.files.layout": "auto",
 
 }

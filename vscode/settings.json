@@ -8,7 +8,7 @@
     // theme
     "material-icon-theme.activeIconPack": "angular",
     "workbench.colorTheme": "Material Theme",
-    "workbench.iconTheme": "eq-material-theme-icons",
+    "workbench.iconTheme": "material-icon-theme",
     
     // terminal
     "terminal.external.osxExec": "iterm.app",
@@ -19,10 +19,64 @@
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     
+     // gitlens
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.codeLens.authors.enabled": false,
+
+    // TODO highlight
+    "todohighlight.exclude": [
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.vscode/**",
+        "**/.github/**",
+        "**/_output/**",
+        "**/*.min.*",
+        "**/*.map",
+        "**/.next/**",
+        "**/site-packages/**",
+    ],
+     "todohighlight.include": [
+        "**/*.js",
+        "**/*.jsx",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.html",
+        "**/*.css",
+        "**/*.scss",
+        "**/*.py",
+        "**/*.go",
+    ],
+    "todohighlight.defaultStyle": {
+        "cursor": "pointer",
+        "borderRadius": "3px",
+        "isWholeLine": true,
+        "backgroundColor": "default",
+    },
+    "todohighlight.keywords": [
+        {
+            "text": "TODO:",
+            "color": "yellow",
+            "backgroundColor": "default"
+        },
+        {
+            "text": "FIXME:",
+            "color": "red",
+            "backgroundColor": "default"
+        }
+    ],
+
     // languages
     //python
     "python.autoComplete.addBrackets": true,
     
     // javascript
     "eslint.packageManager": "yarn",
+    "gitlens.gitExplorer.files.layout": "auto",
+
 }

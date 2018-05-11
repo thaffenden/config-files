@@ -100,6 +100,9 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export GOPATH="$HOME/go"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 if [[ `uname` == 'Darwin' ]]; then
     git_dir="$(dirname "$(greadlink -f ~/.zshrc)")"
 else
@@ -110,7 +113,3 @@ else
 fi
 source $git_dir/.aliases
 
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
-
-export GOPATH="$HOME/go"

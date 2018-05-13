@@ -108,7 +108,7 @@ function grl() {
 
 # docker
 alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
-alias dim='docker images'
+alias dim='docker images | sort -h'
 alias drmi='docker rmi'
 alias dc='docker-compose'
 function dsrm() {

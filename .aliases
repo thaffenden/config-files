@@ -98,6 +98,7 @@ alias gd='git diff'
 alias gpum='git pull upstream master'
 alias gpom='git push origin master'
 alias gtc='git commit -m "temp" --no-verify'
+alias gc-m='git commit -m'
 function gfpr() {
     git fetch upstream refs/pull-requests/$1/from:$2
     git checkout $2
@@ -105,6 +106,10 @@ function gfpr() {
 function grl() {
     sha=$(command git rev-parse HEAD^1)
     git reset $sha
+}
+function gpob {
+	branch_name=$(git symbolic-ref -q HEAD)
+	git push origin ${branch_name##/refs/heads/}
 }
 
 # docker

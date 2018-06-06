@@ -11,6 +11,9 @@ function mkcd() {
 function tarthis() {
     tar -czf $1.tar.gz $1/
 }
+function ghi() {
+	grep $1 ~/.zsh_history
+}
 function toggle-display() {
     current_display=$(xrandr --listmonitors)
 

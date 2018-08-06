@@ -120,6 +120,8 @@ alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Statu
 alias dim='docker images | sort -h'
 alias drmi='docker rmi'
 alias dc='docker-compose'
+alias dsrmall="docker ps -aq --no-trunc -f status=exited | xargs docker rm"
+alias dprune="docker images -q --filter dangling=true | xargs docker rmi"
 function dsrm() {
 	docker stop $1
 	docker rm $1

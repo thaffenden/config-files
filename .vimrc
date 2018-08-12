@@ -9,76 +9,52 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" Utilities
-Plugin 'jdkanani/vim-material-theme'
-Plugin 'tpope/vim-fugitive'
+" functionality
+Plugin 'itchyny/lightline.vim'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'itchyny/lightline.vim'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Townk/vim-autoclose'
+Plugin 'tpope/vim-fugitive'
+" aesthetic
+Plugin 'joshdick/onedark.vim'
+" language specific
+" general lint/code quality
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'w0rp/ale'
 
-" General code
-
-" Language Specific
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
 
 " Typescript
 Plugin 'leafgarland/typescript-vim'
 
-" Python
-
-
-" Go
-
 call vundle#end()            " required
 filetype plugin indent on    " required
+"""" END Vundle Configuration 
 
-
-set termguicolors
-set shiftwidth=4
-set number
-set tabstop=4
-set expandtab
-set autoindent
+" fix backspace
 set backspace=indent,eol,start
+
+set number
+
+set shiftwidth=4
+set tabstop=4
+set autoindent
+
 set linebreak
 set noexpandtab
 
-syntax enable
-set background=dark
-colorscheme material-theme
-set t_Co=256
+" Enable highlighting of the current line
+set cursorline
 
-" ********** LIGHTLINE CONFIG **********
-set laststatus=2
-set noshowmode
+set encoding=utf-8
+set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
 
-let g:lightline = {
-      \ 'colorscheme': 'one',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'MyFileFormat',
-      \ },
-      \ }
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 " ********** NERDTREE CONFIG **********
 " enable NERDTree at start
@@ -89,19 +65,41 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " toggle it with ctrl + n
 map <C-n> :NERDTreeToggle<CR>
-map <C-m> :NERDTree<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden = 1
 
-set encoding=utf-8
-set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
+" ********** LIGHTLINE CONFIG **********
+set laststatus=2
+set noshowmode
+" set showtabline=2
+" set guioptions-=e
 
-" after a re-source, fix syntax matching issues (concealing brackets):
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'filename', 'modified', 'readonly' ] ],
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \   'filetype': 'MyFiletype',
+      \   'fileformat': 'NoFormat',
+      \   'fileencoding': 'NoFormat'
+      \ },
+      \ }
 
-" ********** NERDTREE DEV ICONS CONFIG **********
-" Limit file icons to only these to stop lag.
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
 
+function! NoFormat()
+  return ''
+endfunction
+
+" ********** DEOPLETE.NVIM CONFIG **********
+let g:deoplete#enable_at_startup = 1
+
+" COLOUR SCHEME
+syntax on
+colorscheme onedark

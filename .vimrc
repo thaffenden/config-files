@@ -39,8 +39,8 @@ set backspace=indent,eol,start
 
 set number
 
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set autoindent
 
 set linebreak
@@ -101,5 +101,13 @@ endfunction
 let g:deoplete#enable_at_startup = 1
 
 " COLOUR SCHEME
+if (has("autocmd") && !has("gui_running"))
+  augroup colorset
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+  augroup END
+endif
+
 syntax on
 colorscheme onedark

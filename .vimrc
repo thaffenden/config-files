@@ -15,6 +15,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-fugitive'
+Plugin 'ctrlpvim/ctrlp.vim'
 " aesthetic
 Plugin 'joshdick/onedark.vim'
 " language specific
@@ -38,6 +39,8 @@ filetype plugin indent on    " required
 set backspace=indent,eol,start
 
 set number
+set spelllang=en
+set spell
 
 set shiftwidth=2
 set tabstop=2
@@ -76,7 +79,7 @@ set noshowmode
 " set guioptions-=e
 
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'filename', 'modified', 'readonly' ] ],
@@ -100,7 +103,7 @@ endfunction
 " ********** DEOPLETE.NVIM CONFIG **********
 let g:deoplete#enable_at_startup = 1
 
-" COLOUR SCHEME
+" ********** COLOUR SCHEME **********
 if (has("autocmd") && !has("gui_running"))
   augroup colorset
     autocmd!
@@ -111,3 +114,7 @@ endif
 
 syntax on
 colorscheme onedark
+
+" ********** LANGUAGE CONFIG **********
+" GO
+au BufWritePost *.go !gofmt -w %

@@ -28,6 +28,9 @@ Plugin 'w0rp/ale'
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
 
+" Go
+Plugin 'fatih/vim-go'
+
 " Typescript
 Plugin 'leafgarland/typescript-vim'
 
@@ -38,16 +41,27 @@ filetype plugin indent on    " required
 " fix backspace
 set backspace=indent,eol,start
 
+" show line numbers
 set number
+
+" enable spell checking
 set spelllang=en
 set spell
 
+" configure tab settings
 set shiftwidth=2
 set tabstop=2
 set autoindent
-
-set linebreak
 set noexpandtab
+set linebreak
+
+" save .swp files to non project directory
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
+" make switching modes quicker
+set timeoutlen=1000 ttimeoutlen=0
 
 " Enable highlighting of the current line
 set cursorline
@@ -66,6 +80,7 @@ autocmd vimenter * NERDTree
 " disable it when you close the last file
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+
 " toggle it with ctrl + n
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
@@ -75,8 +90,6 @@ let NERDTreeShowHidden = 1
 " ********** LIGHTLINE CONFIG **********
 set laststatus=2
 set noshowmode
-" set showtabline=2
-" set guioptions-=e
 
 let g:lightline = {
       \ 'colorscheme': 'one',
@@ -116,5 +129,5 @@ syntax on
 colorscheme onedark
 
 " ********** LANGUAGE CONFIG **********
-" GO
-au BufWritePost *.go !gofmt -w %
+let g:ale_completion_enabled = 1
+

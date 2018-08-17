@@ -45,7 +45,7 @@ filetype plugin indent on    " required
 set backspace=indent,eol,start
 
 " show line numbers
-set number
+set number relativenumber
 
 " enable spell checking
 set spelllang=en

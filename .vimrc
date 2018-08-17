@@ -18,6 +18,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
 " aesthetic
 Plugin 'joshdick/onedark.vim'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 " language specific
 " general lint/code quality
 Plugin 'Shougo/deoplete.nvim'

@@ -31,6 +31,9 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Go
 Plugin 'fatih/vim-go'
 
+" Python
+Plugin 'python-mode/python-mode'
+
 " Typescript
 Plugin 'leafgarland/typescript-vim'
 
@@ -128,6 +131,13 @@ endif
 syntax on
 colorscheme onedark
 
+" ********** CTRLP CONFIG **********
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|__pycache__|vendor|bin|lib|include)|(\.(swp|ico|git|svn))$'
+
+
 " ********** LANGUAGE CONFIG **********
 let g:ale_completion_enabled = 1
+
+" python
+let g:pymode_python = 'python3'
 

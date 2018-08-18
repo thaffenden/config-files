@@ -53,10 +53,17 @@ set spelllang=en
 set spell
 
 " configure tab settings
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set autoindent
-set noexpandtab
+set expandtab
+
+autocmd Filetype make setlocal noexpandtab
+autocmd Filetype yaml setlocal shiftwidth=2 tabstop=2
+autocmd Filetype json setlocal shiftwidth=2 tabstop=2
+autocmd Filetype javascript setlocal shiftwidth=2 tabstop=2
+autocmd Filetype typescript setlocal shiftwidth=2 tabstop=2
+
 set linebreak
 
 " save .swp files to non project directory

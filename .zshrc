@@ -67,7 +67,6 @@ plugins=(
   httpie
   docker
   web-search
-  jira
 )
 
 source $ZSH/oh-my-zsh.sh

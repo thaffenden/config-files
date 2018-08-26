@@ -89,7 +89,7 @@ endif
 autocmd vimenter * NERDTree
 
 " disable it when you close the last file
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 " toggle it with ctrl + n

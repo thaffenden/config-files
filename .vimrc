@@ -15,7 +15,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ctrlpvim/ctrlp.vim'
 " aesthetic
 Plugin 'joshdick/onedark.vim'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
@@ -25,6 +25,7 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'w0rp/ale'
+Plugin 'SirVer/ultisnips'
 
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
@@ -37,6 +38,7 @@ Plugin 'python-mode/python-mode'
 
 " Typescript
 Plugin 'leafgarland/typescript-vim'
+Plugin 'ianks/vim-tsx'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -149,3 +151,5 @@ let g:ale_completion_enabled = 1
 " python
 let g:pymode_python = 'python3'
 
+" ********** ULTISNIPS CONFIG **********
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']

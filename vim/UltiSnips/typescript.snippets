@@ -1,0 +1,53 @@
+# General
+snippet cl "Console log" b
+console.log($1);
+endsnippet
+
+# Page object related
+snippet page "WebdriverIO page object" b
+import { PageObject } from "../$2common";
+
+export class $1 extends PageObject {
+
+  private locators = {
+    $3
+  };
+
+  public contructor() {
+  	super();
+  };
+
+}
+endsnippet
+
+snippet puthis "Public function that returns this" b
+public $1($2): this {
+  $3
+  return this;
+}
+endsnippet
+
+# Mocha related
+snippet aft "After block" b
+after(() => {
+  $1
+};
+endsnippet
+
+snippet bef "Before block" b
+before(() => {
+  $1
+};
+endsnippet
+
+snippet desc "Describe block" b
+describe("$1", () => {
+  $2
+};
+endsnippet
+
+snippet it "It block" b
+it("$1", () => {
+  $2
+};
+endsnippet

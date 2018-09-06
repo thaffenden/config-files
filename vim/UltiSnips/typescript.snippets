@@ -20,6 +20,18 @@ export class $1 extends PageObject {
 }
 endsnippet
 
+snippet pubool "Public function that returns a bool" b
+public $1(): boolean {
+  return $2;
+}
+endsnippet
+
+snippet pustr "Public function that returns a string" b
+public $1(): string {
+  return $2;
+}
+endsnippet
+
 snippet puthis "Public function that returns this" b
 public $1($2): this {
   $3

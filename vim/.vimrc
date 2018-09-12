@@ -33,6 +33,9 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Go
 Plugin 'fatih/vim-go'
 
+" Markdown
+Plugin 'shime/vim-livedown'
+
 " Python
 Plugin 'python-mode/python-mode'
 
@@ -157,3 +160,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" ********** LIVEDOWN CONFIG **********
+let g:livedown_open = 1
+let g:livedown_browser = "firefox"

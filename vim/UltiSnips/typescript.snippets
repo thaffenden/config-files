@@ -3,6 +3,11 @@ snippet cl "Console log" b
 console.log($1);
 endsnippet
 
+snippet if "If block" b
+if ($1) {
+  $2
+}
+endsnippet
 # Page object related
 snippet page "WebdriverIO page object" b
 import { PageObject } from "../$2common";

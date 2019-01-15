@@ -8,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 source $HOME/.local/share/fonts/i_dev.sh
-ZSH_THEME="wynwyn"
+ZSH_THEME="wynwyn-minimal"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random

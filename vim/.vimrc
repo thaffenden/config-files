@@ -39,6 +39,9 @@ Plugin 'shime/vim-livedown'
 " Python
 Plugin 'python-mode/python-mode'
 
+" Terraform
+Plugin 'hashivim/vim-terraform'
+
 " Typescript
 Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
@@ -68,6 +71,7 @@ autocmd Filetype yaml setlocal shiftwidth=2 tabstop=2
 autocmd Filetype json setlocal shiftwidth=2 tabstop=2
 autocmd Filetype javascript setlocal shiftwidth=2 tabstop=2
 autocmd Filetype typescript setlocal shiftwidth=2 tabstop=2
+autocmd Filetype python setlocal shiftwidth=4 tabstop=4
 
 set linebreak
 

@@ -1,0 +1,12 @@
+snippet newtest "Create a new test function" b
+func Test$1(t *testing.T) {
+	$2
+	assert.NoError(t, err)
+	assert.Equal(t, actual, expected)
+}
+endsnippet
+
+snippet testassert "Print values for comparison" b
+fmt.Printf("\n\nEXPECTED:\n%s", $1)
+fmt.Printf("\n\nGOT:\n%s", $2)
+endsnippet

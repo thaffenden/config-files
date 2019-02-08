@@ -33,6 +33,9 @@ Plugin 'ekalinin/Dockerfile.vim'
 " Go
 Plugin 'fatih/vim-go'
 
+" GraphQL
+Plugin 'jparise/vim-graphql'
+
 " Markdown
 Plugin 'shime/vim-livedown'
 

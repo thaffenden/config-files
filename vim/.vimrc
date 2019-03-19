@@ -64,17 +64,12 @@ set spelllang=en
 set spell
 
 " configure tab settings
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set autoindent
 set expandtab
 
 autocmd Filetype make setlocal noexpandtab
-autocmd Filetype yaml setlocal shiftwidth=2 tabstop=2
-autocmd Filetype json setlocal shiftwidth=2 tabstop=2
-autocmd Filetype javascript setlocal shiftwidth=2 tabstop=2
-autocmd Filetype typescript setlocal shiftwidth=2 tabstop=2
-autocmd Filetype python setlocal shiftwidth=4 tabstop=4
 
 set linebreak
 

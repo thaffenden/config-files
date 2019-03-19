@@ -25,6 +25,17 @@ export class $1 extends PageObject {
 }
 endsnippet
 
+snippet tpa11y "Jest based Pa11y test" b
+test("$1", async () => {
+	const results = await pa11y(
+		$2,
+		defaultPa11yConfig
+	);
+	console.log(results);
+	assert.isEmpty(results);
+}, defaultTimeout);
+endsnippet
+
 snippet pubool "Public function that returns a bool" b
 public $1(): boolean {
   return $2;
@@ -34,6 +45,14 @@ endsnippet
 snippet pustr "Public function that returns a string" b
 public $1(): string {
   return $2;
+}
+endsnippet
+
+snippet pustar "Public function that returns an array of strings" b
+public $1(): string[] {
+  return [
+		$2,
+	];
 }
 endsnippet
 

@@ -85,6 +85,14 @@ alias tnew='tmux new -s '
 alias tmat='tmux a -t '
 alias tkill='tmux kill-session -t '
 alias tmls='tmux ls'
+function ide() {
+  tmux_session=${PWD##*/}
+  tmux new -s $tmux_session -d
+  tmux send-keys -t $tmux_session "vim" C-m
+  tmux split-pane -v -t $tmux_session
+  tmux resize-pane -D 12
+  tmux attach -t $tmux_session
+}
 
 # python
 alias pl='pip list --format columns'

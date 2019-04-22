@@ -1,0 +1,26 @@
+#!/bin/bash
+if [ `uname` = 'Darwin' ] ; then
+  battery_status=`pmset -g batt`
+  percent=`echo $battery_status | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d";"`
+  power_source=`echo $battery_status | egrep "'(.*) Power'" -o`
+fi
+
+case $power_source in 
+  "'Battery Power'"*)
+    battery_icon=🔋
+    ;;
+  "'AC Power'"*)
+    battery_icon=⚡️
+    ;;
+  *)
+    battery_icon=💀
+esac
+
+if (( ${percent%?} > 70 )); then 
+    color='#[nobright fg=green]'
+elif (( ${percent%?} > 20 )); then 
+    color='#[bright fg=yellow]'
+else 
+    color='#[nobright fg=red]'
+fi
+echo "$battery_icon $color$percent"

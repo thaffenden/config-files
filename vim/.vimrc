@@ -79,7 +79,7 @@ set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
 " make switching modes quicker
-set timeoutlen=1000 ttimeoutlen=0
+set timeout timeoutlen=1000 ttimeoutlen=0
 
 " Enable highlighting of the current line
 set cursorline

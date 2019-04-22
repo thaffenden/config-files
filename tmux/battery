@@ -13,7 +13,7 @@ case $power_source in
     battery_icon=⚡️
     ;;
   *)
-    battery_icon=💀
+    battery_icon=🔥
 esac
 
 if (( ${percent%?} > 70 )); then 
@@ -22,5 +22,6 @@ elif (( ${percent%?} > 20 )); then
     color='#[bright fg=yellow]'
 else 
     color='#[nobright fg=red]'
+    battery_icon=💀
 fi
 echo "$battery_icon $color$percent"

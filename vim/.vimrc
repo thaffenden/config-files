@@ -15,7 +15,7 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-fugitive'
-" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 " aesthetic
 Plugin 'joshdick/onedark.vim'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'

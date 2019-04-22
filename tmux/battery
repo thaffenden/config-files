@@ -17,11 +17,11 @@ case $power_source in
 esac
 
 if (( ${percent%?} > 70 )); then 
-    color='#[nobright fg=green]'
+    color='#[nobright,fg=green]'
 elif (( ${percent%?} > 20 )); then 
-    color='#[bright fg=yellow]'
+    color='#[bright,fg=colour226]'
 else 
-    color='#[nobright fg=red]'
+    color='#[nobright,fg=red]'
     battery_icon=💀
 fi
-echo "$battery_icon $color$percent"
+echo "$color$battery_icon $percent"

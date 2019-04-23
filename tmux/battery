@@ -16,7 +16,7 @@ case $power_source in
     battery_icon=🔥
 esac
 
-if (( ${percent%?} > 70 )); then 
+if (( ${percent%?} > 50 )); then 
     bg_colour='colour2'
 elif (( ${percent%?} > 20 )); then 
     bg_colour='colour3'

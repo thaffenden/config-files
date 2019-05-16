@@ -9,6 +9,16 @@ if ($1) {
 }
 endsnippet
 
+snippet imp "Standard import statement" b
+import { $1 } from "$2";
+endsnippet
+
+snippet puasv "Public async function that returns nothing" b
+public async $1(): Promise<void> {
+	await $2;
+}
+endsnippet
+
 snippet pubool "Public function that returns a bool" b
 public $1(): boolean {
   return $2;

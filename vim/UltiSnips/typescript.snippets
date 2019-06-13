@@ -62,7 +62,7 @@ import { PageObject } from "../$2common";
 
 export class $1 extends PageObject {
 
-  private locators = {
+  protected locators = {
     $3
   };
 
@@ -70,6 +70,12 @@ export class $1 extends PageObject {
     super();
   }
 
+}
+endsnippet
+
+snippet puvis "WebdriverIO page object method for is visible checks" b
+public $1IsVisible(): boolean {
+	return browser.isVisible(this.locators.$1);
 }
 endsnippet
 

@@ -151,6 +151,16 @@ if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases
 fi
 
+# files
+function unique-files() {
+  if [[ "$1" == "" ]]; then
+    search="."
+  else
+    search=$1
+  fi
+  find $search -type f -name "*.*" | awk -F. '{print $NF}' | sort -u
+}
+
 # has to be done after local aliases set so it can use $NOTES_DIR value set in local aliases file
 function notes(){
 	original_dir=$PWD

@@ -93,25 +93,25 @@ endsnippet
 
 # Mocha related
 snippet aft "After block" b
-after(() => {
+after(function() {
   $1
 });
 endsnippet
 
 snippet bef "Before block" b
-before(() => {
+before(function() {
   $1
 });
 endsnippet
 
 snippet desc "Describe block" b
-describe("$1", () => {
+describe("$1", function() {
   $2
 });
 endsnippet
 
 snippet it "It block" b
-it("$1", () => {
+it("$1", function() {
   $2
 });
 endsnippet

@@ -116,6 +116,18 @@ it("$1", function() {
 });
 endsnippet
 
+snippet aseq "Assert equal" b
+assert.equal($1, $2, $3);
+endsnippet
+
+snippet astr "Assert true" b
+assert.isTrue($1, $2);
+endsnippet
+
+snippet asfa "Assert false" b
+assert.isFalse($1, $2)
+endsnippet
+
 # Gherkin
 snippet given "Given block" b
 Given("$1", function() {

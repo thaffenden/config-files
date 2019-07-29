@@ -10,7 +10,11 @@ case $power_source in
     battery_icon=🔋
     ;;
   "'AC Power'"*)
-    battery_icon=⚡️
+    if (( ${percent%?} == 100 )); then
+      battery_icon=🌳
+    else
+      battery_icon=⚡️
+    fi
     ;;
   *)
     battery_icon=🔥

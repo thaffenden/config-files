@@ -88,6 +88,9 @@ set cursorline
 set encoding=utf-8
 set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
 
+" Set custom dict location
+set spellfile=~/.vim/spell/en.utf-8.add
+
 if (has("termguicolors"))
   set termguicolors
 endif

@@ -152,6 +152,15 @@ if [[ -f $HOME/.aliases ]]; then
 fi
 
 # files
+function remove-copy() {
+  if [[ "$1" == "" ]]; then
+    search="."
+  else
+    search=$1
+  fi
+  IFS=$'\n' && for i in $(ls $search); do echo "$i"; mv $i ${i/\ copy\./\.}; done 
+}
+
 function unique-files() {
   if [[ "$1" == "" ]]; then
     search="."

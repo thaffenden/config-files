@@ -16,6 +16,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-surround'
 " aesthetic
 Plugin 'joshdick/onedark.vim'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
@@ -197,3 +199,13 @@ let g:go_list_type = 'quickfix'
 let g:go_metalinter_autosave = 1
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'goconst', 'gosec', 'lll', 'unparam', 'deadcode']
 let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'goconst', 'gosec', 'lll', 'unparam', 'deadcode']
+
+" ********** TERRAFORM CONFIG **********
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
+
+" ********** ACK.VIM CONFIG **********
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif

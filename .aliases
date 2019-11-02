@@ -1,18 +1,118 @@
-# shell
-alias la='ls -la'
-alias ka='k -ah'
-alias suroot='sudo -E -s'
+# ********** DOCKER ALIASES **********
+alias dc='docker-compose'
+alias dim='docker images | sort -h'
+alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
+alias drmi='docker rmi'
+alias dsrmall="docker ps -aq --no-trunc -f status=exited | xargs docker rm"
+function dprune() {
+  docker images -q --filter dangling=true | xargs docker rmi
+  docker image ls --format "{{.Repository}}:{{.Tag}}" | grep "amazonaws" | xargs docker rmi
+}
+function dsrm() {
+	docker stop $1
+	docker rm $1
+}
+
+# ********** FILE SYSTEM ALIASES **********
+function delete-except() {
+	find . -type f -not -name $1 -print0 | xargs -0 -- rm
+}
+function remove-copy() {
+  if [[ "$1" == "" ]]; then
+    search="."
+  else
+    search=$1
+  fi
+  IFS=$'\n' && for i in $(ls $search); do echo "$i"; mv $i ${i/\ copy\./\.}; done 
+}
+function unique-files() {
+  if [[ "$1" == "" ]]; then
+    search="."
+  else
+    search=$1
+  fi
+  find $search -type f -name "*.*" | awk -F. '{print $NF}' | sort -u
+}
+
+# ********** FFMPEG ALIASES **********
+function convert-to-mp4() {
+	echo "Converting ${1} to mp4"
+	ffmpeg -i $1 -c:v libx264 -crf 19 -preset slow -b:a 192k -ac 2 $2
+}
+
+# ********** GIT ALIASES **********
+alias gs='git status'
+alias gd='git diff'
+alias gpum='git pull upstream master'
+alias gpom='git push origin master'
+alias gtc='git commit -m "temp" --no-verify'
+alias gc-m='git commit -m'
+function gfpr() {
+    git fetch upstream refs/pull-requests/$1/from:$2
+    git checkout $2
+}
+function grl() {
+    sha=$(command git rev-parse HEAD^1)
+    git reset $sha
+}
+function gpob {
+	branch_name=$(git symbolic-ref -q HEAD)
+	git push origin ${branch_name##/refs/heads/}
+}
+
+# ********** GOLANG ALIASES **********
+function go-cover() {
+    tempFile="/tmp/go-cover.$$.tmp"
+    go test -coverprofile=$tempFile ./... && go tool cover -html=$tempFile && unlink $tempFile
+}
+
+# ********** PYTHON ALIASES **********
+alias pl='pip list --format columns'
+alias sba='source bin/activate'
+function dex() {
+    deactivate
+    echo 'Deactivated virtual environment'
+    exit
+}
+
+# ********** SHELL ALIASES **********
 alias devicons='cat $HOME/.local/share/fonts/i_dev.sh'
 alias lg='l | grep'
+function auto() {
+    current_dir="$PWD"
+    if [[ -n $VIRTUAL_ENV ]]; then
+        current_env="$VIRTUAL_ENV"
+        deactivate
+    else
+        current_env=""
+    fi
+
+    cd $HOME/git/auto-remote
+    source bin/activate
+    python auto_remote.py send --message=$1
+    deactivate
+
+    if [[ -n $current_env ]]; then
+        cd $current_env
+        source bin/activate
+    fi
+    cd $current_dir
+}
+function ghi() {
+	grep $1 ~/.zsh_history
+}
+function mine() {
+    cd $HOME
+    DIR="$(dirname "$(readlink -f .zshrc)")"
+    . $DIR/public_key
+    $HOME/eth/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $PUBLIC_KEY
+}
 function mkcd() {
     mkdir $1
 	cd $1
 }
 function tarthis() {
     tar -czf $1.tar.gz $1/
-}
-function ghi() {
-	grep $1 ~/.zsh_history
 }
 function toggle-display() {
     current_display=$(xrandr --listmonitors)
@@ -50,128 +150,17 @@ function winboot() {
     sudo grub-reboot "$WINDOWS_TITLE"
     sudo reboot
 }
-function mine() {
-    cd $HOME
-    DIR="$(dirname "$(readlink -f .zshrc)")"
-    . $DIR/public_key
-    $HOME/eth/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $PUBLIC_KEY
-}
-function auto() {
-    current_dir="$PWD"
-    if [[ -n $VIRTUAL_ENV ]]; then
-        current_env="$VIRTUAL_ENV"
-        deactivate
-    else
-        current_env=""
-    fi
 
-    cd $HOME/git/auto-remote
-    source bin/activate
-    python auto_remote.py send --message=$1
-    deactivate
-
-    if [[ -n $current_env ]]; then
-        cd $current_env
-        source bin/activate
-    fi
-    cd $current_dir
-}
-functon delete-except() {
-	find . -type f -not -name $1 -print0 | xargs -0 -- rm
-}
-
-# tmux
-alias tnew='tmux new -s '
-alias tmat='tmux a -t '
+# ********** TMUX ALIASES **********
 alias tkill='tmux kill-session -t '
+alias tmat='tmux a -t '
 alias tmls='tmux ls'
-function ide() {
-  tmux_session=${PWD##*/}
-  tmux new -s $tmux_session -d
-  tmux send-keys -t $tmux_session "vim" C-m
-  tmux split-pane -v -t $tmux_session
-  tmux resize-pane -D 12
-  tmux attach -t $tmux_session
-}
+alias tnew='tmux new -s '
 
-# python
-alias pl='pip list --format columns'
-alias sba='source bin/activate'
-function dex() {
-    deactivate
-    echo 'Deactivated virtual environment'
-    exit
-}
-
-# git
-alias gs='git status'
-alias gd='git diff'
-alias gpum='git pull upstream master'
-alias gpom='git push origin master'
-alias gtc='git commit -m "temp" --no-verify'
-alias gc-m='git commit -m'
-function gfpr() {
-    git fetch upstream refs/pull-requests/$1/from:$2
-    git checkout $2
-}
-function grl() {
-    sha=$(command git rev-parse HEAD^1)
-    git reset $sha
-}
-function gpob {
-	branch_name=$(git symbolic-ref -q HEAD)
-	git push origin ${branch_name##/refs/heads/}
-}
-
-# docker
-alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
-alias dim='docker images | sort -h'
-alias drmi='docker rmi'
-alias dc='docker-compose'
-alias dsrmall="docker ps -aq --no-trunc -f status=exited | xargs docker rm"
-function dprune() {
-  docker images -q --filter dangling=true | xargs docker rmi
-  docker image ls --format "{{.Repository}}:{{.Tag}}" | grep "amazonaws" | xargs docker rmi
-}
-function dsrm() {
-	docker stop $1
-	docker rm $1
-}
-
-# ffmpeg
-function convert-to-mp4() {
-	echo "Converting ${1} to mp4"
-	ffmpeg -i $1 -c:v libx264 -crf 19 -preset slow -b:a 192k -ac 2 $2
-}
-
-# go
-function go-cover() {
-    tempFile="/tmp/go-cover.$$.tmp"
-    go test -coverprofile=$tempFile ./... && go tool cover -html=$tempFile && unlink $tempFile
-}
 
 if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases
 fi
-
-# files
-function remove-copy() {
-  if [[ "$1" == "" ]]; then
-    search="."
-  else
-    search=$1
-  fi
-  IFS=$'\n' && for i in $(ls $search); do echo "$i"; mv $i ${i/\ copy\./\.}; done 
-}
-
-function unique-files() {
-  if [[ "$1" == "" ]]; then
-    search="."
-  else
-    search=$1
-  fi
-  find $search -type f -name "*.*" | awk -F. '{print $NF}' | sort -u
-}
 
 # has to be done after local aliases set so it can use $NOTES_DIR value set in local aliases file
 function notes(){
@@ -180,4 +169,3 @@ function notes(){
 	vim
 	cd $original_dir
 }
-

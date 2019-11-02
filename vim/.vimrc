@@ -15,13 +15,17 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+
+" search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-surround'
+
 " aesthetic
 Plugin 'joshdick/onedark.vim'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
 " language specific
 " general lint/code quality
 Plugin 'Shougo/deoplete.nvim'
@@ -99,11 +103,8 @@ if (has("termguicolors"))
 endif
 
 " ********** NERDTREE CONFIG **********
-" enable NERDTree at start
-autocmd vimenter * NERDTree
-
 " disable it when you close the last file
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 " toggle it with ctrl + n
@@ -170,9 +171,6 @@ endif
 
 syntax on
 colorscheme onedark
-
-" ********** CTRLP CONFIG **********
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|__pycache__|vendor|bin|lib|include)|(\.(swp|ico|git|svn))$'
 
 " ********** LANGUAGE CONFIG **********
 let g:ale_completion_enabled = 1

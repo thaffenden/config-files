@@ -77,6 +77,7 @@ function dex() {
 
 # ********** SHELL ALIASES **********
 alias devicons='cat $HOME/.local/share/fonts/i_dev.sh'
+alias fzf="fzf --preview='bat {} --color=always'"
 alias lg='l | grep'
 function auto() {
     current_dir="$PWD"

@@ -20,7 +20,6 @@ Plugin 'tpope/vim-surround'
 " search
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'mileszs/ack.vim'
 
 " aesthetic
 Plugin 'joshdick/onedark.vim'
@@ -203,28 +202,31 @@ let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'goconst', 
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
-
-" ********** ACK.VIM CONFIG **********
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
 " ********** FZF search with preview **********
-nnoremap <C-p> :call Fzf_dev()<CR>
+nnoremap <C-p> :Files<CR>
 
 " ripgrep
 if executable('rg')
- let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
- set grepprg=rg\ --vimgrep
- command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)  
+  
+  " Overriding fzf.vim's default :Files command.
+  " Pass zero or one args to Files command (which are then passed to Fzf_dev). Support file path completion too.
+  command! -nargs=? -complete=file Files call Fzf_dev(<q-args>)
 endif
 
 " Files + devicons
-function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
+function! Fzf_dev(qargs)
+  let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'" --expect=ctrl-t,ctrl-v,ctrl-x --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all'
 
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+  function! s:files(dir)
+    let l:cmd = $FZF_DEFAULT_COMMAND
+    if a:dir != ''
+      let l:cmd .= ' ' . shellescape(a:dir)
+    endif
+    let l:files = split(system(l:cmd), '\n')
     return s:prepend_icon(l:files)
   endfunction
 
@@ -238,16 +240,24 @@ function! Fzf_dev()
 
     return l:result
   endfunction
+  
+  function! s:edit_file(lines)
+    if len(a:lines) < 2 | return | endif
 
-  function! s:edit_file(item)
-    let l:pos = stridx(a:item, ' ')
-    let l:file_path = a:item[pos+1:-1]
-    execute 'silent e' l:file_path
+    let l:cmd = get({'ctrl-x': 'split',
+                 \ 'ctrl-v': 'vertical split',
+                 \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
+    
+    for l:item in a:lines[1:]
+      let l:pos = stridx(l:item, ' ')
+      let l:file_path = l:item[pos+1:-1]
+      execute 'silent '. l:cmd . ' ' . l:file_path
+    endfor
   endfunction
 
   call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink':   function('s:edit_file'),
+        \ 'source': <sid>files(a:qargs),
+        \ 'sink*':   function('s:edit_file'),
         \ 'options': '-m ' . l:fzf_files_options,
         \ 'down':    '40%' })
 endfunction

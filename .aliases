@@ -11,7 +11,7 @@ function dprune() {
 # docker remove image with fzf
 function drmi() {
   local cid
-  cid=$(docker images | sed 1d | fzf -q "$1" | awk '{print $1":"$2}')
+  cid=$(docker images | sed 1d | fzf -q "$1" | awk '{print $3}')
   [ -n "$cid" ] && docker rmi "$cid"
 }
 # docker stop docker remove

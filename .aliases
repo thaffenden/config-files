@@ -2,12 +2,19 @@
 alias dc='docker-compose'
 alias dim='docker images | sort -h'
 alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
-alias drmi='docker rmi'
 alias dsrmall="docker ps -aq --no-trunc -f status=exited | xargs docker rm"
+# docker prune images
 function dprune() {
   docker images -q --filter dangling=true | xargs docker rmi
   docker image ls --format "{{.Repository}}:{{.Tag}}" | grep "amazonaws" | xargs docker rmi
 }
+# docker remove image with fzf
+function drmi() {
+  local cid
+  cid=$(docker images | sed 1d | fzf -q "$1" | awk '{print $1":"$2}')
+  [ -n "$cid" ] && docker rmi "$cid"
+}
+# docker stop docker remove
 function dsrm() {
 	docker stop $1
 	docker rm $1

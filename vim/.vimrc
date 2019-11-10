@@ -31,8 +31,10 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'roxma/nvim-yarp'
 Plugin 'roxma/vim-hug-neovim-rpc'
 Plugin 'w0rp/ale'
-Plugin 'SirVer/ultisnips'
 Plugin 'maximbaz/lightline-ale'
+
+" snippets
+Plugin 'SirVer/ultisnips'
 
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
@@ -47,7 +49,7 @@ Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " Plugin 'shime/vim-livedown'
 
 " Python
-Plugin 'python-mode/python-mode'
+Plugin 'psf/black'
 
 " Terraform
 Plugin 'hashivim/vim-terraform'
@@ -174,12 +176,10 @@ colorscheme onedark
 " ********** LANGUAGE CONFIG **********
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
-let g:ale_linters = {'go': ['golangci-lint']}
+let g:ale_fixers = {'python': ['black']}
+let g:ale_linters = {'go': ['golangci-lint'], 'python': ['flake8', 'mypy', 'pycodestyle', 'pylint']}
 let g:ale_lint_delay = 10
 let g:ale_go_golangci_lint_executable = "/Users/tristan/go/bin/golangci-lint"
-
-" python
-let g:pymode_python = 'python3'
 
 " ********** ULTISNIPS CONFIG **********
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']

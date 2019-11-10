@@ -105,7 +105,7 @@ endif
 
 " ********** NERDTREE CONFIG **********
 " disable it when you close the last file
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 " toggle it with ctrl + n
@@ -180,6 +180,8 @@ let g:ale_fixers = {'python': ['black']}
 let g:ale_linters = {'go': ['golangci-lint'], 'python': ['flake8', 'mypy', 'pycodestyle', 'pylint']}
 let g:ale_lint_delay = 10
 let g:ale_go_golangci_lint_executable = "/Users/tristan/go/bin/golangci-lint"
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " ********** ULTISNIPS CONFIG **********
 let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']

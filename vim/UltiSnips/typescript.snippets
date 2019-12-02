@@ -62,14 +62,20 @@ import { PageObject } from "../$2common";
 
 export class $1 extends PageObject {
 
-  protected locators = {
+  private locators = {
     $3
   };
 
   public constructor() {
     super();
   }
+}
+endsnippet
 
+snippet puclick "WebdriverIO page object click interaction" b
+public click$1(): this {
+	this.root().$(this.locators.$2).click();
+	return this;
 }
 endsnippet
 

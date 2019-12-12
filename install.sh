@@ -10,6 +10,7 @@ function create_vim_directories() {
   mkdir $HOME/.vim/backup
   mkdir $HOME/.vim/swap
   mkdir $HOME/.vim/undo
+  mkdir $HOME/.tmux
 }
 
 function install_vundle() {
@@ -40,5 +41,7 @@ symlink_file .desktop $HOME/.config/autostart/.desktop 'Keyboard backlight enabl
 
 symlink_file .zshrc $HOME/.zshrc 'Created symlink for .zshrc file'
 symlink_file ./vim/.vimrc $HOME/.vimrc 'Created symlink for .vimrc file'
+symlink_file ./tmux/.tmux.conf $HOME/.tmux.conf 'Created symlink for .tmux.conf file'
+symlink_file ./tmux/battery $HOME/.tmux/battery 'Created symlink for tmux battery indicator file'
 
 copy_monitor_config_file

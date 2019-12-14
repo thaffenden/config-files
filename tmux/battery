@@ -32,4 +32,4 @@ if [ `uname` = 'Darwin' ] ; then
   fi
 fi
 
-echo "#[fg=$bg_colour]◀#[bg=$bg_colour,fg=colour16]$battery_icon $percent #[fg=colour5,bg=$bg_colour]◀"
+echo "#[fg=$bg_colour]#[bg=$bg_colour,fg=colour16] $battery_icon $percent#[fg=colour5,bg=$bg_colour]"

@@ -19,7 +19,10 @@ Plug 'tpope/vim-surround'
 " navigational
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" *** language plug ins ***
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -39,6 +42,10 @@ set showmatch 			                      "show matching brackets
 set shiftwidth=2 		                      "tabs are 2 spaces
 set tabstop=2
 set undodir=~/.vim/undo//                 "undo directory
+set timeout timeoutlen=1000 ttimeoutlen=0
+
+" ********** COC CONFIG **********
+source ~/git/config-files/vim/coc-settings.vim
 
 " ********** COLOUR SCHEME **********
 if (has("autocmd") && !has("gui_running"))
@@ -124,13 +131,11 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'filename', 'modified', 'readonly' ] ],
-      \   'right': [ ['lineinfo'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'], ['filetype'] ]
+      \   'right': [ ['lineinfo'], ['filetype'], ['cocwarning', 'cocerror'] ]
       \ },
       \ 'component_expand': {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
+      \  'cocerror': 'LightLineCocError',
+      \  'cocwarning': 'LightLineCocWarn',
       \ },
       \ 'component_function': {
       \   'filetype': 'MyFiletype',
@@ -138,12 +143,35 @@ let g:lightline = {
       \   'fileencoding': 'NoFormat',
       \ },
       \ 'component_type': {
-      \   'linter_checking': 'left',
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error',
-      \   'linter_ok': 'left',
+      \   'cocerror': 'error',
+      \   'cocwarning': 'warning'
       \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"}
       \ }
+
+function! LightLineCocError()
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return ''
+  endif
+  let errmsgs = []
+  if get(info, 'error', 0)
+    return 'ﰸ ' . info['error']
+  endif
+  return ''
+endfunction
+
+function! LightLineCocWarn() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return '' 
+  endif
+  if get(info, 'warning', 0)
+    return ' ' . info['warning']
+  endif
+  return ''
+endfunction
 
 function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
@@ -152,6 +180,9 @@ endfunction
 function! NoFormat()
   return ''
 endfunction
+
+" force Lightline to update on COC status change 
+autocmd User CocDiagnosticChange call lightline#update()
 
 " ********** NERDTREE CONFIG **********  
 map <C-n> :NERDTreeToggle<CR>

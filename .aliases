@@ -152,7 +152,7 @@ function toggle-display() {
     DP_ACTIVE=false
     HDMI_ACTIVE=false
 
-    if [[ $current_display =~ "DP-2" ]]; then
+    if [[ $current_display =~ "DP-4" ]]; then
         DP_ACTIVE=true
     fi
     if [[ $current_display =~ "HDMI-0" ]]; then
@@ -161,15 +161,15 @@ function toggle-display() {
 
     if [[ $DP_ACTIVE == true && $HDMI_ACTIVE == true ]]; then
         echo "Both monitors active, switching to just display port"
-        enable_monitor="DP-2"
+        enable_monitor="DP-4"
         disable_monitor="HDMI-0"
     elif [[ $DP_ACTIVE == true && $HDMI_ACTIVE == false ]]; then
         echo "Switching to just HDMI output"
         enable_monitor="HDMI-0"
-        disable_monitor="DP-2"
+        disable_monitor="DP-4"
     elif [[ $DP_ACTIVE == false && $HDMI_ACTIVE == true ]]; then
         echo "Switching to just Display Port output"
-        enable_monitor="DP-2"
+        enable_monitor="DP-4"
         disable_monitor="HDMI-0"
     fi
 

@@ -79,6 +79,12 @@ public click$1(): this {
 }
 endsnippet
 
+snippet putxt "WebdriverIO page object getText interaction" b
+public get$1Text(): string {
+  return this.root().$(this.locators.$2).getText();
+}
+endsnippet
+
 snippet puvis "WebdriverIO page object method for is visible checks" b
 public $1IsVisible(): boolean {
 	return browser.isVisible(this.locators.$1);

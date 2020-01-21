@@ -176,8 +176,8 @@ colorscheme onedark
 " ********** LANGUAGE CONFIG **********
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {'python': ['black']}
-let g:ale_linters = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'go': ['golangci-lint'], 'python': ['flake8', 'mypy', 'pycodestyle', 'pylint']}
+let g:ale_fixers = {'python': ['black'], 'typescript': ['prettier']}
+let g:ale_linters = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'go': ['golangci-lint'], 'python': ['flake8', 'mypy', 'pycodestyle', 'pylint'], 'typescript': ['tslint', 'tsserver']}
 let g:ale_lint_delay = 10
 let g:ale_go_golangci_lint_executable = "/Users/tristan/go/bin/golangci-lint"
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)

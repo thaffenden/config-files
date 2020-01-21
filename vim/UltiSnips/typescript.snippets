@@ -87,7 +87,7 @@ endsnippet
 
 snippet puvis "WebdriverIO page object method for is visible checks" b
 public $1IsVisible(): boolean {
-	return browser.isVisible(this.locators.$1);
+	return this.root().$(this.locators.$1).isDisplayed();
 }
 endsnippet
 

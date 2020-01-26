@@ -1,31 +1,35 @@
 #!/bin/bash
+battery_icon=🔌
+bg_colour='colour2'
+percent=''
+
 if [ `uname` = 'Darwin' ] ; then
   battery_status=`pmset -g batt`
   percent=`echo $battery_status | egrep "([0-9]+\%).*" -o --colour=auto | cut -f1 -d";"`
   power_source=`echo $battery_status | egrep "'(.*) Power'" -o`
+  case $power_source in 
+    "'Battery Power'"*)
+      battery_icon=🔋
+      ;;
+    "'AC Power'"*)
+      if (( ${percent%?} == 100 )); then
+        battery_icon=🌳
+      else
+        battery_icon=⚡️
+      fi
+      ;;
+    *)
+      battery_icon=🔥
+  esac
+  
+  if (( ${percent%?} > 50 )); then 
+      bg_colour='colour2'
+  elif (( ${percent%?} > 20 )); then 
+      bg_colour='colour3'
+  else 
+      bg_colour='colour1'
+      battery_icon=💀
+  fi
 fi
 
-case $power_source in 
-  "'Battery Power'"*)
-    battery_icon=🔋
-    ;;
-  "'AC Power'"*)
-    if (( ${percent%?} == 100 )); then
-      battery_icon=🌳
-    else
-      battery_icon=⚡️
-    fi
-    ;;
-  *)
-    battery_icon=🔥
-esac
-
-if (( ${percent%?} > 50 )); then 
-    bg_colour='colour2'
-elif (( ${percent%?} > 20 )); then 
-    bg_colour='colour3'
-else 
-    bg_colour='colour1'
-    battery_icon=💀
-fi
-echo "#[fg=$bg_colour]#[bg=$bg_colour,fg=colour16]$battery_icon $percent #[fg=colour5,bg=$bg_colour]"
+echo "#[fg=$bg_colour]#[bg=$bg_colour,fg=colour16] $battery_icon $percent#[fg=colour5,bg=$bg_colour]"

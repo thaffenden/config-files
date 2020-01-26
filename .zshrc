@@ -8,7 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 source $HOME/.local/share/fonts/i_dev.sh
-ZSH_THEME="wynwyn-minimal"
+ZSH_THEME="wynwyn"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -112,9 +112,6 @@ if [[ `uname` == 'Darwin' ]]; then
     git_dir="$(dirname "$(greadlink -f ~/.zshrc)")"
 else
     git_dir="$(dirname "$(readlink -f ~/.zshrc)")"
-    PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
-    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
-    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
 fi
 source $git_dir/.aliases
 

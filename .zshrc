@@ -115,3 +115,5 @@ else
 fi
 source $git_dir/.aliases
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -22,8 +22,21 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " *** language plug ins ***
+" Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-Plug 'sheerun/vim-polyglot'
+
+" Python
+Plug 'psf/black', { 'for': 'python' }
+
+" Snippets
+Plug 'SirVer/ultisnips'
+
+" Terraform
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
+
+" Typescript
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 
 call plug#end()
 

@@ -13,8 +13,8 @@ function create_vim_directories() {
   mkdir $HOME/.tmux
 }
 
-function install_vundle() {
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+function install_vim_plug() {
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
 function symlink_file() {
@@ -33,11 +33,8 @@ function turn_on_kb_backlight() {
     echo 'Keyboard backlight turned on'
 }
 
-install_vundle
+install_vim_plug
 create_vim_directories
-set_backlight_file_path_in_desktop_file
-turn_on_kb_backlight
-symlink_file .desktop $HOME/.config/autostart/.desktop 'Keyboard backlight enabled at start up'
 
 symlink_file .zshrc $HOME/.zshrc 'Created symlink for .zshrc file'
 symlink_file ./vim/.vimrc $HOME/.vimrc 'Created symlink for .vimrc file'
@@ -45,4 +42,9 @@ symlink_file ./tmux/.tmux.conf $HOME/.tmux.conf 'Created symlink for .tmux.conf 
 symlink_file ./tmux/battery $HOME/.tmux/battery 'Created symlink for tmux battery indicator file'
 symlink_file ./.gitconfig $HOME/.gitconfig 'Created symlink for git config file'
 
-copy_monitor_config_file
+if [[ `uname` != "Darwin" ]]; then
+  copy_monitor_config_file
+  set_backlight_file_path_in_desktop_file
+  turn_on_kb_backlight
+  symlink_file .desktop $HOME/.config/autostart/.desktop 'Keyboard backlight enabled at start up'
+fi

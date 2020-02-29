@@ -38,6 +38,7 @@ create_vim_directories
 
 symlink_file .zshrc $HOME/.zshrc 'Created symlink for .zshrc file'
 symlink_file vim/.vimrc $HOME/.vimrc 'Created symlink for .vimrc file'
+symlink_file vim/coc-settings.json $HOME/.vim/coc-settings.json 'Created symlink for coc settings file'
 symlink_file tmux/.tmux.conf $HOME/.tmux.conf 'Created symlink for .tmux.conf file'
 symlink_file tmux/battery $HOME/.tmux/battery 'Created symlink for tmux battery indicator file'
 symlink_file .gitconfig $HOME/.gitconfig 'Created symlink for git config file'

@@ -48,12 +48,13 @@ function convert-to-mp4() {
 }
 
 # ********** GIT ALIASES **********
-alias gs='git status'
+alias gcb='git checkout -b'
+alias gcm='git checkout master'
 alias gd='git diff'
-alias gpum='git pull upstream master'
-alias gpom='git push origin master'
+alias ggpull='git pull origin'
+alias glo='git log --oneline'
+alias gs='git status'
 alias gtc='git commit -m "temp" --no-verify'
-alias gc-m='git commit -m'
 # git fetch pull request
 function gfpr() {
     git fetch upstream refs/pull-requests/$1/from:$2

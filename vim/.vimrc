@@ -1,165 +1,65 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-" functionality
-Plugin 'itchyny/lightline.vim'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Townk/vim-autoclose'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-
-" search
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+" ********** ALL PLUGINS **********
+call plug#begin('~/.vim/plugged')
 
 " aesthetic
-Plugin 'joshdick/onedark.vim'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'itchyny/lightline.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'ryanoasis/vim-devicons'   "used in NERDTree, fzf search, lightline
 
-" language specific
-" general lint/code quality
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'w0rp/ale'
-Plugin 'maximbaz/lightline-ale'
+" code
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" snippets
-Plugin 'SirVer/ultisnips'
+"functionality
+Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-surround'
 
-" Docker
-Plugin 'ekalinin/Dockerfile.vim'
+" navigational
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
+" *** language plug ins ***
 " Go
-Plugin 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-
-" GraphQL
-" Plugin 'jparise/vim-graphql'
-
-" Markdown
-" Plugin 'shime/vim-livedown'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 " Python
-Plugin 'psf/black'
+Plug 'psf/black', { 'for': 'python' }
+
+" Snippets
+Plug 'SirVer/ultisnips'
 
 " Terraform
-Plugin 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 
 " Typescript
-Plugin 'leafgarland/typescript-vim'
-Plugin 'ianks/vim-tsx'
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-"""" END Vundle Configuration 
+call plug#end()
 
-" fix backspace
-set backspace=indent,eol,start
-
-" show line numbers
-set number relativenumber
-
-" enable spell checking
-set spelllang=en
-set spell
-
-" configure tab settings
-set shiftwidth=2
+" ********** STANDARD VIM SETTINGS **********
+set autoindent 			                      "auto indent new lines
+set backspace=indent,eol,start 	          "use backspace character like proper delete
+set backupdir=~/.vim/backup//             "back up directory
+set directory=~/.vim/swap//               "swap directory
+set encoding=utf-8
+set expandtab 			                      "expand tab character to spaces
+set number 			                          "display line numbers in file
+set relativenumber 		                    "make line numbers relative
+set spell 			                          "enable spell check by default
+set spellfile=~/.vim/spell/en.utf-8.add   "spell file location for custom terms
+set spelllang=en 		                      "set spelling to English
+set showmatch 			                      "show matching brackets
+set shiftwidth=2 		                      "tabs are 2 spaces
 set tabstop=2
-set autoindent
-set expandtab
-
-autocmd Filetype make setlocal noexpandtab
-
-set linebreak
-
-" save .swp files to non project directory
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
-
-" make switching modes quicker
+set undodir=~/.vim/undo//                 "undo directory
 set timeout timeoutlen=1000 ttimeoutlen=0
 
-" Enable highlighting of the current line
-set cursorline
-
-set encoding=utf-8
-set guifont=Source\ Code\ Pro\ Nerd\ Font\ Complete\ Mono\ 14
-
-" Set custom dict location
-set spellfile=~/.vim/spell/en.utf-8.add
-
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-" ********** NERDTREE CONFIG **********
-" disable it when you close the last file
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-
-" toggle it with ctrl + n
-map <C-n> :NERDTreeToggle<CR>
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeShowHidden = 1
-
-" ********** LIGHTLINE CONFIG **********
-set laststatus=2
-set noshowmode
-
-let g:lightline = {
-      \ 'colorscheme': 'one',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'filename', 'modified', 'readonly' ] ],
-      \   'right': [ ['lineinfo'], ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'], ['filetype'] ]
-      \ },
-      \ 'component_expand': {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ },
-      \ 'component_function': {
-      \   'filetype': 'MyFiletype',
-      \   'fileformat': 'NoFormat',
-      \   'fileencoding': 'NoFormat',
-      \ },
-      \ 'component_type': {
-      \   'linter_checking': 'left',
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error',
-      \   'linter_ok': 'left',
-      \ },
-      \ }
-
-function! MyFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! NoFormat()
-  return ''
-endfunction
-
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071  "
-let g:lightline#ale#indicator_errors = "\uf05e  "
-let g:lightline#ale#indicator_ok = "\uf00c"
-
-
-" ********** DEOPLETE.NVIM CONFIG **********
-let g:deoplete#enable_at_startup = 1
+" ********** COC CONFIG **********
+source ~/git/config-files/vim/coc-settings.vim
 
 " ********** COLOUR SCHEME **********
 if (has("autocmd") && !has("gui_running"))
@@ -173,36 +73,9 @@ endif
 syntax on
 colorscheme onedark
 
-" ********** LANGUAGE CONFIG **********
-let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {'python': ['black'], 'typescript': ['prettier']}
-let g:ale_linters = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'go': ['golangci-lint'], 'python': ['flake8', 'mypy', 'pycodestyle', 'pylint'], 'typescript': ['tslint', 'tsserver']}
-let g:ale_lint_delay = 10
-let g:ale_go_golangci_lint_executable = "/Users/tristan/go/bin/golangci-lint"
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" ********** ULTISNIPS CONFIG **********
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" ********** LIVEDOWN CONFIG **********
-let g:livedown_open = 1
-let g:livedown_browser = "firefox"
-
-" ********** GO CONFIG **********
-let g:go_fmt_command = "goimports"
-let g:go_list_type = 'quickfix'
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'goconst', 'gosec', 'lll', 'unparam', 'deadcode']
-let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'goconst', 'gosec', 'lll', 'unparam', 'deadcode']
-
-" ********** TERRAFORM CONFIG **********
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
+if (has("termguicolors"))
+ set termguicolors
+endif
 
 " ********** FZF search with preview **********
 nnoremap <C-p> :Files<CR>
@@ -263,3 +136,80 @@ function! Fzf_dev(qargs)
         \ 'options': '-m ' . l:fzf_files_options,
         \ 'down':    '40%' })
 endfunction
+
+
+" ********** GO CONFIG **********
+let g:go_fmt_command = 'goimports'
+let g:go_list_type = 'quickfix'
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_command='golangci-lint'
+" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'goconst', 'gosec', 'lll', 'unparam', 'deadcode']
+" et g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'goconst', 'gosec', 'lll', 'unparam', 'deadcode']
+
+
+" ********** LIGHTLINE CONFIG **********
+set laststatus=2
+
+let g:lightline = {
+      \ 'colorscheme': 'deus',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'filename', 'modified', 'readonly' ] ],
+      \   'right': [ ['lineinfo'], ['filetype'], ['cocwarning', 'cocerror'] ]
+      \ },
+      \ 'component_expand': {
+      \  'cocerror': 'LightLineCocError',
+      \  'cocwarning': 'LightLineCocWarn',
+      \ },
+      \ 'component_function': {
+      \   'filetype': 'MyFiletype',
+      \   'fileformat': 'NoFormat',
+      \   'fileencoding': 'NoFormat',
+      \ },
+      \ 'component_type': {
+      \   'cocerror': 'error',
+      \   'cocwarning': 'warning'
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"}
+      \ }
+
+function! LightLineCocError()
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return ''
+  endif
+  let errmsgs = []
+  if get(info, 'error', 0)
+    return 'ﰸ ' . info['error']
+  endif
+  return ''
+endfunction
+
+function! LightLineCocWarn() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return '' 
+  endif
+  if get(info, 'warning', 0)
+    return ' ' . info['warning']
+  endif
+  return ''
+endfunction
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! NoFormat()
+  return ''
+endfunction
+
+" force Lightline to update on COC status change 
+autocmd User CocDiagnosticChange call lightline#update()
+
+" ********** NERDTREE CONFIG **********  
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeShowHidden = 1

@@ -10,6 +10,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'ryanoasis/vim-devicons'   "used in NERDTree, fzf search, lightline
 
 " code
+Plug 'editorconfig/editorconfig-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "functionality

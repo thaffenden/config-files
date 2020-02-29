@@ -9,7 +9,7 @@
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # source $HOME/.local/share/fonts/i_dev.sh
 # ZSH_THEME="wynwyn"
-fpath+=$HOME/.zsh/pure
+fpath+=$HOME/.zsh/pure-dev
 autoload -U promptinit; promptinit
 prompt pure
 

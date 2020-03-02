@@ -39,6 +39,15 @@ Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 
+" CocLanguageServers
+Plug 'fannheyward/coc-markdownlint'
+Plug 'fannheyward/coc-pyright'
+Plug 'neoclide/coc-json'
+Plug 'neoclide/coc-python'
+Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-yaml'
+Plug 'josa42/coc-docker'
+
 call plug#end()
 
 " ********** STANDARD VIM SETTINGS **********

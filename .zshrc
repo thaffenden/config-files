@@ -100,9 +100,12 @@ KEYTIMEOUT=1
 
 export GOPATH="$HOME/go"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# fnm
+eval "$(fnm env --multi)"
+alias nvm="fnm"
 
 if [[ `uname` == 'Darwin' ]]; then
     git_dir="$(dirname "$(readlink ~/.zshrc)")"

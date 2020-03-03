@@ -124,6 +124,7 @@ function dex() {
 alias devicons='cat $HOME/.local/share/fonts/i_dev.sh'
 alias fzp="fzf --preview='bat {} --color=always'"
 alias lg='l | grep'
+alias reset_pure='prompt_pure_async_init=0; async_stop_worker prompt_pure'
 function auto() {
     current_dir="$PWD"
     if [[ -n $VIRTUAL_ENV ]]; then

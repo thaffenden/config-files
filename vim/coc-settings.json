@@ -1,6 +1,6 @@
 {
   "coc.preferences.jumpCommand": "split",
-  "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+  "coc.preferences.formatOnSaveFiletypes": ["Markdown", "typescript"],
   "languageserver": {
     "bash": {
       "command": "bash-language-server",

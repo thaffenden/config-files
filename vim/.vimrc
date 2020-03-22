@@ -23,6 +23,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " *** language plug ins ***
+" CSV
+Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
@@ -35,6 +38,8 @@ Plug 'SirVer/ultisnips'
 " Terraform
 Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
 
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+
 " Typescript
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
@@ -44,7 +49,7 @@ Plug 'fannheyward/coc-markdownlint'
 Plug 'fannheyward/coc-pyright'
 Plug 'neoclide/coc-json'
 Plug 'neoclide/coc-python'
-Plug 'neoclide/coc-tsserver'
+" Plug 'neoclide/coc-tsserver'
 Plug 'neoclide/coc-yaml'
 Plug 'josa42/coc-docker'
 

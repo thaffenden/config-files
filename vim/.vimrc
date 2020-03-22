@@ -32,6 +32,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 " Python
 Plug 'psf/black', { 'for': 'python' }
 
+" Rust
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
 " Snippets
 Plug 'SirVer/ultisnips'
 

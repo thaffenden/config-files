@@ -25,6 +25,24 @@ alias l='ls -la'
 function delete-except() {
 	find . -type f -not -name $1 -print0 | xargs -0 -- rm
 }
+function open() {
+  if [[ `uname` == "Darwin" ]]; then
+    open $@
+  else
+    file=$1
+    case "${file##*.}" in
+      "jpg" | "jpeg" | "JPG" | "png")
+        eog $@
+        ;;
+      "mp4" | "mkv")
+        vlc $@
+        ;;
+      *)
+        nautilus $@
+    esac
+
+  fi
+}
 function remove-copy() {
   if [[ "$1" == "" ]]; then
     search="."

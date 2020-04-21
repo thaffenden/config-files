@@ -35,7 +35,7 @@ function turn_on_kb_backlight() {
 }
 
 install_vim_plug
-create_ranger_directories
+create_config_directories
 
 symlink_file .zshrc $HOME/.zshrc 'Created symlink for .zshrc file'
 symlink_file vim/.vimrc $HOME/.vimrc 'Created symlink for .vimrc file'

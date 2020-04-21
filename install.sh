@@ -46,6 +46,7 @@ symlink_file tmux/battery $HOME/.tmux/battery 'Created symlink for tmux battery 
 symlink_file .gitconfig $HOME/.gitconfig 'Created symlink for git config file'
 symlink_file ranger/rc.conf $HOME/.config/ranger/rc.conf 'Created symlink for ranger rc.conf'
 symlink_file ranger/scope.sh $HOME/.config/ranger/scope.sh 'Created symlink for ranger scope.sh'
+symlink_file .alacritty.yml $HOME/.alacritty.yml 'Created symlink for alacritty config'
 
 if [[ `uname` != "Darwin" ]]; then
   copy_monitor_config_file

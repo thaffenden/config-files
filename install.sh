@@ -1,16 +1,17 @@
 #! /bin/bash
-# Install: git, zsh, zsh theme (wynwyn-minimal)
+# Install: git, zsh, pure, alacritty, ranger
 
 function copy_monitor_config_file() {
     cp $HOME/.config/monitors.xml /var/liv/gdm/.config/monitors.xml
     echo 'Set default monitor config at boot'
 }
 
-function create_vim_directories() {
+function create_config_directories() {
   mkdir $HOME/.vim/backup
   mkdir $HOME/.vim/swap
   mkdir $HOME/.vim/undo
   mkdir $HOME/.tmux
+  mkdir $HOME/.config/ranger
 }
 
 function install_vim_plug() {
@@ -34,7 +35,7 @@ function turn_on_kb_backlight() {
 }
 
 install_vim_plug
-create_vim_directories
+create_ranger_directories
 
 symlink_file .zshrc $HOME/.zshrc 'Created symlink for .zshrc file'
 symlink_file vim/.vimrc $HOME/.vimrc 'Created symlink for .vimrc file'
@@ -43,6 +44,8 @@ symlink_file vim/coc-settings.json $HOME/.vim/coc-settings.json 'Created symlink
 symlink_file tmux/.tmux.conf $HOME/.tmux.conf 'Created symlink for .tmux.conf file'
 symlink_file tmux/battery $HOME/.tmux/battery 'Created symlink for tmux battery indicator file'
 symlink_file .gitconfig $HOME/.gitconfig 'Created symlink for git config file'
+symlink_file ranger/rc.conf $HOME/.config/ranger/rc.conf 'Created symlink for ranger rc.conf'
+symlink_file ranger/scope.sh $HOME/.config/ranger/scope.sh 'Created symlink for ranger scope.sh'
 
 if [[ `uname` != "Darwin" ]]; then
   copy_monitor_config_file

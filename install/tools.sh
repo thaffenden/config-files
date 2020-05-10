@@ -1,4 +1,9 @@
 #! /bin/bash
+function install_alacritty() {
+  sudo add-apt-repository ppa:mmstick76/alacritty
+  sudo apt install alacritty
+}
+
 function install_node_version_manager() {
   curl -fsSL https://github.com/Schniz/fnm/raw/master/.ci/install.sh | bash
 }

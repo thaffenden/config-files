@@ -10,7 +10,7 @@ function install_config_repo() {
 }
 
 function install_core_deps() {
-  sudo apt install git zsh vim xclip
+  sudo apt install git zsh vim xclip curl
 }
 
 function install_oh_my_zsh() {

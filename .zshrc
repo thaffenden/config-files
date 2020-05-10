@@ -58,7 +58,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # 
 source $ZSH/oh-my-zsh.sh
 
-fpath+=$HOME/.zsh/pure-dev
+fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 prompt pure
 

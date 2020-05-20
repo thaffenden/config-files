@@ -184,30 +184,32 @@ function tarthis() {
     tar -czf $1.tar.gz $1/
 }
 function toggle-display() {
+    DP_OUT="DP-0"
+    HDMI_OUT="HDMI-0"
     current_display=$(xrandr --listmonitors)
 
     DP_ACTIVE=false
     HDMI_ACTIVE=false
 
-    if [[ $current_display =~ "DP-4" ]]; then
+    if [[ $current_display =~ "${DP_OUT}" ]]; then
         DP_ACTIVE=true
     fi
-    if [[ $current_display =~ "HDMI-0" ]]; then
+    if [[ $current_display =~ "${HDMI_OUT}" ]]; then
         HDMI_ACTIVE=true
     fi
 
     if [[ $DP_ACTIVE == true && $HDMI_ACTIVE == true ]]; then
         echo "Both monitors active, switching to just display port"
-        enable_monitor="DP-4"
-        disable_monitor="HDMI-0"
+        enable_monitor=$DP_OUT
+        disable_monitor=$HDMI_OUT
     elif [[ $DP_ACTIVE == true && $HDMI_ACTIVE == false ]]; then
         echo "Switching to just HDMI output"
-        enable_monitor="HDMI-0"
-        disable_monitor="DP-4"
+        enable_monitor=$HDMI_OUT
+        disable_monitor=$DP_OUT
     elif [[ $DP_ACTIVE == false && $HDMI_ACTIVE == true ]]; then
         echo "Switching to just Display Port output"
-        enable_monitor="DP-4"
-        disable_monitor="HDMI-0"
+        enable_monitor=$DP_OUT
+        disable_monitor=$HDMI_OUT
     fi
 
     xrandr --output $enable_monitor --auto

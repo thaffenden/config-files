@@ -170,11 +170,8 @@ function auto() {
     fi
     cd $current_dir
 }
-function mine() {
-    cd $HOME
-    DIR="$(dirname "$(readlink -f .zshrc)")"
-    . $DIR/public_key
-    $HOME/eth/ethminer --farm-recheck 200 -G -S eu1.ethermine.org:4444 -FS us1.ethermine.org:4444 -O $PUBLIC_KEY
+function mine!() {
+  sudo chown -R $USER $@
 }
 function mkcd() {
     mkdir $1
@@ -184,7 +181,7 @@ function tarthis() {
     tar -czf $1.tar.gz $1/
 }
 function toggle-display() {
-    DP_OUT="DP-0"
+    DP_OUT="DP-4"
     HDMI_OUT="HDMI-0"
     current_display=$(xrandr --listmonitors)
 

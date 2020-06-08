@@ -56,6 +56,8 @@ Plug 'neoclide/coc-python'
 Plug 'neoclide/coc-yaml'
 Plug 'josa42/coc-docker'
 
+Plug 'qpkorr/vim-renamer'
+
 call plug#end()
 
 " ********** STANDARD VIM SETTINGS **********

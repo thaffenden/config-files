@@ -68,8 +68,6 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # speed up key time out
 KEYTIMEOUT=1
 
-export GOPATH="$HOME/go"
-
 # fnm
 export PATH="$HOME/.fnm:$PATH"
 eval "$(fnm env --multi)"
@@ -88,3 +86,6 @@ source $git_dir/.aliases
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+
+# make colours on external dirs more readble.
+export LS_COLORS="$LS_COLORS:ow=37;35"

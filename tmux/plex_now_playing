@@ -6,7 +6,14 @@ pause_icon=
 
 plex_output=`curl -H 'Accept: application/json' http://localhost:32400/status/sessions?X-Plex-Token=$PLEX_TOKEN | jq '.MediaContainer.Metadata[0]'`
 
+state=`jq -r '.Player.state' <<< "$plex_output"`
 artist=`jq -r '.grandparentTitle' <<< "$plex_output"`
 title=`jq -r '.title' <<< "$plex_output"`
 
-echo "#[bg=default,fg=green] $artist - $title $music_icon"
+if [ "$state" == "paused" ];
+  then music_icon=$pause_icon
+fi
+
+if [ "$artist" != 'null' ];
+  then echo "#[bg=default,fg=green] $artist - $title $music_icon"
+fi

@@ -1,0 +1,11 @@
+#!/bin/bash
+music_icon=
+play_icon=
+pause_icon=
+
+artist="Cult Of Luna"
+title="Leave me here"
+
+plex_output="curl -H 'Accept: application/json' http://localhost:32400/status/sessions?X-Plex-Token=$PLEX_TOKEN | jq ."
+
+echo "#[bg=default,fg=green] $artist - $title $music_icon"

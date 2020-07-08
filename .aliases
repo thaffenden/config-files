@@ -177,6 +177,13 @@ function mkcd() {
     mkdir $1
 	cd $1
 }
+function pbcopy() {
+  if [[ `uname` == "Darwin" ]]; then
+    pbcopy
+  else
+    xclip -selection clipboard
+  fi
+}
 function tarthis() {
     tar -czf $1.tar.gz $1/
 }

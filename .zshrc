@@ -80,6 +80,7 @@ else
     git_dir="$(dirname "$(readlink -f ~/.zshrc)")"
 fi
 source $git_dir/.aliases
+source $git_dir/scripts/vpn.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -87,5 +88,5 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
 
-# make colours on external dirs more readble.
+# make colours on external dirs more readable.
 export LS_COLORS="$LS_COLORS:ow=37;35"

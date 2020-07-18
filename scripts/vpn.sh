@@ -1,6 +1,16 @@
 #!/bin/sh
 work_vpn_name="Vidsy Office"
 
+
+# Use in format `log_connecting vpn_type message`.
+log_connecting() {
+  printf "\e[0m\e[1m\e[32m[🔐 vpn - $1]\e[0m $2\n\e[2m"
+}
+
+log_disconnecting() {
+  printf "\e[0m\e[1m\e[35m[🔓 vpn - $1]\e[0m $2\n\e[2m"
+}
+
 home_vpn_is_active() {
   home_status=`expressvpn status` 
   if [[ "$home_status" == *"Not connected"* ]]; then
@@ -8,30 +18,6 @@ home_vpn_is_active() {
   else
     echo "true"
   fi
-}
-
-home_off() {
-  echo "disconnecting from home vpn..."
-  echo `expressvpn disconnect`
-  echo "disconnected"
-}
-
-home_on() {
-  echo "connecting to home vpn..."
-  echo `expressvpn connect`
-  echo "connected!"
-}
-
-work_off() {
-  echo "disconnecting from work vpn..."
-  echo `nmcli con down "$work_vpn_name"`
-  echo "disconnected"
-}
-
-work_on() {
-  echo "connecting to work vpn ($work_vpn_name)"
-  echo `nmcli con up "$work_vpn_name"`
-  echo "connected!"
 }
 
 work_vpn_is_active() {
@@ -51,55 +37,77 @@ vpn_command() {
   case $1 in
     home)
       if [[ "$home_status" == "true" ]]; then
-        echo "home vpn already enabled"
+        log_connecting "home" "home vpn already enabled"
 
       elif [[ "$work_status" == "true" ]]; then
-        echo `work_off`
+        log_disconnecting "work" "disconnecting from work vpn..."
+        disconnect=`nmcli con down "$work_vpn_name"`
+        log_disconnecting "work" "$disconnect"
         sleep 3
-        echo `home_on`
+        log_connecting "home" "connecting to home vpn..."
+        connect=`expressvpn connect`
+        log_connecting "home" "$connect"
 
       else
-        echo `home_on`
+        log_connecting "home" "connecting to home vpn..."
+        connect=`expressvpn connect`
+        log_connecting "home" "$connect"
       fi
       ;;
 
     work)
       if [[ "$work_status" == "true" ]]; then
-        echo "work vpn already enabled"
+        log_connecting "work" "work vpn already enabled"
 
       elif [[ "$home_status" == "true" ]]; then
-        echo `home_off`
-        sleep 3
-        echo `work_on`
+        log_disconnecting "home" "disconnecting from home vpn..."
+        disconnect=`expressvpn disconnect`
+        log_disconnecting "home" "$disconnect"
+        sleep 4
+        log_connecting "work" "connecting to work vpn..."
+        connect=`nmcli con up "$work_vpn_name"`
+        log_connecting "work" "$connect"
 
       else
-        echo `work_on`
+        log_connecting "work" "connecting to work vpn..."
+        connect=`nmcli con up "$work_vpn_name"`
+        log_connecting "work" "$connect"
       fi
       ;;
 
     off)
       if [[ "$home_status" == "true" ]]; then
-        echo `home_off`
+        log_disconnecting "home" "disconnecting from home vpn..."
+        disconnect=`expressvpn disconnect`
+        log_disconnecting "home" "$disconnect"
 
       elif [[ "$work_status" == "true" ]]; then
-        echo `work_off`
+        log_disconnecting "work" "disconnecting from work vpn..."
+        disconnect=`nmcli con down "$work_vpn_name"`
+        log_disconnecting "work" "$disconnect"
 
       else
-        echo "no vpn currently active"
+        log_disconnecting "none" "⚠️ no vpn currently active"
       fi
       ;;
 
     *)
       if [[ "$home_status" == "true" ]]; then
-        echo "home vpn already enabled"
+        log_connecting "home"  "home vpn already enabled"
 
       elif [[ "$work_status" == "true" ]]; then
-        echo `work_off`
-        sleep 3
-        echo `home_on`
+        log_disconnecting "work" "disconnecting from work vpn..."
+        disconnect=`nmcli con down "$work_vpn_name"`
+        log_disconnecting "work" "$disconnect"
+        sleep 4
+        log_connecting "home" "connecting to home vpn..."
+        connect=`expressvpn connect`
+        log_connecting "home" "$connect"
 
       else
-        echo `home_on`
+        log_connecting "home" "connecting to home vpn..."
+        connect=`expressvpn connect`
+        log_connecting "home" "$connect"
       fi
       ;;
 

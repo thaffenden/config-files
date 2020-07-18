@@ -12,25 +12,25 @@ home_vpn_is_active() {
 
 home_off() {
   echo "disconnecting from home vpn..."
-  `expressvpn disconnect &>/dev/null`
+  echo `expressvpn disconnect`
   echo "disconnected"
 }
 
 home_on() {
   echo "connecting to home vpn..."
-  `expressvpn connect &>/dev/null`
+  echo `expressvpn connect`
   echo "connected!"
 }
 
 work_off() {
   echo "disconnecting from work vpn..."
-  `nmcli con down "$work_vpn_name"`
+  echo `nmcli con down "$work_vpn_name"`
   echo "disconnected"
 }
 
 work_on() {
   echo "connecting to work vpn ($work_vpn_name)"
-  `nmcli con up "$work_vpn_name"`
+  echo `nmcli con up "$work_vpn_name"`
   echo "connected!"
 }
 
@@ -44,36 +44,63 @@ work_vpn_is_active() {
 }
 
 vpn_command() {
+  home_status=`home_vpn_is_active`
+  work_status=`work_vpn_is_active`
+
+
   case $1 in
     home)
-      home_status=`toggle_home`
-      echo "$home_status"
+      if [[ "$home_status" == "true" ]]; then
+        echo "home vpn already enabled"
+
+      elif [[ "$work_status" == "true" ]]; then
+        echo `work_off`
+        sleep 3
+        echo `home_on`
+
+      else
+        echo `home_on`
+      fi
       ;;
 
     work)
-      work_status=`work_vpn_is_active`
-      echo "$work_status"
+      if [[ "$work_status" == "true" ]]; then
+        echo "work vpn already enabled"
+
+      elif [[ "$home_status" == "true" ]]; then
+        echo `home_off`
+        sleep 3
+        echo `work_on`
+
+      else
+        echo `work_on`
+      fi
+      ;;
+
+    off)
+      if [[ "$home_status" == "true" ]]; then
+        echo `home_off`
+
+      elif [[ "$work_status" == "true" ]]; then
+        echo `work_off`
+
+      else
+        echo "no vpn currently active"
+      fi
       ;;
 
     *)
-      if [[ `home_vpn_is_active` == "true" ]]; then
-        off=`home_off`
-        sleep 3
-        on=`work_on`
+      if [[ "$home_status" == "true" ]]; then
+        echo "home vpn already enabled"
 
-      elif [[ `work_vpn_is_active` == "true" ]]; then
-        off=`work_off`
-        sleep 1
-        on=`home_on`
+      elif [[ "$work_status" == "true" ]]; then
+        echo `work_off`
+        sleep 3
+        echo `home_on`
 
       else
-        off="no vpn currently enabled"
-        on=`home_on`
-
+        echo `home_on`
       fi
-
-      echo $off
-      echo $on
       ;;
 
   esac

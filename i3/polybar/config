@@ -2,6 +2,7 @@
 background = #263238
 foreground = #ECEFF1
 
+blue = #40C4FF
 green = #5CF19E
 red = #FF5252
 
@@ -72,4 +73,21 @@ date = "%H:%M - %A %d %B"
 
 [module/vpn]
 type = custom/script
-exec = $HOME/git/config-files/i3/polybar/vpn.sh
+exec = $HOME/.config/polybar/scripts/vpn.sh
+
+# External
+[module/pulseaudio-control]
+type = custom/script
+exec = ~/.config/polybar/scripts/pulseaudio-control.bash listen
+tail = true
+
+label=%output%
+label-padding = 2
+label-foreground = ${color.foreground}
+format-underline = ${color.blue}
+
+click-right = exec pavucontrol &
+click-left = ~/.config/polybar/scripts/pulseaudio-control.bash togmute
+click-middle = ~/.config/polybar/scripts/pulseaudio-control.bash next-sink
+scroll-up = ~/.config/polybar/scripts/pulseaudio-control.bash up
+scroll-down = ~/.config/polybar/scripts/pulseaudio-control.bash down

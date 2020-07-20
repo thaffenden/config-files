@@ -1,0 +1,64 @@
+[color]
+background = #263238
+foreground = #ECEFF1
+
+green = #5CF19E
+red = #FF5252
+
+[font]
+default = FiraMono Nerd Font Mono:size=14;0
+
+[monitor]
+default = DP-4
+
+[bar/bottom]
+monitor = ${monitor.default}
+bottom = true
+width = 100%
+height = 27
+
+background = ${color.background}
+foreground = ${color.foreground}
+
+line-color = ${color.background}
+line-size = 3
+
+spacing = 3
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+font-0 = ${font.default}
+
+modules-left = i3
+modules-right = date
+
+[module/i3]
+type = internal/i3
+
+fuzzy-match = true
+pin-workspaces = true
+strip-wsnumbers = true
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = code;
+ws-icon-3 = music;
+ws-icon-4 = irssi;
+ws-icon-default = 
+
+format = <label-state> <label-mode>
+
+label-focused = "%icon%"
+label-focused-padding = 1
+label-focused-underline = ${color.green}
+
+label-unfocused = "%icon%"
+label-unfocused-padding = 1
+
+label-urgent = "%icon%"
+label-urgent-underline = ${color.red}
+
+[module/date]
+type = internal/date
+date = "%H:%M - %A %d %B"

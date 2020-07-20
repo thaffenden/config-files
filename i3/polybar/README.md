@@ -13,3 +13,8 @@ Custom font created with [Glyphter](https://glyphter.com/).
 
 External modules should be cloned into `.config/polybar/scripts`.
 This is a symlinked directory, but all directories inside here are git ignored.
+
+External modules currently being used:
+
+1. [pulseaudio control](https://github.com/marioortizmanero/polybar-pulseaudio-control) - with changes to icons and sink names.
+

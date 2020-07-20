@@ -95,7 +95,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -191,5 +191,5 @@ hide_edge_borders both
 # Other programs
 exec_always feh --bg-scale ./Pictures/desktop
 exec_always --no-startup-id compton
-bindsym $mod+d exec --no-startup-id rofi -show drun -config $HOME/.config/rofi/config.rasi
+bindsym $mod+space exec --no-startup-id rofi -show drun -config $HOME/.config/rofi/config.rasi
 

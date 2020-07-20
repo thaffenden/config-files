@@ -26,14 +26,14 @@ line-color = ${color.background}
 line-size = 3
 
 spacing = 3
-padding-right = 4
+padding-right = 2
 module-margin-left = 0
-module-margin-right = 6
+module-margin-right = 3
 
 font-0 = ${font.default}
 font-1 = ${font.small}
 font-2 = ${font.icons}
-
+focused
 modules-left = i3
 modules-right = vpn date
 

@@ -6,17 +6,18 @@ green = #5CF19E
 red = #FF5252
 
 [font]
-default = FiraMono Nerd Font Mono:size=14;0
-small = FiraMono Nerd Font Mono:size=10;0
+default = FiraMono Nerd Font Mono:size=10;0
+icons = FiraMono Nerd Font Mono:size=14;0
+small = FiraMono Nerd Font Mono:size=8;0
 
 [monitor]
 default = DP-4
 
-[bar/bottom]
+[bar/top]
 monitor = ${monitor.default}
-bottom = true
+top = true
 width = 100%
-height = 27
+height = 25
 
 background = ${color.background}
 foreground = ${color.foreground}
@@ -31,6 +32,7 @@ module-margin-right = 6
 
 font-0 = ${font.default}
 font-1 = ${font.small}
+font-2 = ${font.icons}
 
 modules-left = i3
 modules-right = vpn date
@@ -52,13 +54,16 @@ ws-icon-default = 
 format = <label-state> <label-mode>
 
 label-focused = "%icon%"
+label-focused-font = 3
 label-focused-padding = 1
 label-focused-underline = ${color.green}
 
 label-unfocused = "%icon%"
+label-unfocused-font = 3
 label-unfocused-padding = 1
 
 label-urgent = "%icon%"
+label-urgent-font = 3
 label-urgent-underline = ${color.red}
 
 [module/date]
@@ -68,4 +73,3 @@ date = "%H:%M - %A %d %B"
 [module/vpn]
 type = custom/script
 exec = $HOME/git/config-files/i3/polybar/vpn.sh
-

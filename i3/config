@@ -183,6 +183,6 @@ hide_edge_borders both
 
 # Other programs
 exec_always --no-startup-id feh --bg-scale ./Pictures/desktop
-exec_always --no-startup-id compton
+exec --no-startup-id compton
 exec_always --no-startup-id polybar top
 bindsym $mod+space exec --no-startup-id rofi -show drun -config $HOME/.config/rofi/config.rasi

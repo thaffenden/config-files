@@ -7,6 +7,7 @@ green = #5CF19E
 red = #FF5252
 
 [font]
+custom-icons = Glyphter:size=12;0
 default = FiraMono Nerd Font Mono:size=10;0
 icons = FiraMono Nerd Font Mono:size=14;0
 small = FiraMono Nerd Font Mono:size=8;0
@@ -34,7 +35,8 @@ module-margin-right = 3
 font-0 = ${font.default}
 font-1 = ${font.small}
 font-2 = ${font.icons}
-focused
+font-3 = ${font.custom-icons}
+
 modules-left = i3
 modules-right = pulseaudio-control vpn date
 

@@ -7,6 +7,7 @@ red = #FF5252
 
 [font]
 default = FiraMono Nerd Font Mono:size=14;0
+small = FiraMono Nerd Font Mono:size=10;0
 
 [monitor]
 default = DP-4
@@ -29,9 +30,10 @@ module-margin-left = 0
 module-margin-right = 6
 
 font-0 = ${font.default}
+font-1 = ${font.small}
 
 modules-left = i3
-modules-right = date
+modules-right = vpn date
 
 [module/i3]
 type = internal/i3
@@ -62,3 +64,8 @@ label-urgent-underline = ${color.red}
 [module/date]
 type = internal/date
 date = "%H:%M - %A %d %B"
+
+[module/vpn]
+type = custom/script
+exec = $HOME/git/config-files/i3/polybar/vpn.sh
+

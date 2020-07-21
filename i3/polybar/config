@@ -38,7 +38,7 @@ font-2 = ${font.icons}
 font-3 = ${font.custom-icons}
 
 modules-left = i3
-modules-right = pulseaudio-control vpn date
+modules-right = nowplaying pulseaudio-control vpn date
 
 [module/i3]
 type = internal/i3
@@ -76,6 +76,10 @@ date = "%H:%M - %A %d %B"
 [module/vpn]
 type = custom/script
 exec = ~/.config/polybar/scripts/vpn.sh
+
+[module/nowplaying]
+type = custom/script
+exec = ~/.config/polybar/scripts/now_playing.sh
 
 # External
 [module/pulseaudio-control]

@@ -4,25 +4,20 @@ player=`jq '.player' <<< $json | awk -F'"' '$0=$2'`
 
 case "$player" in
   "firefox")
-    title=`jq '.title' <<< $json`
-    artist=$(echo "$title" | awk -F'"' '$0=$2' | awk -F' - ' '$0=$1')
-    song=$(echo "$title" | awk -F'"' '$0=$2' | awk -F' - ' '$0=$2')
+    title=`jq '.title' <<< $json | awk -F'"' '$0=$2'`
+    artist=$(echo "$title" | awk -F' - ' '$0=$1')
 
-    case "$song" in
-      "YouTube")
-        echo '%{F#FF5252}%{T3}%{F- T-}' "$artist"
-        ;;
+    if [[ "${title##* }" == "YouTube" ]]; then
+      echo '%{F#FF5252}%{T3}%{F- T-}' "$(echo $title | awk 'BEGIN { ORS=" " }; {n=split($0,A," - "); for (i = 1; i <= n - 1; i++) print A[i]}')"
+      break;
+    fi
 
-      *)
-        echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song"
-        ;;
-    esac
+    song=$(echo "$title" | awk -F' - ' '$0=$2')
+    echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song"
     ;;
 
   *)
     echo "$player"
-    # echo `playerctl metadata --format '{"artist":"{{ artist }}","title":"{{ title }}","album":"{{ album }}","player":"{{ playerName }}"}'`
     ;;
 
 esac
-# might need custom handling for firefox not outputting data.

@@ -10,7 +10,7 @@ case "$player" in
 
     case "$song" in
       "YouTube")
-        echo " $artist"
+        echo '%{F#FF5252}%{T3}%{F- T-}' "$artist"
         ;;
 
       *)

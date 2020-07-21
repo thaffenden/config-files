@@ -14,7 +14,7 @@ case "$player" in
         ;;
 
       *)
-        echo "$artist - $song"
+        echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song"
         ;;
     esac
     ;;

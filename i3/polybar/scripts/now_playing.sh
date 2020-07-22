@@ -13,7 +13,16 @@ case "$player" in
     fi
 
     song=$(echo "$title" | awk -F' - ' '$0=$2')
-    echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song"
+    if [[ "$song" != "" ]]; then
+      echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song"
+      break;
+    fi
+
+    if [[ `echo $artist | awk -F' | ' '$0=$1'` == "Slack" ]]; then
+      echo '%{F#FF4081}%{T3}%{F- T-}' "$artist"
+    fi
+
+    echo '%{F#FFD740}%{T3}?%{F- T-}' "$artist"
     ;;
 
   *)

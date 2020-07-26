@@ -1,4 +1,4 @@
 public_key
 .DS_Store
 
-i3/polybar/scripts/**/
+polybar/scripts/**/

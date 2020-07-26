@@ -33,3 +33,4 @@ install_ripgrep
 install_bat
 install_jq
 install_tmux
+install_alacritty

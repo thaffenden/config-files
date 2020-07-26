@@ -4,11 +4,6 @@ function generate_ssh_key() {
   read -n 1 -p "SSH key added to github? (copy with cat $HOME/.ssh/id_rsa.pub | xclip -selection clipboard)" copied
 }
 
-function install_config_repo() {
-  mkdir $HOME/git
-  git clone git@github.com:thaffenden/config-files.git $HOME/git/config-files
-}
-
 function install_core_deps() {
   sudo apt install git zsh vim xclip curl
 }
@@ -22,8 +17,13 @@ function install_terminal_theme() {
   git clone git@github.com:thaffenden/pure.git $HOME/.zsh/pure
 }
 
+function use_zsh() {
+  chsh -s $(which zsh)
+  echo "shell set to zsh. log out and back in again for changes to take effect."
+}
+
 install_core_deps
 generate_ssh_key
 install_oh_my_zsh
 install_terminal_theme
-install_config_repo
+use_zsh

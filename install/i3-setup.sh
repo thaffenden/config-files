@@ -3,7 +3,7 @@ function install_core_deps() {
   sudo add-apt-repository ppa:kgilmer/speed-ricer
   sudo apt update
 
-  sudo apt install i3-gaps polybar rofi compton feh
+  sudo apt install i3-gaps polybar rofi compton feh playerctl
 }
 
 function symlink_config() {

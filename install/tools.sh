@@ -20,7 +20,7 @@ function install_node_version_manager() {
 
 function install_ripgrep() {
   rg_version="11.0.2"
-  rg_package_name="ripgrep_" + $rg_version + "_amd64.deb"
+  rg_package_name="ripgrep_${rg_version}_amd64.deb"
   curl -LO https://github.com/BurntSushi/ripgrep/releases/download/$rg_version/$rg_package_name && sudo dpkg -i $rg_package_name && rm $rg_package_name
 }
 

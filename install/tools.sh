@@ -6,8 +6,8 @@ function install_alacritty() {
 
 function install_bat() {
   bat_version="0.15.0"
-  bat_package_name="bat_" + $bat_version + "_amd64.deb"
-  curl -LO https://github.com/sharkdp/bat/releases/download/v$bat_version/$bat && sudo dpkg -i $bat_package_name && rm $bat_package_name
+  bat_package_name="bat_${bat_version}_amd64.deb"
+  curl -LO https://github.com/sharkdp/bat/releases/download/v$bat_version/$bat_package_name && sudo dpkg -i $bat_package_name && rm $bat_package_name
 }
 
 function install_jq() {

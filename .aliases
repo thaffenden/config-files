@@ -73,6 +73,13 @@ function convert-to-mp4() {
 	ffmpeg -i $1 -c:v libx264 -crf 19 -preset slow -b:a 192k -ac 2 $2
 }
 
+function screen() {
+  slop=$(slop -f "%x %y %w %h %g %i") || exit 1
+  read -r X Y W H G ID < <(echo $slop)
+  epoch=$(date "+%s")
+  ffmpeg -f x11grab -s "$W"x"$H" -i :1.0+$X,$Y "$HOME/Videos/screen-recording-${epoch}.mov"
+}
+
 # ********** GIT ALIASES **********
 alias gb='git branch'
 alias gcb='git checkout -b'

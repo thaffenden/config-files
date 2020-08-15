@@ -11,6 +11,7 @@ function symlink_config() {
   ln -s $HOME/git/config-files/polybar $HOME/.config/polybar
   ln -s $HOME/git/config-files/compton/compton.conf $HOME/.config/compton.conf
   ln -s $HOME/git/config-files/rofi $HOME/.config/rofi
+  ln -s $HOME/git/config-files/dunst $HOME/.config/dunst
 }
 
 install_core_deps

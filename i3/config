@@ -187,3 +187,5 @@ exec --no-startup-id compton
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 bindsym $mod+d exec --no-startup-id rofi -show drun -config $HOME/.config/rofi/config.rasi
 bindsym --release Shift+Print exec --no-startup-id gnome-screenshot -a
+
+bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"

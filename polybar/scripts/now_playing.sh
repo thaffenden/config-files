@@ -25,6 +25,12 @@ case "$player" in
     echo '%{F#FFD740}%{T3}?%{F- T-}' "$artist"
     ;;
 
+  "Plexamp")
+    artist=`jq '.artist' <<< $json -r`
+    song=`jq '.title' <<< $json -r`
+    echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song"
+    ;;
+
   *)
     echo "$player"
     ;;

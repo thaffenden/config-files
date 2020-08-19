@@ -31,6 +31,9 @@ function open() {
   else
     file=$1
     case "${file##*.}" in
+      "html")
+        firefox-dev $@
+        ;;
       "jpg" | "jpeg" | "JPG" | "png")
         eog $@
         ;;

@@ -1,12 +1,22 @@
 #! /bin/bash
-json=`playerctl metadata --format '{"artist":"{{ artist }}","title":"{{ title }}","album":"{{ album }}","player":"{{ playerName }}"}' | jq .`
+json=`playerctl metadata --format '{"artist":"{{ artist }}","title":"{{ title }}","album":"{{ album }}","player":"{{ playerName }}","status":"{{ status }}"}'`
 player=`jq '.player' -r <<< $json`
+playbackStatus=`jq '.status' -r <<< $json`
+
+playIcon="▶ "
+pauseIcon=" "
+
+if [[ "${status}" == "Playing" ]]; then
+  playbackStatusIcon=${pauseIcon}
+else
+  playbackStatusIcon=${playIcon}
+fi
+
 
 case "$player" in
   "firefox")
-    playChar="▶ "
     title=`jq '.title' -r <<< $json`
-    title=${title#"$playChar"}
+    title=${title#"$playIcon"}
     artist=$(echo "$title" | awk -F' - ' '$0=$1')
 
     if [[ "${title##* }" == "YouTube" ]]; then
@@ -16,7 +26,7 @@ case "$player" in
 
     song=$(echo "$title" | awk -F' - ' '$0=$2')
     if [[ "$song" != "" ]]; then
-      echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song  "
+      echo "$playbackStatusIcon" '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song  "
       exit 0;
     fi
 

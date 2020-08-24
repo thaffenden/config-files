@@ -26,7 +26,7 @@ case "$player" in
 
     song=$(echo "$title" | awk -F' - ' '$0=$2')
     if [[ "$song" != "" ]]; then
-      echo "$playbackStatusIcon" '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song  "
+      echo '%{F#FFD740}%{T3}﮸%{F- T-}' "$artist - $song  "
       exit 0;
     fi
 
@@ -45,7 +45,7 @@ case "$player" in
     ;;
 
   *)
-    echo "$player"
+    echo "$player  "
     ;;
 
 esac

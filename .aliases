@@ -183,7 +183,7 @@ function auto() {
 }
 function briefimage() {
   filename=$1
-  docker run -v $HOME/Pictures:/imgs dpokidov/imagemagick /imgs/$filename -resize "400x400^" -gravity center -crop 400x400+0+0  "/imgs/${filename%.*}-output.png"
+  docker run --rm -v $HOME/Pictures:/imgs dpokidov/imagemagick /imgs/$filename -resize "400x400^" -gravity center -crop 400x400+0+0  "/imgs/${filename%.*}-output.png"
   echo "${filename%.*}-output.png created"
 }
 function mine!() {

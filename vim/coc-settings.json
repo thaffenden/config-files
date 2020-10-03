@@ -1,6 +1,6 @@
 {
   "coc.preferences.jumpCommand": "split",
-  "coc.preferences.formatOnSaveFiletypes": ["markdown", "typescript"],
+  "coc.preferences.formatOnSaveFiletypes": ["markdown", "typescript", "python"],
   "languageserver": {
     "bash": {
       "command": "bash-language-server",
@@ -15,5 +15,7 @@
       "disableWorkspaceFolders": true,
       "filetypes": ["go"]
     }
-  }
+  },
+  "python.formatting.provider": "black",
+  "python.pythonPath": "python3"
 }

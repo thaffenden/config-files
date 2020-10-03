@@ -49,7 +49,7 @@ Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 
 " CocLanguageServers
 Plug 'fannheyward/coc-markdownlint', { 'for': 'markdown' }
-Plug 'fannheyward/coc-pyright'
+Plug 'fannheyward/coc-pyright', { 'for': 'python' }
 Plug 'neoclide/coc-json', { 'for': 'json' }
 Plug 'neoclide/coc-python', { 'for': 'python' }
 " Plug 'neoclide/coc-tsserver'

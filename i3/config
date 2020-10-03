@@ -184,7 +184,7 @@ hide_edge_borders both
 # Other programs
 exec_always --no-startup-id feh --bg-scale /home/tristan/Pictures/bg-edit.jpg
 # exec --no-startup-id compton
-exec --no-startup-id $HOME/.config/picom/launch.sh
+# exec --no-startup-id $HOME/.config/picom/launch.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 bindsym $mod+d exec --no-startup-id rofi -show drun -config $HOME/.config/rofi/config.rasi
 bindsym --release Shift+Print exec --no-startup-id gnome-screenshot -a

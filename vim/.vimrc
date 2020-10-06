@@ -179,7 +179,11 @@ let g:lightline = {
       \             [ 'filename', 'modified', 'readonly' ] ],
       \   'right': [ ['lineinfo'], ['filetype'], ['cocwarning', 'cocerror'] ]
       \ },
+      \ 'tabline': {
+      \   'left': [ ['bufferline'] ]
+      \ },
       \ 'component_expand': {
+      \  'bufferline': 'LightLineBufferline',
       \  'cocerror': 'LightLineCocError',
       \  'cocwarning': 'LightLineCocWarn',
       \ },
@@ -189,12 +193,18 @@ let g:lightline = {
       \   'fileencoding': 'NoFormat',
       \ },
       \ 'component_type': {
+      \   'bufferline': 'tabsel',
       \   'cocerror': 'error',
       \   'cocwarning': 'warning'
       \ },
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"}
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"},
       \ }
+
+function! LightLineBufferline()
+  call bufferline#refresh_status()
+  return [ g:bufferline_status_info.before, g:bufferline_status_info.current, g:bufferline_status_info.after]
+endfunction
 
 function! LightLineCocError()
   let info = get(b:, 'coc_diagnostic_info', {})
@@ -235,3 +245,30 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden = 1
+
+" search for word under cursor
+" nnoremap <silent><leader>f :Rg -q <C-R>=expand("<cword>")<CR><CR>
+
+function! s:GetVisualSelection()
+    if mode()=="v"
+        let [line_start, column_start] = getpos("v")[1:2]
+        let [line_end, column_end] = getpos(".")[1:2]
+    else
+        let [line_start, column_start] = getpos("'<")[1:2]
+        let [line_end, column_end] = getpos("'>")[1:2]
+    end
+    if (line2byte(line_start)+column_start) > (line2byte(line_end)+column_end)
+        let [line_start, column_start, line_end, column_end] =
+        \   [line_end, column_end, line_start, column_start]
+    end
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+            return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - 1]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+endfunction
+
+" search for visually selected item
+vnoremap <silent><leader>f <Esc>:Rg <C-R>=<SID>GetVisualSelection()<CR><CR>

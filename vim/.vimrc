@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'ryanoasis/vim-devicons'   "used in NERDTree, fzf search, lightline
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " code
 Plug 'editorconfig/editorconfig-vim'
@@ -178,9 +179,6 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'filename', 'modified', 'readonly' ] ],
       \   'right': [ ['lineinfo'], ['filetype'], ['cocwarning', 'cocerror'] ]
-      \ },
-      \ 'tabline': {
-      \   'left': [ ['bufferline'] ]
       \ },
       \ 'component_expand': {
       \  'bufferline': 'LightLineBufferline',

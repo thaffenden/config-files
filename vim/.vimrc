@@ -57,7 +57,9 @@ Plug 'neoclide/coc-python', { 'for': 'python' }
 Plug 'neoclide/coc-yaml', { 'for': 'yaml' }
 Plug 'josa42/coc-docker'
 
+" File management
 Plug 'qpkorr/vim-renamer'
+Plug 'AndrewRadev/id3.vim'
 
 call plug#end()
 

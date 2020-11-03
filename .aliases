@@ -68,7 +68,7 @@ function convert-flac() {
   file=$1
   full_path=$(realpath $file)
   dir_name=$(dirname $full_path)
-  docker run -v $dir_name:/files jrottenberg/ffmpeg -i /files/$file -ab 321k -map_metadata 0 -id3v2_version 3 "/files/${file%.*}.mp3"
+  docker run -v $dir_name:/files --rm jrottenberg/ffmpeg -i /files/$file -ab 321k -map_metadata 0 -id3v2_version 3 "/files/${file%.*}.mp3"
 }
 
 function convert-to-mp4() {

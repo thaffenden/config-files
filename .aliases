@@ -111,6 +111,14 @@ function grl() {
     git reset $sha
 }
 
+# ********** GITHUB ALIASES **********
+# list PRs and check out selected one with fzf
+function ghpr() {
+  local pr
+  pr=$(gh pr list | fzf -q "$1" | awk '{print $1}')
+  [ -n "$pr" ] && gh pr checkout "$pr"
+}
+
 # ********** GOLANG ALIASES **********
 function go-cover() {
     tempFile="/tmp/go-cover.$$.tmp"

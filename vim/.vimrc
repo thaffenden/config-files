@@ -176,7 +176,7 @@ let g:go_metalinter_command='golangci-lint'
 set laststatus=2
 
 let g:lightline = {
-      \ 'colorscheme': 'deus',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'filename', 'modified', 'readonly' ] ],

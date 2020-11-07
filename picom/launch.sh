@@ -4,4 +4,4 @@ if ps -A | grep picom; then
 fi
 
 # Load picom
-picom
+picom --experimental-backends --blur-method dual_kawase

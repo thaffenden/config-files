@@ -1,6 +1,6 @@
 [color]
-background = #263238
-foreground = #ECEFF1
+background = #1c1f27
+foreground = #e8e8e8
 
 blue = #40C4FF
 green = #5CF19E
@@ -59,7 +59,7 @@ format = <label-state> <label-mode>
 label-focused = "%icon%"
 label-focused-font = 3
 label-focused-padding = 1
-label-focused-underline = ${color.green}
+label-focused-foreground = ${color.green}
 
 label-unfocused = "%icon%"
 label-unfocused-font = 3
@@ -67,7 +67,7 @@ label-unfocused-padding = 1
 
 label-urgent = "%icon%"
 label-urgent-font = 3
-label-urgent-underline = ${color.red}
+label-urgent-foreground = ${color.red}
 
 [module/date]
 type = internal/date

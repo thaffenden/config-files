@@ -49,7 +49,7 @@ drun-show-actions: true;
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-theme: "onedark";
+theme: "theme";
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/

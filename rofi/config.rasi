@@ -3,10 +3,9 @@ modi: "drun,window";
 width: 25;
 lines: 12;
 /*	columns: 1;*/
-font: "FiraMono Nerd Font Mono 14";
 /*	bw: 1;*/
 location: 0;
-padding: 20;
+padding: 40;
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
@@ -42,9 +41,6 @@ drun-show-actions: true;
 /*	line-padding: 1;*/
 /*	filter: ;*/
 /*	separator-style: "dash";*/
-hide-scrollbar: true;
-fullscreen: false;
-fake-transparency: true;
 /*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/
@@ -53,7 +49,7 @@ fake-transparency: true;
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-theme: "theme";
+theme: "onedark";
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/

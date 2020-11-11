@@ -40,9 +40,9 @@ font-1 = ${font.small}
 font-2 = ${font.icons}
 font-3 = ${font.custom-icons}
 
-modules-left = i3 mpd
+modules-left = i3
 modules-center = date
-modules-right = nowplaying pulseaudio-control vpn
+modules-right = mpd pulseaudio-control vpn
 
 [module/i3]
 type = internal/i3
@@ -92,9 +92,9 @@ icon-repeat = 凌
 icon-repeatone = 綾
 
 label-song = %artist% - %title%
-format-online = <icon-prev> <icon-stop> <toggle> <icon-next> <icon-repeat> <icon-random> <bar-progress> <label-time> <label-song>
+format-online = <label-song> <toggle> <icon-stop> <icon-prev> <bar-progress> <icon-next> <label-time>
 
-bar-progress-width = 30
+bar-progress-width = 25
 bar-progress-indicator = |
 bar-progress-fill = ─
 bar-progress-empty = ─
@@ -103,10 +103,6 @@ bar-progress-empty = ─
 [module/vpn]
 type = custom/script
 exec = ~/.config/polybar/scripts/vpn.sh
-
-[module/nowplaying]
-type = custom/script
-exec = ~/.config/polybar/scripts/now_playing.sh
 
 # External
 [module/pulseaudio-control]

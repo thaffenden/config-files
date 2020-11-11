@@ -40,7 +40,7 @@ font-1 = ${font.small}
 font-2 = ${font.icons}
 font-3 = ${font.custom-icons}
 
-modules-left = i3
+modules-left = i3 mpd
 modules-center = date
 modules-right = nowplaying pulseaudio-control vpn
 
@@ -53,8 +53,8 @@ strip-wsnumbers = true
 
 ws-icon-0 = 1;
 ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
+ws-icon-2 = 3;ﱘ
+ws-icon-3 = 4;
 ws-icon-default = 
 
 format = <label-state> <label-mode>
@@ -76,6 +76,30 @@ label-urgent-foreground = ${color.red}
 type = internal/date
 date = "%A %d %B - %H:%M"
 
+[module/mpd]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 6600
+
+icon-play = 契
+icon-pause = 
+icon-stop = 栗
+icon-prev = 玲
+icon-next = 怜
+icon-random = 
+icon-repeat = 凌
+icon-repeatone = 綾
+
+label-song = %artist% - %title%
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next> <icon-repeat> <icon-random> <bar-progress> <label-time> <label-song>
+
+bar-progress-width = 30
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+
+# my custom
 [module/vpn]
 type = custom/script
 exec = ~/.config/polybar/scripts/vpn.sh

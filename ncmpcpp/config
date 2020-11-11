@@ -8,7 +8,7 @@
 
  # Playlist
  playlist_disable_highlight_delay = "0"  
- playlist_display_mode = "columns"  
+ playlist_display_mode = "classic"  
  playlist_show_remaining_time = "yes"
 
  browser_display_mode = "columns"  
@@ -32,6 +32,7 @@
 alternative_header_first_line_format = "$0$aqqu$/a {$7%a - $9}{$5%t$9}|{$8%f$9} $0$atqq$/a$9"
 alternative_header_second_line_format = "{{$6%b$9}{ [$6%y$9]}}|{%D}"
 song_list_format = "{$3%n │ $9}{$7%a - $9}{$5%t$9}|{$8%f$9}$R{$6 │ %b$9}{$3 │ %l$9}"
+# song_list_format = "$6{%a »$4 %t$/r$R}|{%f}"
 user_interface = "alternative"
 default_place_to_search_in = "database"
 
@@ -62,13 +63,13 @@ discard_colors_if_item_is_selected = "no"
 incremental_seeking = "yes"
 seek_time = "1"
 
-## Visivility ##
+## Visibility ##
 header_visibility = "yes"
 statusbar_visibility = "yes"
 titles_visibility = "yes"
 
 progressbar_look =  "=>-"
-progressbar_boldness = "yes"
+# progressbar_boldness = "yes"
 progressbar_elapsed_color = "white"
 
 now_playing_prefix = "> "
@@ -82,3 +83,4 @@ display_bitrate = "yes"
 follow_now_playing_lyrics = "yes"
 ignore_leading_the = "yes"
 empty_tag_marker = ""
+execute_on_song_change="~/git/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"

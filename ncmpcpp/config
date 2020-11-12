@@ -8,13 +8,11 @@ mpd_crossfade_time = "2"
 
 [ playlists ]
 header_visibility = "no"
-# now_playing_prefix = "$1 "
 now_playing_prefix = "$b"
 playlist_disable_highlight_delay = "0"  
 playlist_display_mode = "columns"  
 playlist_show_remaining_time = "yes"
 selected_item_prefix = "$8"
-# song_list_format = "{%a       %t}|{%f}"
 song_columns_list_format = "(20)[magenta]{a} (31)[black]{b} (2)[cyan]{n} (40)[white]{t} (7)[black]{lr}"
 titles_visibility = "no"
 user_interface = "classic"
@@ -46,25 +44,14 @@ visualizer_sync_interval = "10"
 visualizer_type = "wave"
 
 [ display ]
-# browser_display_mode = "columns"  
-# autocenter_mode = "yes"  
-# # fancy_scrolling = "yes"  
-# follow_now_playing_lyrics = "yes"  
-# # display_screens_numbers_on_start = "yes"  
-# # lyrics_database = "1"  
-# song_columns_list_format = "(10)[blue]{l} (30)[green]{a} (30)[magenta]{b} (50)[yellow]{t}"  
-# colors_enabled = "yes"  
-# main_window_color = "white"  
-# main_window_highlight_color =  "blue"
-# header_window_color = "cyan"  
-# volume_color = "red"  
-# progressbar_color = "cyan"  
-# statusbar_color = "white"  
-# active_column_color = "cyan"  
-# active_window_border = "blue"
+browser_display_mode = "columns"  
+color1 = "magenta"
+color2 = "black"
+main_window_color = "magenta"
+main_window_highlight_color = "white"
+ 
 
-# song_list_format = "{$3%n │ $9}{$7%a - $9}{$5%t$9}|{$8%f$9}$R{$6 │ %b$9}{$3 │ %l$9}"
-# song_list_format = "$6{%a »$4 %t$/r$R}|{%f}"
+
 default_place_to_search_in = "database"
 
 
@@ -85,14 +72,10 @@ discard_colors_if_item_is_selected = "no"
 incremental_seeking = "yes"
 seek_time = "1"
 
-## Visibility ##
-
-
 autocenter_mode = "yes"
 centered_cursor = "yes"
 
 # Misc
-# enable_window_title = "no"
 follow_now_playing_lyrics = "yes"
 ignore_leading_the = "yes"
 empty_tag_marker = ""

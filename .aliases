@@ -166,7 +166,7 @@ function dex() {
 # ********** SHELL ALIASES **********
 alias fzp="fzf --preview='bat {} --color=always'"
 alias lg='l | grep'
-alias music='~/git/ncmpcpp-ueberzug/ncmpcpp-ueberzug'
+alias music='tmux new-session "tmux source-file ~/.config/ncmpcpp/tmux_session"'
 alias reset_pure='prompt_pure_async_init=0; async_stop_worker prompt_pure'
 alias task='docker run --rm -it -v /etc/localtime:/etc/localtime:ro -v $HOME/.task/.taskrc:/root/.taskrc -v $HOME/.task/:/root/.task jamesnetherton/taskwarrior'
 function auto() {

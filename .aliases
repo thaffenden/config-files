@@ -164,9 +164,9 @@ function dex() {
 }
 
 # ********** SHELL ALIASES **********
-alias devicons='cat $HOME/.local/share/fonts/i_dev.sh'
 alias fzp="fzf --preview='bat {} --color=always'"
 alias lg='l | grep'
+alias music='~/git/ncmpcpp-ueberzug/ncmpcpp-ueberzug'
 alias reset_pure='prompt_pure_async_init=0; async_stop_worker prompt_pure'
 alias task='docker run --rm -it -v /etc/localtime:/etc/localtime:ro -v $HOME/.task/.taskrc:/root/.taskrc -v $HOME/.task/:/root/.task jamesnetherton/taskwarrior'
 function auto() {
@@ -189,11 +189,6 @@ function auto() {
     fi
     cd $current_dir
 }
-function briefimage() {
-  filename=$1
-  docker run --rm -v $HOME/Pictures:/imgs dpokidov/imagemagick /imgs/$filename -resize "400x400^" -gravity center -crop 400x400+0+0  "/imgs/${filename%.*}-output.png"
-  echo "${filename%.*}-output.png created"
-}
 function mine!() {
   sudo chown -R $USER $@
 }
@@ -207,6 +202,11 @@ function pbcopy() {
   else
     xclip -selection clipboard
   fi
+}
+function sqimg() {
+  filename=$1
+  docker run --rm -v $HOME/Pictures:/imgs dpokidov/imagemagick /imgs/$filename -resize "400x400^" -gravity center -crop 400x400+0+0  "/imgs/${filename%.*}-output.png"
+  echo "${filename%.*}-output.png created"
 }
 function tarthis() {
     tar -czf $1.tar.gz $1/

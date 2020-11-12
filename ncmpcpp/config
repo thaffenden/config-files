@@ -7,25 +7,45 @@ mpd_connection_timeout = "5"
 mpd_crossfade_time = "2"  
 
 [ playlists ]
+header_visibility = "no"
+# now_playing_prefix = "$1 "
+now_playing_prefix = "$b"
 playlist_disable_highlight_delay = "0"  
-playlist_display_mode = "classic"  
+playlist_display_mode = "columns"  
 playlist_show_remaining_time = "yes"
+selected_item_prefix = "$8"
+# song_list_format = "{%a       %t}|{%f}"
+song_columns_list_format = "(20)[magenta]{a} (31)[black]{b} (2)[cyan]{n} (40)[white]{t} (7)[black]{lr}"
+titles_visibility = "no"
+user_interface = "classic"
+
+[ progress bar ]
+progressbar_look =  " "
+progressbar_elapsed_color = "black"
 
 [ header ]
-alternative_header_first_line_format = "$0$aqqu$/a {$7%a - $9}{$5%t$9}|{$8%f$9} $0$atqq$/a$9"
-alternative_header_second_line_format = "{{$6%b$9}{ [$6%y$9]}}|{%D}"
+header_window_color = "black"
+state_flags_color = "white"
+state_line_color = "black"
+volume_color = "black" 
+
+[ status bar ]
+display_bitrate = "yes"
+player_state_color = "black"
+song_status_format = "$6%a$9  %b  $8%t$9 "
+statusbar_color = "black"
+statusbar_time_color = "black"
+statusbar_visibility = "yes"
 
 [ visualizer ]
-# visualizer_fifo_path = "/tmp/mpd.fifo"
-# visualizer_output_name = "my_fifo"
-# visualizer_sync_interval = "12"
-#visualizer_type = "wave" (spectrum/wave)
-# visualizer_type = "spectrum" (spectrum/wave)
-# visualizer_in_stereo = "yes"
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_in_stereo = "no"
 # visualizer_look = "+|"
+visualizer_output_name = "my_fifo"
+visualizer_sync_interval = "10"
+visualizer_type = "wave"
 
 [ display ]
-
 # browser_display_mode = "columns"  
 # autocenter_mode = "yes"  
 # # fancy_scrolling = "yes"  
@@ -45,7 +65,6 @@ alternative_header_second_line_format = "{{$6%b$9}{ [$6%y$9]}}|{%D}"
 
 # song_list_format = "{$3%n │ $9}{$7%a - $9}{$5%t$9}|{$8%f$9}$R{$6 │ %b$9}{$3 │ %l$9}"
 # song_list_format = "$6{%a »$4 %t$/r$R}|{%f}"
-user_interface = "alternative"
 default_place_to_search_in = "database"
 
 
@@ -60,7 +79,6 @@ system_encoding = "utf-8"
 regular_expressions = "extended"
 
 ## Selected tracks ##
-selected_item_prefix = "* "
 discard_colors_if_item_is_selected = "no"
 
 ## Seeking ##
@@ -68,20 +86,12 @@ incremental_seeking = "yes"
 seek_time = "1"
 
 ## Visibility ##
-header_visibility = "yes"
-statusbar_visibility = "yes"
-titles_visibility = "yes"
 
-progressbar_look =  "=>-"
-progressbar_elapsed_color = "white"
 
-now_playing_prefix = "> "
-song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
 autocenter_mode = "yes"
 centered_cursor = "yes"
 
 # Misc
-display_bitrate = "yes"
 # enable_window_title = "no"
 follow_now_playing_lyrics = "yes"
 ignore_leading_the = "yes"

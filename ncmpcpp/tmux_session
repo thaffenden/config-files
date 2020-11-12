@@ -1,8 +1,10 @@
 neww
 set -g status off
-send-keys '~/.config/ncmpcpp/cover.sh' C-m
+send-keys '~/.config/ncmpcpp/cover.sh > /dev/null 2>&1' C-m
 split-window -h
 resize-pane -t 0 -x 70
 select-pane -t 1
 send-keys 'ncmpcpp' C-m
-
+select-pane -t 0
+split-window -v
+select-pane -t 2

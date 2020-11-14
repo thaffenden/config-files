@@ -12,8 +12,8 @@ COVER="/tmp/cover.png"
 # Size of cover
 COVER_SIZE=620
 # Size in pixel of borders to crop out
-CROP_BORDER=10
-# Radius or rounded borders
+CROP_BORDER=0
+# Radius of rounded borders
 BORDER_RADIUS=0
 
 ffmpeg_cover() {

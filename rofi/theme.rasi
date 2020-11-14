@@ -9,6 +9,7 @@
   blue:       #40C4FF;
   mangenta:   #FF4081;
   cyan:       #64FCDA;
+  purple:      bold #C678DD;
 
   emphasis:   #50536b;
 
@@ -57,7 +58,7 @@ listview {
 element {
   padding: 5px;
   text-color: @fg;
-  highlight: @green;
+  highlight: @purple;
   border-radius: 3px;
 }
 

@@ -3,13 +3,15 @@
   bg:         #1c1f27;
 
   black:      #546E7A;
-  red:        #FF5252;
-  green:      bold #5CF19E;
-  yellow:     #FFD740;
   blue:       #40C4FF;
-  mangenta:   #FF4081;
   cyan:       #64FCDA;
-  purple:      bold #C678DD;
+  green:      #5CF19E;
+  greenBold:  bold #5CF19E;
+  mangenta:   #FF4081;
+  purple:     #C678DD;
+  purpleBold: bold #C678DD;
+  red:        #FF5252;
+  yellow:     #FFD740;
 
   emphasis:   #50536b;
 
@@ -20,22 +22,24 @@
 }
 
 window {
-  transparency: "real";
-  fullscreen: true;
   background-color: @bg;
+  border-radius: 20px;
+  fullscreen: false;
+  location: 0;
+  transparency: "real";
 }
 
 mainbox {
-  padding: 30% 30%;
+  padding: 1.5% 0.75%;
 }
 
 inputbar {
-  margin: 0px 0px 20px 0px;
   children: [prompt, textbox-prompt-colon, entry, case-indicator];
+  margin: 0% 0% 1% 0%;
 }
 
 prompt {
-  text-color: @blue;
+  text-color: @purple;
 }
 
 textbox-prompt-colon {
@@ -50,16 +54,16 @@ entry {
 }
 
 listview {
-  spacing: 5px;
   dynamic: true;
   scrollbar: false;
+  spacing: 0.5%;
 }
 
 element {
+  border-radius: 3px;
+  highlight: @greenBold;
   padding: 5px;
   text-color: @fg;
-  highlight: @purple;
-  border-radius: 3px;
 }
 
 element selected {
@@ -75,16 +79,18 @@ element active, element selected active {
   text-color: @purple;
 }
 
-message {
-  padding: 5px;
+message, error-message {
+  background-color: @bg;
   border-radius: 3px;
-  background-color: @emphasis;
-  border: 1px;
-  border-color: @cyan;
+  padding: 2%;
 }
 
 button selected {
-  padding: 5px;
-  border-radius: 3px;
   background-color: @emphasis;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+error-message {
+  text-color: @red;
 }

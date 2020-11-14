@@ -1,11 +1,10 @@
 configuration {
 modi: "drun,window";
-width: 25;
+width: 30;
 lines: 12;
 /*	columns: 1;*/
 /*	bw: 1;*/
-location: 0;
-padding: 40;
+/* location: 0; */
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/

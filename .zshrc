@@ -62,6 +62,11 @@ fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 prompt pure
 
+# LAUNCH TMUX WITH EVERY SHELL
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 

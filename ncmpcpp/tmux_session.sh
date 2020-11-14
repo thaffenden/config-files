@@ -14,6 +14,7 @@ tmux send-keys '~/.config/ncmpcpp/cover.sh > /dev/null 2>&1' C-m
 # go to media dir
 tmux select-pane -t 1
 tmux send-keys 'cd /media/tristan/HDD/music' C-m
+tmux send-keys 'clear' C-m
 # open ncmpcpp
 tmux select-pane -t 2
 tmux send-keys 'ncmpcpp' C-m

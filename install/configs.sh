@@ -30,4 +30,5 @@ symlink_file ranger/rc.conf $HOME/.config/ranger/rc.conf 'Created symlink for ra
 symlink_file ranger/scope.sh $HOME/.config/ranger/scope.sh 'Created symlink for ranger scope.sh'
 symlink_file .alacritty.yml $HOME/.alacritty.yml 'Created symlink for alacritty config'
 symlink_file mpd $HOME/.config/mpd 'Created symlink for mpd config'
-symlink_file mpd $HOME/.config/ncmpcpp 'Created symlink ncmpcpp config'
+symlink_file ncmpcpp $HOME/.config/ncmpcpp 'Created symlink for ncmpcpp config'
+symlink_file .Xresources $HOME/.Xresources 'Created symlink for Xresources config'

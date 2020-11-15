@@ -64,7 +64,7 @@ function unique-files() {
 }
 
 # ********** FFMPEG ALIASES **********
-function convert-flac() {
+function convert-to-mp3() {
   file=$1
   full_path=$(realpath $file)
   dir_name=$(dirname $full_path)
@@ -72,8 +72,10 @@ function convert-flac() {
 }
 
 function convert-to-mp4() {
-	echo "Converting ${1} to mp4"
-	ffmpeg -i $1 -c:v libx264 -crf 19 -preset slow -b:a 192k -ac 2 $2
+  file=$1
+  full_path=$(realpath $file)
+  dir_name=$(dirname $full_path)
+  docker run -v $dir_name:/files --rm jrottenberg/ffmpeg -i /files/$file -c:v libx264 -crf 19 -preset slow -b:a 192k -ac 2 "/files/${file%.*}.mp4"
 }
 
 function screen() {

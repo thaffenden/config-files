@@ -9,13 +9,14 @@ mpd_crossfade_time = "2"
 [ playlists ]
 header_visibility = "no"
 now_playing_prefix = "$b"
-playlist_disable_highlight_delay = "3"  
+playlist_disable_highlight_delay = "2"  
 playlist_display_mode = "columns"  
 playlist_show_remaining_time = "yes"
-selected_item_prefix = "$8"
 song_columns_list_format = "(20)[magenta]{a} (31)[black]{b} (2)[cyan]{n} (40)[white]{t} (7)[black]{lr}"
 titles_visibility = "no"
 user_interface = "classic"
+
+current_item_inactive_column_prefix = ""
 
 [ progress bar ]
 progressbar_look =  " "
@@ -46,9 +47,9 @@ visualizer_type = "wave"
 [ display ]
 browser_display_mode = "columns"  
 color1 = "magenta"
-color2 = "black"
+color2 = "white"
 main_window_color = "magenta"
-main_window_highlight_color = "black"
+main_window_highlight_color = "cyan"
  
 
 default_place_to_search_in = "database"
@@ -77,4 +78,4 @@ centered_cursor = "yes"
 follow_now_playing_lyrics = "yes"
 ignore_leading_the = "yes"
 empty_tag_marker = ""
-execute_on_song_change="~/.config/ncmpcpp/art.sh"
+# execute_on_song_change="~/.config/ncmpcpp/art.sh"

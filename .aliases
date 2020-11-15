@@ -64,6 +64,13 @@ function unique-files() {
 }
 
 # ********** FFMPEG ALIASES **********
+function convert-to-flac() {
+  file=$1
+  full_path=$(realpath $file)
+  dir_name=$(dirname $full_path)
+  docker run -v $dir_name:/files --rm jrottenberg/ffmpeg -i /files/$file -af aformat=s16:44100 -c:a flac "/files/${file%.*}.flac"
+}
+
 function convert-to-mp3() {
   file=$1
   full_path=$(realpath $file)

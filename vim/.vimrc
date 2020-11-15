@@ -240,6 +240,18 @@ endfunction
 " force Lightline to update on COC status change 
 autocmd User CocDiagnosticChange call lightline#update()
 
+" transparent background in statusbar
+autocmd VimEnter * call SetupLightlineColors()
+function SetupLightlineColors() abort
+  let l:palette = lightline#palette()
+
+  let l:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+  let l:palette.inactive.middle = l:palette.normal.middle
+  let l:palette.tabline.middle = l:palette.normal.middle
+
+  call lightline#colorscheme()
+endfunction
+
 " ********** NERDTREE CONFIG **********  
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1

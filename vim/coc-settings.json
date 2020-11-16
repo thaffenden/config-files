@@ -1,14 +1,7 @@
 {
   "coc.preferences.jumpCommand": "split",
-  "coc.preferences.formatOnSaveFiletypes": ["markdown", "typescript", "python"],
+  "coc.preferences.formatOnSaveFiletypes": ["markdown", "typescript", "python", "sh"],
   "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    },
-
     "golang": {
       "command": "gopls",
       "rootPatterns": ["go.mod"],
@@ -17,5 +10,7 @@
     }
   },
   "python.formatting.provider": "black",
-  "python.pythonPath": "python3"
+  "python.pythonPath": "python3",
+  "sh.enable": true,
+  "sh.highlightParsingErrors": true
 }

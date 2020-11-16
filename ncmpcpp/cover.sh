@@ -6,7 +6,7 @@
 
 source "`ueberzug library`"
 
-COVER="/tmp/cover.png"
+COVER="/tmp/kunst.png"
 X_PADDING=0
 Y_PADDING=0
 

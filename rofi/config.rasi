@@ -1,5 +1,5 @@
 configuration {
-modi: "drun,window";
+modi: "drun,vpn:/home/tristan/.config/rofi/vpn.sh,window";
 width: 30;
 lines: 12;
 /*	columns: 1;*/

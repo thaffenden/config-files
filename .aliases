@@ -89,7 +89,7 @@ function screen() {
   slop=$(slop -f "%x %y %w %h %g %i") || exit 1
   read -r X Y W H G ID < <(echo $slop)
   epoch=$(date "+%s")
-  ffmpeg -f x11grab -s "$W"x"$H" -i :1.0+$X,$Y "$HOME/Videos/screen-recording-${epoch}.mov"
+  ffmpeg -f x11grab -s "$W"x"$H" -i :1.0+$X,$Y -c:v h264_nvenc -an -y "$HOME/Videos/screen-recording-${epoch}.mp4"
 }
 
 # ********** GIT ALIASES **********

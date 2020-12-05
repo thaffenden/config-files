@@ -3,17 +3,20 @@ alias dc='docker-compose'
 alias dim='docker images | sort -h'
 alias dp='docker ps -a --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dsrmall="docker ps -aq --no-trunc -f status=exited | xargs docker rm"
+
 # docker prune images
 function dprune() {
   docker images -q --filter dangling=true | xargs docker rmi
   docker image ls --format "{{.Repository}}:{{.Tag}}" | grep "amazonaws" | xargs docker rmi
 }
+
 # docker remove image with fzf
 function drmi() {
   local cid
   cid=$(docker images | sed 1d | fzf -q "$1" | awk '{print $3}')
   [ -n "$cid" ] && docker rmi "$cid"
 }
+
 # docker stop docker remove
 function dsrm() {
 	docker stop $1
@@ -22,9 +25,13 @@ function dsrm() {
 
 # ********** FILE SYSTEM ALIASES **********
 alias l='ls -la'
+
+# delete all files in the directory except the one specified
 function delete-except() {
 	find . -type f -not -name $1 -print0 | xargs -0 -- rm
 }
+
+# wrapper to make opening a file consistent
 function open() {
   if [[ `uname` == "Darwin" ]]; then
     open $@
@@ -46,6 +53,8 @@ function open() {
 
   fi
 }
+
+# remove any files in a directory that are marked as copies
 function remove-copy() {
   if [[ "$1" == "" ]]; then
     search="."
@@ -54,6 +63,8 @@ function remove-copy() {
   fi
   IFS=$'\n' && for i in $(ls $search); do echo "$i"; mv $i ${i/\ copy\./\.}; done 
 }
+
+# show all unique files in the specified directory
 function unique-files() {
   if [[ "$1" == "" ]]; then
     search="."
@@ -64,6 +75,7 @@ function unique-files() {
 }
 
 # ********** FFMPEG ALIASES **********
+# convert an audio file to flac
 function convert-to-flac() {
   file=$1
   full_path=$(realpath $file)
@@ -71,6 +83,7 @@ function convert-to-flac() {
   docker run -v $dir_name:/files --rm jrottenberg/ffmpeg -i /files/$file -af aformat=s16:44100 -c:a flac "/files/${file%.*}.flac"
 }
 
+# convert an audio file to mp3
 function convert-to-mp3() {
   file=$1
   full_path=$(realpath $file)
@@ -78,6 +91,7 @@ function convert-to-mp3() {
   docker run -v $dir_name:/files --rm jrottenberg/ffmpeg -i /files/$file -ab 321k -map_metadata 0 -id3v2_version 3 "/files/${file%.*}.mp3"
 }
 
+# convert a video file to mp4
 function convert-to-mp4() {
   file=$1
   full_path=$(realpath $file)
@@ -85,6 +99,7 @@ function convert-to-mp4() {
   docker run -v $dir_name:/files --rm jrottenberg/ffmpeg -i /files/$file -c:v libx264 -crf 19 -preset slow -b:a 192k -ac 2 "/files/${file%.*}.mp4"
 }
 
+# highlight a section of the screen then record it
 function screen() {
   slop=$(slop -f "%x %y %w %h %g %i") || exit 1
   read -r X Y W H G ID < <(echo $slop)
@@ -102,6 +117,7 @@ alias ggpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias glo='git log --oneline'
 alias gs='git status'
 alias gtc='git commit -m "temp" --no-verify'
+
 # git checkout branch with fuzzy search
 function gbb() {
   local branch
@@ -109,12 +125,14 @@ function gbb() {
   [ -n "$branch" ] && git checkout "$branch"
 
 }
+
 # git fetch pull request
 function gfpr() {
     git fetch upstream refs/pull-requests/$1/from:$2
     git checkout $2
 }
-# git reset last
+
+# git reset last commit
 function grl() {
     sha=$(command git rev-parse HEAD^1)
     git reset $sha
@@ -129,6 +147,7 @@ function ghpr() {
 }
 
 # ********** GOLANG ALIASES **********
+# run unit tests and create then open html report for easier reviewing
 function go-cover() {
     tempFile="/tmp/go-cover.$$.tmp"
     go test -coverprofile=$tempFile ./... && go tool cover -html=$tempFile && unlink $tempFile
@@ -140,8 +159,9 @@ function bip() {
   local inst=$(brew search | fzf -m)
 
   if [[ $inst ]]; then
-    for prog in $(echo $inst);
-    do; brew install $prog; done;
+    for prog in $(echo $inst); do
+      brew install $prog; 
+    done;
   fi
 }
 # brew update plugin
@@ -149,8 +169,9 @@ function bup() {
   local upd=$(brew leaves | fzf -m)
 
   if [[ $upd ]]; then
-    for prog in $(echo $upd);
-    do; brew upgrade $prog; done;
+    for prog in $(echo $upd); do
+      brew upgrade $prog; 
+    done;
   fi
 }
 # brew delete plugin
@@ -158,14 +179,17 @@ function bdp() {
   local uninst=$(brew leaves | fzf -m)
 
   if [[ $uninst ]]; then
-    for prog in $(echo $uninst);
-    do; brew uninstall $prog; done;
+    for prog in $(echo $uninst); do 
+      brew uninstall $prog; 
+    done;
   fi
 }
 
 # ********** PYTHON ALIASES **********
 alias pl='pip list --format columns'
 alias sba='source bin/activate'
+
+# deactivate virtual environment
 function dex() {
     deactivate
     echo 'Deactivated virtual environment'
@@ -178,6 +202,8 @@ alias lg='l | grep'
 alias music=$HOME/.config/ncmpcpp/tmux_session.sh
 alias reset_pure='prompt_pure_async_init=0; async_stop_worker prompt_pure'
 alias task='docker run --rm -it -v /etc/localtime:/etc/localtime:ro -v $HOME/.task/.taskrc:/root/.taskrc -v $HOME/.task/:/root/.task jamesnetherton/taskwarrior'
+
+# trigger auto remote commands
 function auto() {
     current_dir="$PWD"
     if [[ -n $VIRTUAL_ENV ]]; then
@@ -198,13 +224,19 @@ function auto() {
     fi
     cd $current_dir
 }
+
+# set specified file or directory as owned by current user
 function mine!() {
   sudo chown -R $USER $@
 }
+
+# make a directory, then cd into it
 function mkcd() {
-    mkdir $1
+  mkdir $1
 	cd $1
 }
+
+# wrapper to make copy command consistent
 function pbcopy() {
   if [[ `uname` == "Darwin" ]]; then
     pbcopy
@@ -212,14 +244,20 @@ function pbcopy() {
     xclip -selection clipboard
   fi
 }
+
+# convert the specified image into a square png
 function sqimg() {
   filename=$1
   docker run --rm -v $HOME/Pictures:/imgs dpokidov/imagemagick /imgs/$filename -resize "400x400^" -gravity center -crop 400x400+0+0  "/imgs/${filename%.*}-output.png"
   echo "${filename%.*}-output.png created"
 }
+
+# tar and gzip the specified directory
 function tarthis() {
     tar -czf $1.tar.gz $1/
 }
+
+# toggle display from monitor to TV
 function toggle-display() {
     DP_OUT="DP-4"
     HDMI_OUT="HDMI-0"
@@ -252,6 +290,8 @@ function toggle-display() {
     xrandr --output $enable_monitor --auto
     xrandr --output $disable_monitor --off
 }
+
+# restart and boot into Windows
 function winboot() {
     WINDOWS_TITLE=`grep -i 'windows' /boot/grub/grub.cfg|cut -d"'" -f2`
     echo 'Booting directly into windows'
@@ -266,6 +306,7 @@ alias tmls='tmux ls'
 alias tnew='tmux new -s '
 
 
+# source device specific aliases that I don't want included in this file
 if [[ -f $HOME/.aliases ]]; then
     source $HOME/.aliases
 fi
@@ -277,3 +318,4 @@ function notes(){
 	vim
 	cd $original_dir
 }
+# vim:ft=sh

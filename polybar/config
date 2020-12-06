@@ -1,6 +1,6 @@
 [color]
 background = #00000000
-foreground = #2F343F
+foreground = #FFFFFF
 
 blue = #40C4FF
 green = #5CF19E
@@ -107,7 +107,7 @@ exec = ~/.config/polybar/scripts/vpn.sh
 # External
 [module/pulseaudio-control]
 type = custom/script
-exec = ~/.config/polybar/scripts/polybar-pulseaudio-control/pulseaudio-control.bash --sink-nickname "alsa_output.pci-0000_0b_00.3.iec958-stereo:%{T3}%{F#FFD740}﴾ %{T- F-}%{T1}%{F#1c1f27}opt out%{T- F-}" --sink-nickname "alsa_output.usb-iFi__by_AMR__iFi__by_AMR__HD_USB_Audio_00000000-00.iec958-stereo:%{T3}%{F#40C4FF} %{T- B-}%{T1}%{F#1c1f27}iFi DAC%{T- F-}" --sink-nickname "alsa_output.usb-iFi__by_AMR__iFi__by_AMR__HD_USB_Audio_00000000-00.analog-stereo:%{T3}%{F#40C4FF} %{T- B-}%{T1}%{F#1c1f27}iFi DAC%{T- F-}" --sink-nickname "alsa_output.pci-0000_09_00.1.hdmi-stereo-extra1:%{T3}%{T-}monitor" --sink-nickname "alsa_output.pci-0000_09_00.1.hdmi-stereo-extra2:%{T3}%{T-}monitor" --icons-volume "%{T3}%{T-}, %{T3}%{T-}, %{T3}%{T-}" --icon-muted "%{T3}%{F#FF5252}%{T- F-}%{T1}%{F#1c1f27}" listen
+exec = ~/.config/polybar/scripts/polybar-pulseaudio-control/pulseaudio-control.bash --sink-nickname "alsa_output.pci-0000_0b_00.3.iec958-stereo:%{T3}%{F#FFD740}﴾ %{T- F-}%{T1}opt out%{T-}" --sink-nickname "alsa_output.usb-iFi__by_AMR__iFi__by_AMR__HD_USB_Audio_00000000-00.iec958-stereo:%{T3}%{F#40C4FF} %{T- B-}%{T1}iFi DAC%{T-}" --sink-nickname "alsa_output.usb-iFi__by_AMR__iFi__by_AMR__HD_USB_Audio_00000000-00.analog-stereo:%{T3}%{F#40C4FF} %{T- B-}%{T1}iFi DAC%{T-}" --sink-nickname "alsa_output.pci-0000_09_00.1.hdmi-stereo-extra1:%{T3} %{T-}%{T1}monitor%{T-}" --sink-nickname "alsa_output.pci-0000_09_00.1.hdmi-stereo-extra2:%{T3} %{T-}%{T1}monitor%{T-}" --icons-volume "%{T3}%{T-}, %{T3}%{T-}, %{T3}%{T-}" --icon-muted "%{T3}%{F#FF5252}%{T- F-}%{T1}%{F#1c1f27}" listen
 tail = true
 
 label=%output%

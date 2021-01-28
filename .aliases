@@ -24,7 +24,7 @@ function dsrm() {
 }
 
 # ********** FILE SYSTEM ALIASES **********
-alias l='ls -la'
+alias l='ls -lah'
 
 # delete all files in the directory except the one specified
 function delete-except() {

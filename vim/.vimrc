@@ -17,6 +17,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "functionality
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-surround'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " navigational
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }

@@ -1,6 +1,12 @@
 {
   "coc.preferences.jumpCommand": "split",
-  "coc.preferences.formatOnSaveFiletypes": ["markdown", "typescript", "python", "sh"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "markdown",
+    "python", 
+    "sh",
+    "typescript"
+  ],
   "eslint.autoFixOnSave": true,
   "languageserver": {
     "golang": {

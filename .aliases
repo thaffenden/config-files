@@ -110,7 +110,7 @@ function screen() {
 # ********** GIT ALIASES **********
 alias gb='git branch'
 alias gcb='git checkout -b'
-alias gcm='git checkout master'
+alias gcm='git checkout $(gdb)'
 alias gd='git diff'
 alias ggpull='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias ggpush='git push origin $(git rev-parse --abbrev-ref HEAD)'
@@ -124,6 +124,11 @@ function gbb() {
   branch=$(git branch --no-color --no-column | fzf -q "$1" | awk '{print $1}')
   [ -n "$branch" ] && git checkout "$branch"
 
+}
+
+# get the default branch name
+function gdb() {
+  git remote show origin | rg "HEAD" | cut -d' ' -f5
 }
 
 # git fetch pull request

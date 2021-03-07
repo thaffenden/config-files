@@ -1,6 +1,7 @@
 {
   "coc.preferences.jumpCommand": "split",
   "coc.preferences.formatOnSaveFiletypes": [
+    "dart",
     "javascript",
     "markdown",
     "python", 

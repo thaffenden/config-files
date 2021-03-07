@@ -28,6 +28,9 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " CSV
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
+" Dart
+Plug 'dart-lang/dart-vim-plugin', { 'for': 'dart' }
+
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
@@ -52,6 +55,7 @@ Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 " CocLanguageServers
 Plug 'fannheyward/coc-markdownlint', { 'for': 'markdown' }
 Plug 'fannheyward/coc-pyright', { 'for': 'python' }
+Plug 'iamcco/coc-flutter', { 'for': 'dart' }
 Plug 'neoclide/coc-json', { 'for': 'json' }
 Plug 'neoclide/coc-python', { 'for': 'python' }
 " Plug 'neoclide/coc-tsserver'

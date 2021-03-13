@@ -241,6 +241,13 @@ function mkcd() {
 	cd $1
 }
 
+# start nvim docker container with current directory volume mounted
+nvim() {
+  local workdir
+  workdir="/home/t14n/${PWD##*/}"
+  docker run --rm -it -v ${PWD}:$workdir --workdir=$workdir t14n/nvim
+}
+
 # wrapper to make copy command consistent
 function pbcopy() {
   if [[ `uname` == "Darwin" ]]; then

@@ -25,11 +25,14 @@ RUN adduser --disabled-password ${USERNAME}; \
 
 USER ${USERNAME}
 
-RUN curl -Lo "/home/${USERNAME}/.config/nvim/autoload/plug.vim" --create-dirs \
+ARG NVIM_CONFIG="/home/${USERNAME}/.config/nvim"
+RUN curl -Lo "${NVIM_CONFIG}/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-COPY ./config/init.vim "/home/${USERNAME}/.config/nvim/init.vim"
-COPY ./config/plugins "/home/${USERNAME}/.config/nvim/plugins"
+COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
+COPY ./config/plugins "${NVIM_CONFIG}/plugins"
 
 RUN nvim --headless +PlugInstall +qall
+RUN ln -s "${NVIM_CONFIG}/autoload/plugged/onedark.vim/autoload/lightline/colorscheme/onedark.vim" \
+  "${NVIM_CONFIG}/autoload/plugged/lightline.vim/autoload/lightline/colorscheme"
    
 ENTRYPOINT ["nvim"]

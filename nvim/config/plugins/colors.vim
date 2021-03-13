@@ -8,9 +8,16 @@ if (has("autocmd") && !has("gui_running"))
   augroup END
 endif
 
-syntax on
-colorscheme onedark
-
 if (has("termguicolors"))
  set termguicolors
 endif
+
+let g:onedark_color_overrides = {
+  \ "dark_yellow": { "gui": "#FFD740", "cterm": "173", "cterm16": "11" },
+  \ "green": { "gui": "#85edb3", "cterm": "114", "cterm16": "2" },
+  \ "purple": { "gui": "#BD93F9", "cterm": "170", "cterm16": "5" },
+  \ "yellow": { "gui": "#FFE57F", "cterm": "180", "cterm16": "3" }
+  \ }
+
+syntax on
+colorscheme onedark

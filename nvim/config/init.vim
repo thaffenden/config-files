@@ -13,4 +13,5 @@ set tabstop=2                             "tabs are 2 spaces
 
 source $HOME/.config/nvim/plugins/_loader.vim
 source $HOME/.config/nvim/plugins/colors.vim
+source $HOME/.config/nvim/plugins/fzf.vim
 source $HOME/.config/nvim/plugins/nerdtree.vim

@@ -19,6 +19,7 @@ let g:lightline = {
       \   'filetype': 'MyFiletype',
       \   'fileformat': 'NoFormat',
       \   'fileencoding': 'NoFormat',
+      \   'getIcon': 'GetIcon',
       \ },
       \ 'component_type': {
       \   'bufferline': 'tabsel',
@@ -27,6 +28,13 @@ let g:lightline = {
       \ },
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3"},
+      \ 'tabline': {
+      \   'left': [ [ 'tabs' ] ]
+      \ },
+      \ 'tab': {
+      \   'active': [ 'tabnum', 'filename', 'getIcon' ],
+      \   'inactive': [ 'tabnum', 'filename', 'getIcon' ],
+      \ }
       \ }
 
 function! LightLineBufferline()
@@ -70,6 +78,10 @@ function! MyFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
+function! GetIcon()
+  return WebDevIconsGetFileTypeSymbol(&filetype)
+endfunction
+
 function! NoFormat()
   return ''
 endfunction
@@ -84,6 +96,7 @@ function SetupLightlineColors() abort
   let l:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
   let l:palette.inactive.middle = l:palette.normal.middle
   let l:palette.tabline.middle = l:palette.normal.middle
+  let l:palette.tabline.tab.active = l:palette.normal.middle
 
   call lightline#colorscheme()
 endfunction

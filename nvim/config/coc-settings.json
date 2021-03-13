@@ -1,0 +1,24 @@
+{
+  "coc.preferences.jumpCommand": "split",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "dart",
+    "javascript",
+    "markdown",
+    "python", 
+    "sh",
+    "typescript"
+  ],
+  "eslint.autoFixOnSave": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "disableWorkspaceFolders": true,
+      "filetypes": ["go"]
+    }
+  },
+  "python.formatting.provider": "black",
+  "python.pythonPath": "python3",
+  "sh.enable": true,
+  "sh.highlightParsingErrors": true
+}

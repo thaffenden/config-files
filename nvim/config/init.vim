@@ -20,3 +20,6 @@ source $HOME/.config/nvim/plugins/nerdtree.vim
 
 " custom functionality
 source $HOME/.config/nvim/functionality/search_for_selected.vim
+
+" coc
+source $HOME/.config/nvim/coc/settings.vim

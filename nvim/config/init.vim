@@ -11,8 +11,12 @@ set showmatch 			                      "show matching brackets
 set shiftwidth=2 		                      "indentation is 2 spaces
 set tabstop=2                             "tabs are 2 spaces
 
+" plugins
 source $HOME/.config/nvim/plugins/_loader.vim
 source $HOME/.config/nvim/plugins/colors.vim
 source $HOME/.config/nvim/plugins/fzf.vim
 source $HOME/.config/nvim/plugins/lightline.vim
 source $HOME/.config/nvim/plugins/nerdtree.vim
+
+" custom functionality
+source $HOME/.config/nvim/functionality/search_for_selected.vim

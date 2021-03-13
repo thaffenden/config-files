@@ -96,7 +96,6 @@ function SetupLightlineColors() abort
   let l:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
   let l:palette.inactive.middle = l:palette.normal.middle
   let l:palette.tabline.middle = l:palette.normal.middle
-  let l:palette.tabline.tab.active = l:palette.normal.middle
 
   call lightline#colorscheme()
 endfunction

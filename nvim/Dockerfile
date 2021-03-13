@@ -29,6 +29,7 @@ ARG NVIM_CONFIG="/home/${USERNAME}/.config/nvim"
 RUN curl -Lo "${NVIM_CONFIG}/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
+COPY ./config/functionality "${NVIM_CONFIG}/functionality"
 COPY ./config/plugins "${NVIM_CONFIG}/plugins"
 
 RUN nvim --headless +PlugInstall +qall

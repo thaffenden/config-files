@@ -1,4 +1,4 @@
-call plug#begin('~/.local/nvim/autoload/plug.vim')
+call plug#begin('~/.config/nvim/autoload/plugged')
   " navigational
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'

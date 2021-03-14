@@ -14,4 +14,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'editorconfig/editorconfig-vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+  "functionality
+  Plug 'Townk/vim-autoclose'
+  Plug 'tpope/vim-surround'
+
+  """ Language plugins
+  " Typescript
+  Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+
 call plug#end()

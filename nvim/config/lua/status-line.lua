@@ -1,18 +1,7 @@
 local api = vim.api
+local colors = require('colors')
 local icons = require('devicons')
 local M = {}
-
--- Different colors for mode
-local purple = '#B48EAD'
-local blue = '#81A1C1'
-local yellow = '#EBCB8B'
-local green = '#A3BE8C'
-local red = '#BF616A'
-
--- fg and bg
-local white_fg = '#e6e6e6'
-local black_fg = '#282c34'
-local bg = '#4d4d4d'
 
 -- Separators
 local left_separator = ''
@@ -56,34 +45,23 @@ local current_mode = setmetatable({
     }
 )
 
--- Obsession Color
-local obsession_fg = purple
-local obsession_gui = 'bold'
-api.nvim_command('hi Obsession guifg='..obsession_fg..' gui='..obsession_gui)
-
 -- Filename Color
-local file_bg = purple
-local file_fg = black_fg
-local file_gui = 'bold'
-api.nvim_command('hi File guibg='..file_bg..' guifg='..file_fg..' gui='..file_gui)
-api.nvim_command('hi FileSeparator guifg='..file_bg)
+api.nvim_command('hi File guibg='..colors.white..' guifg='..colors.purple..' gui=bold')
+api.nvim_command('hi FileSeparator guifg='..colors.white)
 
 -- Working directory Color
-local dir_bg = bg
-local dir_fg = white_fg
-local dir_gui = 'bold'
-api.nvim_command('hi Directory guibg='..dir_bg..' guifg='..dir_fg..' gui='..dir_gui)
-api.nvim_command('hi DirSeparator guifg='..dir_bg)
+api.nvim_command('hi Directory guibg='..colors.black..' guifg='..colors.white..' gui=bold')
+api.nvim_command('hi DirSeparator guifg='..colors.black)
 
 -- FileType Color
 local filetype_bg = 'None'
-local filetype_fg = purple
+local filetype_fg = colors.purple
 local filetype_gui = 'bold'
 api.nvim_command('hi Filetype guibg='..filetype_bg..' guifg='..filetype_fg..' gui='..filetype_gui)
 
 -- row and column Color
 local line_bg = 'None'
-local line_fg = white_fg
+local line_fg = colors.white
 local line_gui = 'bold'
 api.nvim_command('hi Line guibg='..line_bg..' guifg='..line_fg..' gui='..line_gui)
 
@@ -92,24 +70,24 @@ api.nvim_command('hi Line guibg='..line_bg..' guifg='..line_fg..' gui='..line_gu
 -- Redraw different colors for different mode
 local RedrawColors = function(mode)
   if mode == 'n' then
-    api.nvim_command('hi Mode guibg='..green..' guifg='..black_fg..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..green)
+    api.nvim_command('hi Mode guibg='..colors.green..' guifg='..colors.black..' gui=bold')
+    api.nvim_command('hi ModeSeparator guifg='..colors.green)
   end
   if mode == 'i' then
-    api.nvim_command('hi Mode guibg='..blue..' guifg='..black_fg..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..blue)
+    api.nvim_command('hi Mode guibg='..colors.blue..' guifg='..colors.black..' gui=bold')
+    api.nvim_command('hi ModeSeparator guifg='..colors.blue)
   end
   if mode == 'v' or mode == 'V' or mode == '^V' then
-    api.nvim_command('hi Mode guibg='..purple..' guifg='..black_fg..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..purple)
+    api.nvim_command('hi Mode guibg='..colors.purple..' guifg='..colors.black..' gui=bold')
+    api.nvim_command('hi ModeSeparator guifg='..colors.purple)
   end
   if mode == 'c' then
-    api.nvim_command('hi Mode guibg='..yellow..' guifg='..black_fg..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..yellow)
+    api.nvim_command('hi Mode guibg='..colors.yellow..' guifg='..colors.black..' gui=bold')
+    api.nvim_command('hi ModeSeparator guifg='..colors.yellow)
   end
   if mode == 't' then
-    api.nvim_command('hi Mode guibg='..red..' guifg='..black_fg..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..red)
+    api.nvim_command('hi Mode guibg='..colors.red..' guifg='..colors.black..' gui=bold')
+    api.nvim_command('hi ModeSeparator guifg='..colors.red)
   end
 end
 
@@ -164,7 +142,7 @@ function M.activeLine()
 end
 
 local InactiveLine_bg = '#1c1c1c'
-local InactiveLine_fg = white_fg
+local InactiveLine_fg = colors.white
 api.nvim_command('hi InActive guibg='..InactiveLine_bg..' guifg='..InactiveLine_fg)
 
 function M.inActiveLine()

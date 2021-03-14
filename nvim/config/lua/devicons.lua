@@ -28,6 +28,7 @@ local extensionTable = {
       ['procfile']                         = '',
       ['dockerfile']                       = '',
       ['docker-compose.yml']               = '',
+      ['nerdtree']                         = '',
       -- Extension
       ['styl']     = '',
       ['sass']     = '',

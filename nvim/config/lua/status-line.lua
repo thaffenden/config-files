@@ -56,38 +56,39 @@ api.nvim_command('hi DirSeparator guifg='..colors.black)
 -- FileType Color
 local filetype_bg = 'None'
 local filetype_fg = colors.purple
-local filetype_gui = 'bold'
-api.nvim_command('hi Filetype guibg='..filetype_bg..' guifg='..filetype_fg..' gui='..filetype_gui)
-
--- row and column Color
-local line_bg = 'None'
-local line_fg = colors.white
-local line_gui = 'bold'
-api.nvim_command('hi Line guibg='..line_bg..' guifg='..line_fg..' gui='..line_gui)
-
-
+api.nvim_command('hi Filetype guibg='..filetype_bg..' guifg='..filetype_fg)
 
 -- Redraw different colors for different mode
 local RedrawColors = function(mode)
   if mode == 'n' then
     api.nvim_command('hi Mode guibg='..colors.green..' guifg='..colors.black..' gui=bold')
     api.nvim_command('hi ModeSeparator guifg='..colors.green)
+    api.nvim_command('hi Line guibg='..colors.green..' guifg='..colors.black)
+    api.nvim_command('hi LineSeparator guifg='..colors.green)
   end
   if mode == 'i' then
     api.nvim_command('hi Mode guibg='..colors.blue..' guifg='..colors.black..' gui=bold')
     api.nvim_command('hi ModeSeparator guifg='..colors.blue)
+    api.nvim_command('hi Line guibg='..colors.blue..' guifg='..colors.black)
+    api.nvim_command('hi LineSeparator guifg='..colors.blue)
   end
   if mode == 'v' or mode == 'V' or mode == '^V' then
     api.nvim_command('hi Mode guibg='..colors.purple..' guifg='..colors.black..' gui=bold')
     api.nvim_command('hi ModeSeparator guifg='..colors.purple)
+    api.nvim_command('hi Line guibg='..colors.purple..' guifg='..colors.black)
+    api.nvim_command('hi LineSeparator guifg='..colors.purple)
   end
   if mode == 'c' then
     api.nvim_command('hi Mode guibg='..colors.yellow..' guifg='..colors.black..' gui=bold')
     api.nvim_command('hi ModeSeparator guifg='..colors.yellow)
+    api.nvim_command('hi Line guibg='..colors.yellow..' guifg='..colors.black)
+    api.nvim_command('hi LineSeparator guifg='..colors.yellow)
   end
   if mode == 't' then
     api.nvim_command('hi Mode guibg='..colors.red..' guifg='..colors.black..' gui=bold')
     api.nvim_command('hi ModeSeparator guifg='..colors.red)
+    api.nvim_command('hi Line guibg='..colors.red..' guifg='..colors.black)
+    api.nvim_command('hi LineSeparator guifg='..colors.red)
   end
 end
 
@@ -122,11 +123,16 @@ function M.activeLine()
   --   statusline = statusline.."%#Function# "..lsp_function
   -- end
 
+  -- Component: FileType
   local filetype = api.nvim_buf_get_option(0, 'filetype')
-  statusline = statusline.."%#Filetype#  Filetype: "..filetype
+  local icon = icons.deviconTable[filetype]
+  if icon == nil then
+    icon = "🤷"
+  end
+
+  statusline = statusline.."%#Filetype#"..icon..blank..filetype
   statusline = statusline..blank
 
-  -- Component: FileType
   -- Component: row and col
   local line = api.nvim_call_function('line', {"."})
   local col = "4"
@@ -136,7 +142,7 @@ function M.activeLine()
   while string.len(col) < 3 do
     col = col..' '
   end
-  statusline = statusline.."%#Line# ℓ "..line.." 𝚌 "..col
+  statusline = statusline.."%#LineSeparator#"..left_separator.."%#Line#ℓ "..line.."𝚌 "..col.."%#LineSeparator#"..right_separator
 
   return statusline
 end

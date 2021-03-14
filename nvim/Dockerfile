@@ -34,9 +34,11 @@ RUN curl -Lo "${NVIM_CONFIG}/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 COPY ./config/coc-settings.json "${NVIM_CONFIG}/coc-settings.json"
 COPY ./config/functionality "${NVIM_CONFIG}/functionality"
+COPY ./config/lua "${NVIM_CONFIG}/lua"
 COPY ./config/plugins "${NVIM_CONFIG}/plugins"
 COPY ./config/theme "${NVIM_CONFIG}/theme"
 COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
+COPY ./config/init.lua "${NVIM_CONFIG}/init.lua"
 
 # Install plugins
 RUN nvim --headless +PlugInstall +qall; \
@@ -45,6 +47,7 @@ RUN nvim --headless +PlugInstall +qall; \
     coc-eslint \ 
     coc-flutter \ 
     coc-json \ 
+    coc-lua \
     coc-markdownlint \
     coc-prettier \ 
     coc-pyright \
@@ -55,7 +58,7 @@ RUN nvim --headless +PlugInstall +qall; \
   nvim --headless +'CocCommand eslint.showOutputChannel' +1 +qall
 
 # Symlink lightline colour scheme so overridden onedark config is used
-RUN ln -s "${NVIM_CONFIG}/theme/lightline_onedark_custom.vim" \
-  "${NVIM_CONFIG}/autoload/plugged/lightline.vim/autoload/lightline/colorscheme"
+# RUN ln -s "${NVIM_CONFIG}/theme/lightline_onedark_custom.vim" \
+#   "${NVIM_CONFIG}/autoload/plugged/lightline.vim/autoload/lightline/colorscheme"
    
 ENTRYPOINT ["nvim"]

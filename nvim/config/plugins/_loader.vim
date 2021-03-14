@@ -5,7 +5,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
   " aesthetic
-  Plug 'itchyny/lightline.vim'
+  " Plug 'itchyny/lightline.vim'
   Plug 'joshdick/onedark.vim'
   Plug 'ryanoasis/vim-devicons'   "used in NERDTree, fzf search, lightline
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'

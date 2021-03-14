@@ -34,7 +34,6 @@ ARG NVIM_CONFIG="/home/${USERNAME}/.config/nvim"
 RUN curl -Lo "${NVIM_CONFIG}/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
-COPY ./config/coc "${NVIM_CONFIG}/coc"
 COPY ./config/coc-settings.json "${NVIM_CONFIG}/coc-settings.json"
 COPY ./config/functionality "${NVIM_CONFIG}/functionality"
 COPY ./config/plugins "${NVIM_CONFIG}/plugins"

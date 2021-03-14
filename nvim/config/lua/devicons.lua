@@ -132,12 +132,15 @@ local extensionTable = {
       ['psb']      = '',
       ['ts']       = '',
       ['tsx']      = '',
+      ['typescript'] = '',
       ['jl']       = '',
       ['pp']       = '',
       ['vue']      = '﵂',
       ['elm']      = '',
       ['swift']    = '',
-      ['xcplayground'] = ''}
+      ['xcplayground'] = '',
+      ['cucumber'] = ''
+}
 
 
 M.deviconTable = setmetatable(extensionTable,{

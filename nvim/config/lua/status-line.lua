@@ -54,9 +54,7 @@ api.nvim_command('hi Directory guibg='..colors.black..' guifg='..colors.white..'
 api.nvim_command('hi DirSeparator guifg='..colors.black)
 
 -- FileType Color
-local filetype_bg = 'None'
-local filetype_fg = colors.purple
-api.nvim_command('hi Filetype guibg='..filetype_bg..' guifg='..filetype_fg)
+api.nvim_command('hi Filetype guibg=None guifg='..colors.purple)
 
 -- Redraw different colors for different mode
 local RedrawColors = function(mode)
@@ -90,16 +88,6 @@ local RedrawColors = function(mode)
   api.nvim_command('hi LineSeparator guifg='..mode_bg)
 end
 
-local TrimmedDirectory = function(dir)
-  local home = os.getenv("HOME")
-  local _, index = string.find(dir, home, 1)
-  if index ~= nil and index ~= string.len(dir) then
-    -- TODO Trimmed Home Directory
-    return string.gsub(dir, home, '~')
-  end
-  return dir
-end
-
 function M.activeLine()
   local statusline = ""
   -- Component: Mode
@@ -108,10 +96,9 @@ function M.activeLine()
   statusline = statusline.."%#ModeSeparator#"..left_separator.."%#Mode# "..mode.." %#ModeSeparator#"..right_separator
   statusline = statusline..blank
 
-  -- Component: Working Directory
-  local dir = api.nvim_call_function('getcwd', {})
-  statusline = statusline.."%#DirSeparator#"..left_separator.."%#Directory# "..TrimmedDirectory(dir).." %#DirSeparator#"..right_separator
-  statusline = statusline..blank
+  -- Component: Current file
+  local file_name = api.nvim_call_function('expand', {'%F'})
+  statusline = statusline.."%#DirSeparator#"..left_separator.."%#Directory# "..file_name.." %#DirSeparator#"..right_separator
 
   -- Alignment to left
   statusline = statusline.."%="
@@ -133,25 +120,24 @@ function M.activeLine()
 
   -- Component: row and col
   local line = api.nvim_call_function('line', {"."})
-  local col = "4"
   while string.len(line) < 3 do
-    line = line..' '
+    line = ' '..line
   end
+  local col = api.nvim_call_function('col', {"."})
   while string.len(col) < 3 do
-    col = col..' '
+    col = ' '..col
   end
-  statusline = statusline.."%#LineSeparator#"..left_separator.."%#Line#ℓ "..line.."𝚌 "..col.."%#LineSeparator#"..right_separator
+  statusline = statusline.."%#LineSeparator#"..left_separator.."%#Line#ℓ"..line..":𝚌"..col.."%#LineSeparator#"..right_separator
 
   return statusline
 end
 
-local InactiveLine_bg = '#1c1c1c'
-local InactiveLine_fg = colors.white
-api.nvim_command('hi InActive guibg='..InactiveLine_bg..' guifg='..InactiveLine_fg)
+api.nvim_command('hi InActive guibg=None guifg='..colors.white)
 
 function M.inActiveLine()
-  local file_name = api.nvim_call_function('expand', {'%F'})
-  return "%#InActive# "..file_name
+  -- local file_name = api.nvim_call_function('expand', {'%F'})
+  -- return "%#InActive# "..file_name
+  return ""
 end
 
 ------------------------------------------------------------------------

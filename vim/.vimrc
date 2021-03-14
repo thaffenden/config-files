@@ -58,7 +58,7 @@ Plug 'fannheyward/coc-pyright', { 'for': 'python' }
 Plug 'iamcco/coc-flutter', { 'for': 'dart' }
 Plug 'neoclide/coc-json', { 'for': 'json' }
 Plug 'neoclide/coc-python', { 'for': 'python' }
-" Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-tsserver'
 Plug 'neoclide/coc-yaml', { 'for': 'yaml' }
 Plug 'josa42/coc-docker'
 
@@ -98,12 +98,19 @@ if (has("autocmd") && !has("gui_running"))
   augroup END
 endif
 
-syntax on
-colorscheme onedark
+let g:onedark_color_overrides = {
+  \ "dark_yellow": { "gui": "#FFD740", "cterm": "173", "cterm16": "11" },
+  \ "green": { "gui": "#50FA7B", "cterm": "114", "cterm16": "2" },
+  \ "purple": { "gui": "#BD93F9", "cterm": "170", "cterm16": "5" },
+  \ "yellow": { "gui": "#F1FA8C", "cterm": "180", "cterm16": "3" }
+  \ }
 
 if (has("termguicolors"))
  set termguicolors
 endif
+
+syntax on
+colorscheme onedark
 
 " ********** FZF search with preview **********
 nnoremap <C-p> :Files<CR>

@@ -17,6 +17,7 @@
       "filetypes": ["go"]
     }
   },
+  "Lua.diagnostics.globals": [ "vim" ],
   "python.formatting.provider": "black",
   "python.pythonPath": "python3",
   "sh.enable": true,

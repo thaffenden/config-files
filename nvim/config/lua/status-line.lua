@@ -19,28 +19,28 @@ local current_mode = setmetatable({
       ['n'] = 'NORMAL',
       ['no'] = 'N·Operator Pending',
       ['v'] = 'VISUAL',
-      ['V'] = 'V·Line',
-      ['^V'] = 'V·Block',
-      ['s'] = 'Select',
-      ['S'] = 'S·Line',
-      ['^S'] = 'S·Block',
+      ['V'] = 'V·LINE',
+      ['^V'] = 'V·BLOCK',
+      ['s'] = 'SELECT',
+      ['S'] = 'S·LINE',
+      ['^S'] = 'S·BLOCK',
       ['i'] = 'INSERT',
       ['ic'] = 'INSERT',
       ['ix'] = 'INSERT',
-      ['R'] = 'Replace',
-      ['Rv'] = 'V·Replace',
+      ['R'] = 'REPLACE',
+      ['Rv'] = 'V·REPLACE',
       ['c'] = 'COMMAND',
-      ['cv'] = 'Vim Ex',
-      ['ce'] = 'Ex',
-      ['r'] = 'Prompt',
-      ['rm'] = 'More',
-      ['r?'] = 'Confirm',
-      ['!'] = 'Shell',
+      ['cv'] = 'VIM EX',
+      ['ce'] = 'EX',
+      ['r'] = 'PROMPT',
+      ['rm'] = 'MORE',
+      ['r?'] = 'CONFIRM',
+      ['!'] = 'SHELL',
       ['t'] = 'TERMINAL'
     }, {
       -- fix weird issues
       __index = function(_, _)
-        return 'V·Block'
+        return 'V·BLOCK'
       end
     }
 )
@@ -60,36 +60,34 @@ api.nvim_command('hi Filetype guibg='..filetype_bg..' guifg='..filetype_fg)
 
 -- Redraw different colors for different mode
 local RedrawColors = function(mode)
-  if mode == 'n' then
-    api.nvim_command('hi Mode guibg='..colors.green..' guifg='..colors.black..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..colors.green)
-    api.nvim_command('hi Line guibg='..colors.green..' guifg='..colors.black)
-    api.nvim_command('hi LineSeparator guifg='..colors.green)
+  local mode_bg = colors.black
+  local mode_fg = colors.white
+
+  if mode == "NORMAL" then
+    mode_bg = colors.green
+    mode_fg = colors.black
   end
-  if mode == 'i' then
-    api.nvim_command('hi Mode guibg='..colors.blue..' guifg='..colors.black..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..colors.blue)
-    api.nvim_command('hi Line guibg='..colors.blue..' guifg='..colors.black)
-    api.nvim_command('hi LineSeparator guifg='..colors.blue)
+  if mode == "INSERT" then
+    mode_bg = colors.blue
+    mode_fg = colors.black
   end
-  if mode == 'v' or mode == 'V' or mode == '^V' then
-    api.nvim_command('hi Mode guibg='..colors.purple..' guifg='..colors.black..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..colors.purple)
-    api.nvim_command('hi Line guibg='..colors.purple..' guifg='..colors.black)
-    api.nvim_command('hi LineSeparator guifg='..colors.purple)
+  if mode == "VISUAL" or mode == "V·LINE" or mode == "V·BLOCK" then
+    mode_bg = colors.purple
+    mode_fg = colors.black
   end
-  if mode == 'c' then
-    api.nvim_command('hi Mode guibg='..colors.yellow..' guifg='..colors.black..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..colors.yellow)
-    api.nvim_command('hi Line guibg='..colors.yellow..' guifg='..colors.black)
-    api.nvim_command('hi LineSeparator guifg='..colors.yellow)
+  if mode == "COMMAND" then
+    mode_bg = colors.dark_yellow
+    mode_fg = colors.black
   end
-  if mode == 't' then
-    api.nvim_command('hi Mode guibg='..colors.red..' guifg='..colors.black..' gui=bold')
-    api.nvim_command('hi ModeSeparator guifg='..colors.red)
-    api.nvim_command('hi Line guibg='..colors.red..' guifg='..colors.black)
-    api.nvim_command('hi LineSeparator guifg='..colors.red)
+  if mode == "REPLACE" or mode == "V·REPLACE" then
+    mode_bg = colors.red
+    mode_fg = colors.black
   end
+
+  api.nvim_command('hi Mode guibg='..mode_bg..' guifg='..mode_fg..' gui=bold')
+  api.nvim_command('hi ModeSeparator guifg='..mode_bg)
+  api.nvim_command('hi Line guibg='..mode_bg..' guifg='..mode_fg)
+  api.nvim_command('hi LineSeparator guifg='..mode_bg)
 end
 
 local TrimmedDirectory = function(dir)
@@ -105,9 +103,9 @@ end
 function M.activeLine()
   local statusline = ""
   -- Component: Mode
-  local mode = api.nvim_get_mode()['mode']
+  local mode = current_mode[api.nvim_get_mode()['mode']]
   RedrawColors(mode)
-  statusline = statusline.."%#ModeSeparator#"..left_separator.."%#Mode# "..current_mode[mode].." %#ModeSeparator#"..right_separator
+  statusline = statusline.."%#ModeSeparator#"..left_separator.."%#Mode# "..mode.." %#ModeSeparator#"..right_separator
   statusline = statusline..blank
 
   -- Component: Working Directory

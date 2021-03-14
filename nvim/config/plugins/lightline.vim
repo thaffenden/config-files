@@ -3,16 +3,15 @@ set laststatus=2
 set noshowmode  " lightline shows the mode
 
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'lightline_onedark_custom',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'filename', 'modified', 'readonly' ] ],
-      \   'right': [ ['lineinfo'], ['filetype'], ['cocwarning', 'cocerror', 'cocok'] ]
+      \   'right': [ ['lineinfo'], ['filetype'], ['cocwarning', 'cocerror'] ]
       \ },
       \ 'component_expand': {
       \  'bufferline': 'LightLineBufferline',
       \  'cocerror': 'LightLineCocError',
-      \  'cocok': 'LightLineCocOK',
       \  'cocwarning': 'LightLineCocWarn',
       \ },
       \ 'component_function': {
@@ -54,15 +53,6 @@ function! LightLineCocError()
   return ''
 endfunction
 
-function! LightLineCocOK() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info)
-    return ''
-  endif
-  let l:counts = get(info, 'error', 0) + get(info, 'warning', 0)
-  return l:counts == 0 ? '✓ ' : ''
-endfunction
-
 function! LightLineCocWarn() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if empty(info)
@@ -79,7 +69,7 @@ function! MyFiletype()
 endfunction
 
 function! GetIcon()
-  return WebDevIconsGetFileTypeSymbol(&filetype)
+  return strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : ''
 endfunction
 
 function! NoFormat()
@@ -90,14 +80,14 @@ endfunction
 autocmd User CocDiagnosticChange call lightline#update()
 
 " transparent background in statusbar
-function SetupLightlineColors() abort
-  let l:palette = lightline#palette()
-
-  let l:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
-  let l:palette.inactive.middle = l:palette.normal.middle
-  let l:palette.tabline.middle = l:palette.normal.middle
-
-  call lightline#colorscheme()
-endfunction
-
-autocmd VimEnter * call SetupLightlineColors()
+" function SetupLightlineColors() abort
+"   let l:palette = lightline#palette()
+" 
+"   let l:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+"   let l:palette.inactive.middle = l:palette.normal.middle
+"   let l:palette.tabline.middle = l:palette.normal.middle
+" 
+"   call lightline#colorscheme()
+" endfunction
+" 
+" autocmd VimEnter * call SetupLightlineColors()

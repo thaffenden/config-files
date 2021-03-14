@@ -26,17 +26,17 @@ ARG USERNAME=t14n
 RUN adduser --disabled-password ${USERNAME}; \
   usermod -g sudo ${USERNAME}; \
   passwd -d ${USERNAME}
-
 USER ${USERNAME}
 
 # Install vim-plug, and copy all the config files to the correct places
 ARG NVIM_CONFIG="/home/${USERNAME}/.config/nvim"
 RUN curl -Lo "${NVIM_CONFIG}/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
 COPY ./config/coc-settings.json "${NVIM_CONFIG}/coc-settings.json"
 COPY ./config/functionality "${NVIM_CONFIG}/functionality"
 COPY ./config/plugins "${NVIM_CONFIG}/plugins"
+COPY ./config/theme "${NVIM_CONFIG}/theme"
+COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
 
 # Install plugins
 RUN nvim --headless +PlugInstall +qall; \
@@ -54,8 +54,8 @@ RUN nvim --headless +PlugInstall +qall; \
     coc-yaml' +qall; \
   nvim --headless +'CocCommand eslint.showOutputChannel' +1 +qall
 
-# Symlink lightline colour scheme so overridden onedark colours are used
-RUN ln -s "${NVIM_CONFIG}/autoload/plugged/onedark.vim/autoload/lightline/colorscheme/onedark.vim" \
+# Symlink lightline colour scheme so overridden onedark config is used
+RUN ln -s "${NVIM_CONFIG}/theme/lightline_onedark_custom.vim" \
   "${NVIM_CONFIG}/autoload/plugged/lightline.vim/autoload/lightline/colorscheme"
    
 ENTRYPOINT ["nvim"]

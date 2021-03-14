@@ -29,8 +29,6 @@ let s:white = [ s:colors.white.gui, s:term_white ]
 let s:black = [ s:colors.black.gui, s:term_black ]
 let s:grey = [ s:colors.visual_grey.gui, s:term_grey ]
 
-let s:transparent = [ '#ffffff', 'NONE', 255, 'NONE' ]
-
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.inactive.left =  [ [ s:white, s:grey ], [ s:white, s:grey ] ]
 let s:p.inactive.middle = [ [ s:white, s:grey ] ] "make transparent
@@ -52,3 +50,17 @@ let s:p.visual.left = [ [ s:black, s:purple ], [ s:white, s:grey ] ]
 let s:p.visual.right = [ [ s:black, s:purple ], [ s:white, s:grey ] ]
 
 let g:lightline#colorscheme#lightline_onedark_custom#palette = lightline#colorscheme#flatten(s:p)
+
+" transparent background in statusbar
+function SetupLightlineColors() abort
+  let l:palette = lightline#palette()
+
+  let l:transparent = [[ 'NONE', 'NONE', 'NONE', 'NONE' ]]
+  let l:palette.normal.middle = l:transparent
+  let l:palette.inactive.middle = l:transparent
+  let l:palette.tabline.middle = l:transparent
+
+  call lightline#colorscheme()
+endfunction
+
+autocmd VimEnter * call SetupLightlineColors()

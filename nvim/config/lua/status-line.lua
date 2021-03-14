@@ -1,63 +1,56 @@
-local api = vim.api
 local colors = require('colors')
 local icons = require('devicons')
+
+local api = vim.api
 local M = {}
 
--- Separators
-local left_separator = ''
-local right_separator = ''
+-- spacer to put in-between sections
+local spacer = ' '
 
--- Blank Between Components
-local blank = ' '
-
-------------------------------------------------------------------------
---                             StatusLine                             --
-------------------------------------------------------------------------
-
--- Mode Prompt Table
+-- Vim mode identifiers
 local current_mode = setmetatable({
-      ['n'] = 'NORMAL',
-      ['no'] = 'N·Operator Pending',
-      ['v'] = 'VISUAL',
-      ['V'] = 'V·LINE',
-      ['^V'] = 'V·BLOCK',
-      ['s'] = 'SELECT',
-      ['S'] = 'S·LINE',
-      ['^S'] = 'S·BLOCK',
+      ['c'] = 'COMMAND',
+      ['ce'] = 'EX',
+      ['cv'] = 'VIM EX',
       ['i'] = 'INSERT',
       ['ic'] = 'INSERT',
       ['ix'] = 'INSERT',
-      ['R'] = 'REPLACE',
-      ['Rv'] = 'V·REPLACE',
-      ['c'] = 'COMMAND',
-      ['cv'] = 'VIM EX',
-      ['ce'] = 'EX',
+      ['n'] = 'NORMAL',
+      ['no'] = 'N·Operator Pending',
       ['r'] = 'PROMPT',
       ['rm'] = 'MORE',
       ['r?'] = 'CONFIRM',
+      ['R'] = 'REPLACE',
+      ['Rv'] = 'V·REPLACE',
+      ['s'] = 'SELECT',
+      ['S'] = 'S·LINE',
+      ['^S'] = 'S·BLOCK',
+      ['t'] = 'TERMINAL',
+      ['v'] = 'VISUAL',
+      ['V'] = 'V·LINE',
+      ['^V'] = 'V·BLOCK',
       ['!'] = 'SHELL',
-      ['t'] = 'TERMINAL'
     }, {
-      -- fix weird issues
+      -- can't identify v blocks properly, but it's the only one I use that I can't flag
+      -- so just assume it's that if this check fails
       __index = function(_, _)
         return 'V·BLOCK'
       end
     }
 )
 
--- Filename Color
-api.nvim_command('hi File guibg='..colors.white..' guifg='..colors.purple..' gui=bold')
-api.nvim_command('hi FileSeparator guifg='..colors.white)
+-- get an icon with a fallback to flag when values aren't set in devicons
+local get_icon = function(filetype)
+  local icon = icons.deviconTable[filetype]
+  if icon == nil then
+    icon = "🤷"
+  end
 
--- Working directory Color
-api.nvim_command('hi Directory guibg='..colors.black..' guifg='..colors.white..' gui=bold')
-api.nvim_command('hi DirSeparator guifg='..colors.black)
+  return icon
+end
 
--- FileType Color
-api.nvim_command('hi Filetype guibg=None guifg='..colors.purple)
-
--- Redraw different colors for different mode
-local RedrawColors = function(mode)
+-- get colors for different modes
+local get_mode_colors = function(mode)
   local mode_bg = colors.black
   local mode_fg = colors.white
 
@@ -82,69 +75,12 @@ local RedrawColors = function(mode)
     mode_fg = colors.black
   end
 
-  api.nvim_command('hi Mode guibg='..mode_bg..' guifg='..mode_fg..' gui=bold')
-  api.nvim_command('hi ModeSeparator guifg='..mode_bg)
-  api.nvim_command('hi Line guibg='..mode_bg..' guifg='..mode_fg)
-  api.nvim_command('hi LineSeparator guifg='..mode_bg)
+  return mode_bg, mode_fg
+
 end
 
-function M.activeLine()
-  local statusline = ""
-  -- Component: Mode
-  local mode = current_mode[api.nvim_get_mode()['mode']]
-  RedrawColors(mode)
-  statusline = statusline.."%#ModeSeparator#"..left_separator.."%#Mode# "..mode.." %#ModeSeparator#"..right_separator
-  statusline = statusline..blank
-
-  -- Component: Current file
-  local file_name = api.nvim_call_function('expand', {'%F'})
-  statusline = statusline.."%#DirSeparator#"..left_separator.."%#Directory# "..file_name.." %#DirSeparator#"..right_separator
-
-  -- Alignment to left
-  statusline = statusline.."%="
-
-  -- local lsp_function = vim.b.lsp_current_function
-  -- if lsp_function ~= nil then
-  --   statusline = statusline.."%#Function# "..lsp_function
-  -- end
-
-  -- Component: FileType
-  local filetype = api.nvim_buf_get_option(0, 'filetype')
-  local icon = icons.deviconTable[filetype]
-  if icon == nil then
-    icon = "🤷"
-  end
-
-  statusline = statusline.."%#Filetype#"..icon..blank..filetype
-  statusline = statusline..blank
-
-  -- Component: row and col
-  local line = api.nvim_call_function('line', {"."})
-  while string.len(line) < 3 do
-    line = ' '..line
-  end
-  local col = api.nvim_call_function('col', {"."})
-  while string.len(col) < 3 do
-    col = ' '..col
-  end
-  statusline = statusline.."%#LineSeparator#"..left_separator.."%#Line#ℓ"..line..":𝚌"..col.."%#LineSeparator#"..right_separator
-
-  return statusline
-end
-
-api.nvim_command('hi InActive guibg=None guifg='..colors.white)
-
-function M.inActiveLine()
-  -- local file_name = api.nvim_call_function('expand', {'%F'})
-  -- return "%#InActive# "..file_name
-  return ""
-end
-
-------------------------------------------------------------------------
---                              TabLine                               --
-------------------------------------------------------------------------
-
-local getTabLabel = function(n)
+-- create string to use for tabs in the tab bar
+local get_tab_label = function(n)
   local current_win = api.nvim_tabpage_get_win(n)
   local current_buf = api.nvim_win_get_buf(current_win)
   local file_name = api.nvim_buf_get_name(current_buf)
@@ -155,36 +91,100 @@ local getTabLabel = function(n)
   if file_name == '' then
     return "No Name"
   end
-  local icon = icons.deviconTable[file_name]
-  if icon ~= nil then
-    return icon..' '..file_name
-  end
-  return file_name
+
+  local icon = get_icon(file_name)
+  return icon..' '..file_name
 end
 
-api.nvim_command('hi TabLineSel gui=Bold guibg=#81A1C1 guifg=#292929')
-api.nvim_command('hi TabLineSelSeparator gui=bold guifg=#81A1C1')
-api.nvim_command('hi TabLine guibg=#4d4d4d guifg=#c7c7c7 gui=None')
-api.nvim_command('hi TabLineSeparator guifg=#4d4d4d')
-api.nvim_command('hi TabLineFill guibg=None gui=None')
+-- get counter value and apply padding to stop jumping around when navigating
+local pad_counter = function(counter)
+  local val = api.nvim_call_function(counter, {"."})
+  while string.len(val) < 3 do
+    val = ' '..val
+  end
+  return val
+end
 
+-- function to output create a new pill on the status line
+local pill = function(pill_name, text, bg_color, fg_color, bold)
+  local gui_string = ""
+  if bold == true then
+    gui_string = " gui=bold"
+  end
+  api.nvim_command("hi "..pill_name.." guibg="..bg_color.." guifg="..fg_color..gui_string)
+
+  local left = ""
+  local right = ""
+
+  if bg_color ~= "None" then
+    api.nvim_command("hi "..pill_name.."Separator guifg="..bg_color)
+    left = "%#"..pill_name.."Separator#"
+    right = "%#"..pill_name.."Separator#"
+  end
+  return left.."%#"..pill_name.."#"..text..right
+end
+
+-- draw the active buffer status line
+function M.activeLine()
+  local statusline = ""
+  local filetype = api.nvim_buf_get_option(0, 'filetype')
+  -- if it's NERDTree don't bother with full status line
+  if filetype == "nerdtree" then
+    return ""
+  end
+
+  -- mode indicator
+  local mode = current_mode[api.nvim_get_mode()['mode']]
+  local mode_bg, mode_fg = get_mode_colors(mode)
+  statusline = statusline..pill("MODE", mode, mode_bg, mode_fg, true)..spacer
+
+  -- current file indicator
+  local file_name = api.nvim_call_function('expand', {'%F'})
+  if file_name ~= nil or file_name == "" then
+    statusline = statusline..pill("FILE", file_name, colors.black, colors.white, true)..spacer
+  end
+
+  -- left align
+  statusline = statusline.."%="
+
+  -- local lsp_function = vim.b.lsp_current_function
+  -- if lsp_function ~= nil then
+  --   statusline = statusline.."%#Function# "..lsp_function
+  -- end
+
+  -- file type indicator
+  local icon = get_icon(filetype)
+  statusline = statusline..pill("FILETYPE", icon..spacer..filetype, "None",  colors.purple, false)..spacer
+
+  -- row and column counter
+  local line = pad_counter("line")
+  local col = pad_counter("col")
+  statusline = statusline..pill("LINE", "ℓ"..line..":𝚌"..col, mode_bg, mode_fg, false)
+
+  return statusline
+end
+
+function M.inActiveLine()
+  -- local file_name = api.nvim_call_function('expand', {'%F'})
+  -- return "%#InActive# "..file_name
+  return ""
+end
 
 function M.TabLine()
-  local tabline = ''
+  local tabline = spacer
   local tab_list = api.nvim_list_tabpages()
   local current_tab = api.nvim_get_current_tabpage()
+
   for _, val in ipairs(tab_list) do
-    local file_name = getTabLabel(val)
+    local file_name = get_tab_label(val)
     if val == current_tab then
-      tabline = tabline.."%#TabLineSelSeparator# "..left_separator
-      tabline = tabline.."%#TabLineSel# "..file_name
-      tabline = tabline.." %#TabLineSelSeparator#"..right_separator
+      tabline = tabline..pill("SELECTEDTAB", file_name, colors.black, colors.white, true)..spacer
     else
-      tabline = tabline.."%#TabLineSeparator# "..left_separator
-      tabline = tabline.."%#TabLine# "..file_name
-      tabline = tabline.." %#TabLineSeparator#"..right_separator
+      tabline = tabline..pill("UNSELECTEDTAB", file_name, "None", colors.white, false)..spacer
     end
   end
+
   return tabline
 end
+
 return M

@@ -18,6 +18,9 @@
     }
   },
   "Lua.diagnostics.globals": [ "vim" ],
+  "markdownlint.config": {
+    "no-inline-html": false
+  },
   "python.formatting.provider": "black",
   "python.pythonPath": "python3",
   "sh.enable": true,

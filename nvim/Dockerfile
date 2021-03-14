@@ -57,8 +57,4 @@ RUN nvim --headless +PlugInstall +qall; \
     coc-yaml' +qall; \
   nvim --headless +'CocCommand eslint.showOutputChannel' +1 +qall
 
-# Symlink lightline colour scheme so overridden onedark config is used
-# RUN ln -s "${NVIM_CONFIG}/theme/lightline_onedark_custom.vim" \
-#   "${NVIM_CONFIG}/autoload/plugged/lightline.vim/autoload/lightline/colorscheme"
-   
 ENTRYPOINT ["nvim"]

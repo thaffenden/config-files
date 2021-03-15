@@ -148,6 +148,7 @@ local extensionTable = {
       ['swift']    = '',
       ['xcplayground'] = '',
       ['cucumber'] = ''
+      ['feature'] = ''
 }
 
 

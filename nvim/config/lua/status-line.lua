@@ -84,16 +84,15 @@ local get_tab_label = function(n)
   local current_win = api.nvim_tabpage_get_win(n)
   local current_buf = api.nvim_win_get_buf(current_win)
   local file_name = api.nvim_buf_get_name(current_buf)
-  if string.find(file_name, 'term://') ~= nil then
-    return ' '..api.nvim_call_function('fnamemodify', {file_name, ":p:t"})
-  end
+  -- if string.find(file_name, 'term://') ~= nil then
+  --   return ' '..api.nvim_call_function('fnamemodify', {file_name, ":p:t"})
+  -- end
   file_name = api.nvim_call_function('fnamemodify', {file_name, ":p:t"})
   if file_name == '' then
     return "No Name"
   end
 
-  local icon = get_icon(file_name)
-  return icon..' '..file_name
+  return file_name..' '..get_icon(file_name)
 end
 
 -- get counter value and apply padding to stop jumping around when navigating
@@ -125,7 +124,7 @@ local pill = function(pill_name, text, bg_color, fg_color, bold)
 end
 
 -- draw the active buffer status line
-function M.activeLine()
+function M.active_line()
   local statusline = ""
   local filetype = api.nvim_buf_get_option(0, 'filetype')
   -- if it's NERDTree don't bother with full status line
@@ -164,23 +163,23 @@ function M.activeLine()
   return statusline
 end
 
-function M.inActiveLine()
-  -- local file_name = api.nvim_call_function('expand', {'%F'})
-  -- return "%#InActive# "..file_name
-  return ""
+function M.inactive_line()
+  -- local file_name = api.nvim_call_function('expand', {'%t'})
+  -- local unselected = get_tab_label(file_name)
+  return pill("INACTIVE", "this file is also open", colors.black, colors.white, false)
 end
 
-function M.TabLine()
+function M.tab_line()
   local tabline = spacer
   local tab_list = api.nvim_list_tabpages()
   local current_tab = api.nvim_get_current_tabpage()
 
-  for _, val in ipairs(tab_list) do
+  for i, val in ipairs(tab_list) do
     local file_name = get_tab_label(val)
     if val == current_tab then
-      tabline = tabline..pill("SELECTEDTAB", file_name, colors.black, colors.white, true)..spacer
+      tabline = tabline..pill("SELECTEDTAB", i..". "..file_name, colors.black, colors.white, true)..spacer..spacer
     else
-      tabline = tabline..pill("UNSELECTEDTAB", file_name, "None", colors.white, false)..spacer
+      tabline = tabline..pill("UNSELECTEDTAB", i..". "..file_name, "None", colors.white, false)..spacer..spacer
     end
   end
 

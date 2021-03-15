@@ -41,8 +41,8 @@ COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
 COPY ./config/init.lua "${NVIM_CONFIG}/init.lua"
 
 # Install plugins
-RUN nvim --headless +PlugInstall +qall; \
-  nvim --headless +'CocInstall -sync  \
+RUN nvim --headless +PlugInstall +qall
+RUN nvim --headless +'CocInstall -sync  \
     coc-docker \
     coc-eslint \ 
     coc-flutter \ 
@@ -54,7 +54,7 @@ RUN nvim --headless +PlugInstall +qall; \
     coc-python \ 
     coc-sh \
     coc-tsserver \ 
-    coc-yaml' +qall; \
-  nvim --headless +'CocCommand eslint.showOutputChannel' +1 +qall
+    coc-yaml' +qall
+RUN nvim --headless +'CocCommand eslint.showOutputChannel' +1 +qall
 
 ENTRYPOINT ["nvim"]

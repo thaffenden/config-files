@@ -54,6 +54,7 @@ RUN nvim --headless +'CocInstall -sync \
  coc-pyright \
  coc-python \ 
  coc-sh \
+ coc-snippets \
  coc-tsserver \ 
  coc-yaml' +qall
 RUN nvim --headless +CocUpdateSync +qall

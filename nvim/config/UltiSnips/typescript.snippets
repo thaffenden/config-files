@@ -91,6 +91,10 @@ public $1IsVisible(): boolean {
 }
 endsnippet
 
+snippet bld "WebdriverIO text debug logger command" b
+browser.log.debug(`$1`);
+endsnippet
+
 # a11y tests
 snippet tpa11y "Jest based Pa11y test" b
 test("$1", async () => {

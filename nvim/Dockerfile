@@ -37,6 +37,7 @@ COPY ./config/functionality "${NVIM_CONFIG}/functionality"
 COPY ./config/lua "${NVIM_CONFIG}/lua"
 COPY ./config/plugins "${NVIM_CONFIG}/plugins"
 COPY ./config/theme "${NVIM_CONFIG}/theme"
+COPY ./config/UltiSnips "${NVIM_CONFIG}/UltiSnips"
 COPY ./config/init.vim "${NVIM_CONFIG}/init.vim"
 COPY ./config/init.lua "${NVIM_CONFIG}/init.lua"
 

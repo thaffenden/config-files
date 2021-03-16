@@ -1,0 +1,160 @@
+# General
+snippet cl "Console log" b
+console.log($1);
+endsnippet
+
+snippet if "If block" b
+if ($1) {
+  $2
+}
+endsnippet
+
+snippet imp "Standard import statement" b
+import { $1 } from "$2";
+endsnippet
+
+snippet puasv "Public async function that returns nothing" b
+public async $1(): Promise<void> {
+	await $2;
+}
+endsnippet
+
+snippet pubool "Public function that returns a bool" b
+public $1(): boolean {
+  return $2;
+}
+endsnippet
+
+snippet pustr "Public function that returns a string" b
+public $1(): string {
+  return $2;
+}
+endsnippet
+
+snippet pustar "Public function that returns an array of strings" b
+public $1(): string[] {
+  return [
+		$2,
+	];
+}
+endsnippet
+
+snippet puthis "Public function that returns this" b
+public $1($2): this {
+  $3
+  return this;
+}
+endsnippet
+
+snippet switch "Default switch case template" b
+switch ($1) {
+	case $2:
+		$3
+		break;
+
+	default:
+		$4
+}
+endsnippet
+# Page object related
+snippet page "WebdriverIO page object" b
+import { PageObject } from "../$2common";
+
+export class $1 extends PageObject {
+
+  private locators = {
+    $3
+  };
+
+  public constructor() {
+    super();
+  }
+}
+endsnippet
+
+snippet puclick "WebdriverIO page object click interaction" b
+public click$1(): this {
+	this.root().$(this.locators.$2).click();
+	return this;
+}
+endsnippet
+
+snippet putxt "WebdriverIO page object getText interaction" b
+public get$1Text(): string {
+  return this.root().$(this.locators.$2).getText();
+}
+endsnippet
+
+snippet puvis "WebdriverIO page object method for is visible checks" b
+public $1IsVisible(): boolean {
+	return this.root().$(this.locators.$1).isDisplayed();
+}
+endsnippet
+
+# a11y tests
+snippet tpa11y "Jest based Pa11y test" b
+test("$1", async () => {
+	const results = await pa11y(
+		$2,
+		defaultPa11yConfig
+	);
+	console.log(results);
+	assert.isEmpty(results);
+}, defaultTimeout);
+endsnippet
+
+# Mocha related
+snippet aft "After block" b
+after(function() {
+  $1
+});
+endsnippet
+
+snippet bef "Before block" b
+before(function() {
+  $1
+});
+endsnippet
+
+snippet desc "Describe block" b
+describe("$1", function() {
+  $2
+});
+endsnippet
+
+snippet it "It block" b
+it("$1", function() {
+  $2
+});
+endsnippet
+
+snippet aseq "Assert equal" b
+assert.equal($1, $2, $3);
+endsnippet
+
+snippet astr "Assert true" b
+assert.isTrue($1, $2);
+endsnippet
+
+snippet asfa "Assert false" b
+assert.isFalse($1, $2)
+endsnippet
+
+# Gherkin
+snippet given "Given block" b
+Given("$1", function() {
+	$2
+});
+endsnippet
+
+snippet then "Then block" b
+Then("$1", function() {
+	$2
+});
+endsnippet
+
+snippet when "When block" b
+When("$1", function() {
+	$2
+});
+endsnippet

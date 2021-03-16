@@ -1,2 +1,2 @@
-require("status-line")
 require("mappings")
+require("status-line")

@@ -19,6 +19,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'tpope/vim-surround'
 
   """ Language plugins
+  " Snippets
+  Plug 'SirVer/ultisnips'
+
   " Typescript
   Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 

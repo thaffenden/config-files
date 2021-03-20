@@ -1,11 +1,16 @@
 local colors = require('colors')
-local icons = require('new_devicons')
+local icons = require('nvim-web-devicons')
 
 local api = vim.api
 local M = {}
 
 -- spacer to put in-between sections
-local spacer = ' '
+local left_sep = ""
+local right_sep = ""
+
+api.nvim_command("hi StatusLineBlackSeparator guifg="..colors.black)
+api.nvim_command("hi StatusLineBlackBold guifg="..colors.white.." guibg="..colors.black.." gui=bold")
+api.nvim_command("hi StatusLineUnselectedTab guifg="..colors.white)
 
 -- Vim mode identifiers
 local current_mode = setmetatable({
@@ -69,20 +74,15 @@ local get_mode_colors = function(mode)
 
 end
 
--- create string to use for tabs in the tab bar
-local get_tab_label = function(n)
+local function get_tab_file_name(n)
   local current_win = api.nvim_tabpage_get_win(n)
   local current_buf = api.nvim_win_get_buf(current_win)
-  local file_name = api.nvim_buf_get_name(current_buf)
-  -- if string.find(file_name, 'term://') ~= nil then
-  --   return ' '..api.nvim_call_function('fnamemodify', {file_name, ":p:t"})
-  -- end
-  file_name = api.nvim_call_function('fnamemodify', {file_name, ":p:t"})
+  local file_name = api.nvim_call_function('fnamemodify', {api.nvim_buf_get_name(current_buf), ":p:t"})
   if file_name == '' then
     return "No Name"
   end
 
-  return file_name..' '..icons.get_icon_new(file_name)
+  return file_name
 end
 
 -- get counter value and apply padding to stop jumping around when navigating
@@ -107,8 +107,8 @@ local pill = function(pill_name, text, bg_color, fg_color, bold)
 
   if bg_color ~= "None" then
     api.nvim_command("hi "..pill_name.."Separator guifg="..bg_color)
-    left = "%#"..pill_name.."Separator#"
-    right = "%#"..pill_name.."Separator#"
+    left = "%#"..pill_name.."Separator#"..left_sep
+    right = "%#"..pill_name.."Separator#"..right_sep
   end
   return left.."%#"..pill_name.."#"..text..right
 end
@@ -142,8 +142,8 @@ function M.active_line()
   -- end
 
   -- file type indicator
-  local icon = icons.get_icon_new(filetype)
-  statusline = statusline..pill("FILETYPE", icon..spacer..filetype, "None",  colors.purple, false)..spacer
+  local icon = icons.get_icon(filetype)
+  statusline = statusline..pill("FILETYPE", icon.." "..filetype, "None",  colors.purple, false).." "
 
   -- row and column counter
   local line = pad_counter("line")
@@ -155,21 +155,29 @@ end
 
 function M.inactive_line()
   -- local file_name = api.nvim_call_function('expand', {'%t'})
-  -- local unselected = get_tab_label(file_name)
   return pill("INACTIVE", "this file is also open", colors.black, colors.white, false)
 end
 
 function M.tab_line()
-  local tabline = spacer
+  local tabline = "  "
   local tab_list = api.nvim_list_tabpages()
   local current_tab = api.nvim_get_current_tabpage()
 
   for i, val in ipairs(tab_list) do
-    local file_name = get_tab_label(val)
+    local file_name = get_tab_file_name(val)
+    local extension = api.nvim_call_function('fnamemodify', { file_name, ":e"})
+    local icon = icons.get_icon_config(file_name, extension)
+
     if val == current_tab then
-      tabline = tabline..pill("SELECTEDTAB", i..". "..file_name, colors.black, colors.white, true)..spacer..spacer
+      api.nvim_command("hi StatusLineSelectedTabIcon guifg="..icon.color.." guibg="..colors.black)
+      local selected_tab_pill = "%#StatusLineBlackSeparator#"..left_sep.."%#StatusLineBlackBold#"..i..". %#StatusLineSelectedTabIcon#"..icon.icon.." %#StatusLineBlackBold#"..file_name.." %#StatusLineBlackSeparator#"..right_sep
+      tabline = tabline..selected_tab_pill.."  "
+
     else
-      tabline = tabline..pill("UNSELECTEDTAB", i..". "..file_name, "None", colors.white, false)..spacer..spacer
+      api.nvim_command("hi StatusLineUnselectedTabIcon"..icon.name.." guifg="..icon.color)
+      local unselected_tab_pill = "%#StatusLineUnselectedTab#"..i..". %#StatusLineUnselectedTabIcon"..icon.name.."#"..icon.icon.." %#StatusLineUnselectedTab#"..file_name
+      tabline = tabline..unselected_tab_pill.."  "
+
     end
   end
 

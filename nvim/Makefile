@@ -18,4 +18,4 @@ build:
 
 .PHONY:
 debug:
-	@docker run --rm -it --entrypoint sh -v ${PWD}:/home/t14n/config-files --workdir=${PWD} $(debug-volume-mounts) ${CONTAINER}
+	@docker run --rm -it --entrypoint sh --workdir=${NVIM_CONFIG_DIR} $(debug-volume-mounts) ${CONTAINER}

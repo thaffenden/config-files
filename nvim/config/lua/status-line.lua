@@ -1,5 +1,5 @@
 local colors = require('colors')
-local icons = require('devicons')
+local icons = require('new_devicons')
 
 local api = vim.api
 local M = {}
@@ -38,16 +38,6 @@ local current_mode = setmetatable({
       end
     }
 )
-
--- get an icon with a fallback to flag when values aren't set in devicons
-local get_icon = function(filetype)
-  local icon = icons.deviconTable[filetype]
-  if icon == nil then
-    icon = "🤷"
-  end
-
-  return icon
-end
 
 -- get colors for different modes
 local get_mode_colors = function(mode)
@@ -92,7 +82,7 @@ local get_tab_label = function(n)
     return "No Name"
   end
 
-  return file_name..' '..get_icon(file_name)
+  return file_name..' '..icons.get_icon_new(file_name)
 end
 
 -- get counter value and apply padding to stop jumping around when navigating
@@ -152,7 +142,7 @@ function M.active_line()
   -- end
 
   -- file type indicator
-  local icon = get_icon(filetype)
+  local icon = icons.get_icon_new(filetype)
   statusline = statusline..pill("FILETYPE", icon..spacer..filetype, "None",  colors.purple, false)..spacer
 
   -- row and column counter

@@ -10,6 +10,7 @@ local colors = {
   green = "#50FA7B",
   gutter_fg_grey = "#4B5263",
   menu_grey = "#3E4452",
+  orange = "#ed8a09",
   purple = "#BD93F9",
   red = "#E06C75",
   special_grey = "#3B4048",

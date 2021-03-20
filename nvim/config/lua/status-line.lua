@@ -135,12 +135,12 @@ function M.active_line()
   -- mode indicator
   local mode = current_mode[api.nvim_get_mode()['mode']]
   local mode_bg, mode_fg = get_mode_colors(mode)
-  statusline = statusline..pill("MODE", mode, mode_bg, mode_fg, true)..spacer
+  statusline = statusline..pill("MODE", mode, mode_bg, mode_fg, true).." "
 
   -- current file indicator
   local file_name = api.nvim_call_function('expand', {'%F'})
   if file_name ~= nil or file_name == "" then
-    statusline = statusline..pill("FILE", file_name, colors.black, colors.white, true)..spacer
+    statusline = statusline..pill("FILE", file_name, colors.black, colors.white, true).." "
   end
 
   -- left align

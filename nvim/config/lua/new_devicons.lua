@@ -541,6 +541,11 @@ local icons = {
     color = "#a074c4",
     name = "Gif",
   };
+  ["git-branch"] = {
+    icon = "",
+    color = "#ed8a09",
+    name = "GitBranch"
+  },
   ["go"] = {
     icon = "",
     color = "#519aba",
@@ -798,20 +803,72 @@ local icons = {
   };
 }
 
-local function get_icon_by_file_type(file_type, highlight)
-  local icon_config = icons[file_type]
-  if icon_config == nil then
-    return "🤷"
+local function get_highlight_name(data)
+  return data.name and "DevIcon" .. data.name
+end
+
+local loaded = false
+
+local default_icon = {
+  icon = "",
+  color = "#6d8086",
+  name = "Default",
+}
+
+local function setup(opts)
+  loaded = true
+
+  local user_icons = opts or {}
+
+  icons = vim.tbl_extend("force", icons, user_icons.override or {});
+
+  table.insert(icons, default_icon)
+  for _, icon_data in pairs(icons) do
+    if icon_data.color and icon_data.name then
+      local hl_group = get_highlight_name(icon_data)
+      if hl_group then
+        vim.api.nvim_command("highlight! "..hl_group.. " guifg="..icon_data.color)
+      end
+    end
+  end
+end
+
+local function get_icon(name, ext)
+  if not loaded then
+    setup()
   end
 
-  if highlight == false then
-    return icon_config.icon
+  local icon_data = icons[name]
+  local by_name = icon_data and icon_data.icon or nil
+
+  if by_name then
+    return by_name, get_highlight_name(icon_data)
+  else
+    icon_data = icons[ext]
+
+    if not icon_data then
+      icon_data = default_icon
+    end
+
+    if icon_data then
+      local by_ext = icon_data.icon
+      return by_ext, get_highlight_name(icon_data)
+    end
+  end
+end
+
+local function get_icon_new(name)
+  local icon = icons[name]
+  if icon == nil then
+    return default_icon.icon
   end
 
-  vim.api.nvim_command("highlight! "..icon_config.name.."Icon guifg="..icon_config.color)
-  return icon_config.icon
+  return icon.icon
 end
 
 return {
-  get_icon_by_file_type = get_icon_by_file_type
+  get_icon = get_icon,
+  get_icon_new = get_icon_new,
+  has_loaded = function() return loaded end,
+  setup = setup,
 }

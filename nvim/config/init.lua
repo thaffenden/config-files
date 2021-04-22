@@ -1,10 +1,10 @@
 require('nvim-web-devicons').setup {
  override = {
-  zsh = {
-    icon = "",
+  ["NERD tree"] = {
+    icon = "",
     color = "#428850",
-    name = "Zsh"
-  }
+    name = "NERD_tree"
+  },
  };
  default = true;
 }

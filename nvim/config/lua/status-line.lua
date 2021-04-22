@@ -154,8 +154,8 @@ function M.active_line()
 end
 
 function M.inactive_line()
-  -- local file_name = api.nvim_call_function('expand', {'%t'})
-  return pill("INACTIVE", "this file is also open", colors.black, colors.white, false)
+  local file_name = api.nvim_call_function('expand', {'%t'})
+  return pill("INACTIVE", "this file is also open "..file_name, colors.black, colors.white, false)
 end
 
 function M.tab_line()
@@ -165,6 +165,12 @@ function M.tab_line()
 
   for i, val in ipairs(tab_list) do
     local file_name = get_tab_file_name(val)
+
+    -- Strip NERD tree number incrementing
+    if file_name:find("^NERD_") then
+      file_name = "NERD tree"
+    end
+
     local extension = api.nvim_call_function('fnamemodify', { file_name, ":e"})
     local icon = icons.get_icon_config(file_name, extension)
 

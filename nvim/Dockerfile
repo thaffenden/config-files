@@ -6,6 +6,8 @@ RUN apt-get -y update && apt-get -y install \
   curl \
   nodejs \
   npm \
+  wget \
+  sudo \
   && apt-get autoclean
 
 # Install bat - used for file previews in fzf search in vim.
@@ -22,11 +24,17 @@ RUN curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RIP_GREP_
   dpkg -i ${RIP_GREP_PACKAGE}; \
   rm ${RIP_GREP_PACKAGE}
 
+ARG GOLANG_VERSION="1.16.2"
+ARG GOLANG_PACKAGE="go${GOLANG_VERSION}.linux-amd64.tar.gz"
+RUN wget https://golang.org/dl/${GOLANG_PACKAGE}; \
+  tar -C /usr/local -xzf ${GOLANG_PACKAGE}
+
 ARG USERNAME=t14n
 RUN adduser --disabled-password ${USERNAME}; \
   usermod -g sudo ${USERNAME}; \
   passwd -d ${USERNAME}
 USER ${USERNAME}
+ENV PATH="${PATH}:/usr/local/go/bin"
 
 # Install vim-plug, and copy all the config files to the correct places
 ARG NVIM_CONFIG="/home/${USERNAME}/.config/nvim"

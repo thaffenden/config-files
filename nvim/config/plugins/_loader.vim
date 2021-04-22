@@ -9,7 +9,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'joshdick/onedark.vim'
   Plug 'ryanoasis/vim-devicons'   "used in NERDTree, fzf search, lightline
   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'thaffenden/nvim-web-devicons', {'branch': 'support_returning_icon_config'}
 
   " code
   Plug 'editorconfig/editorconfig-vim'

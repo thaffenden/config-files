@@ -9,8 +9,8 @@ endfunction
 " Change statusline automatically
 augroup Statusline
   autocmd!
-  autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveLine()
   autocmd WinLeave,BufLeave * setlocal statusline=%!InactiveLine()
+  autocmd WinEnter,BufEnter * setlocal statusline=%!ActiveLine()
 augroup END
 
 

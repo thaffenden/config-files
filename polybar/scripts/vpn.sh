@@ -6,5 +6,5 @@ elif [[ `nmcli con show --active` == *"Vidsy Office"* ]]; then
   echo '%{F#FF0657}%{T4}C   %{F- T-}'
 
 else
-  echo '%{F#FFD740}   %{F-}'
+  echo '%{F#000000}   %{F-}'
 fi

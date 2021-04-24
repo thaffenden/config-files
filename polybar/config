@@ -76,7 +76,7 @@ label-urgent-foreground = ${color.red}
 
 [module/date]
 type = internal/date
-date = "%H:%M | %A %d %B"
+date = "%H:%M %{F#000000}|%{F-} %A %d %B"
 
 [module/mpd]
 type = internal/mpd
